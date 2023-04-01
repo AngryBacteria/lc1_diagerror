@@ -4,6 +4,7 @@ import { useLocalStorage } from '@vueuse/core'
 import type { MessageLanguages } from '@/plugins/i18n'
 import { useI18n } from 'vue-i18n'
 import { useCurrentUser } from 'vuefire'
+import type { SnackbarConfig } from '@/components/global/GlobalSnackbar.vue'
 
 export const useUserStore = defineStore('user', () => {
   //other fields
@@ -13,6 +14,13 @@ export const useUserStore = defineStore('user', () => {
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
+  const snackbarConfig = useLocalStorage<SnackbarConfig>('snackbarConfig', {
+    visible: false,
+    message: 'TestMessage',
+    color: 'primary',
+    timeout: '2000',
+    location: "top"
+  })
 
   //init code
   i18n.locale.value = language.value
@@ -23,6 +31,16 @@ export const useUserStore = defineStore('user', () => {
     i18n.locale.value = systemLanguage
   }
 
+  function resetSnackbarConfig() {
+    snackbarConfig.value = {
+      visible: false,
+      message: 'TestMessage',
+      color: 'primary',
+      timeout: '3000',
+      location: "top"
+    }
+  }
+
   watch(
     refUser,
     (newRefUser) => {
@@ -31,5 +49,5 @@ export const useUserStore = defineStore('user', () => {
     { deep: true }
   )
 
-  return { language, changeLanguage, refUser, isLoggedIn }
+  return { language, changeLanguage, refUser, isLoggedIn, snackbarConfig, resetSnackbarConfig }
 })

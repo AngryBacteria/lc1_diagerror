@@ -24,16 +24,15 @@ async function logout() {
 
 <template>
   <v-layout>
-    <v-app-bar color="background" density="compact">
+    <v-app-bar elevation="1" color="background" density="compact">
       <template v-slot:prepend> Admin-Tool </template>
-
       <template v-slot:append>
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn v-if="store.isLoggedIn" variant="tonal" color="primary" v-bind="props">
+            <v-btn v-if="store.isLoggedIn" variant="elevated" color="primary" v-bind="props">
               {{ store.refUser?.email }}
             </v-btn>
-            <v-btn v-if="!store.isLoggedIn" variant="tonal" color="primary" v-bind="props">
+            <v-btn v-if="!store.isLoggedIn" variant="elevated" color="primary" v-bind="props">
               Nicht angemeldet
             </v-btn>
           </template>

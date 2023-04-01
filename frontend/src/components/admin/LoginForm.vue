@@ -25,14 +25,6 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-
-  <v-snackbar color="success" close-delay="1000" v-model="alertOpen" location="top">
-    {{ alertText }}
-  </v-snackbar>
-
-  <v-snackbar color="error" close-delay="2000" v-model="alertErrorOpen" location="top">
-    {{ alertText }}
-  </v-snackbar>
 </template>
 
 <script setup lang="ts">
@@ -41,15 +33,13 @@ import { getCurrentUser, useFirebaseAuth } from 'vuefire'
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
+import { useUserStore } from '@/stores/user'
+
 const router = useRouter()
 const route = useRouter()
 const email = ref('')
 const password = ref('')
-
-//Snackbar/Alert Component
-const alertText = ref('')
-const alertOpen = ref(false)
-const alertErrorOpen = ref(false)
+const store = useUserStore()
 
 // i18n
 const { t } = useTypedI18n()
@@ -65,8 +55,9 @@ onMounted(async () => {
         ? route.currentRoute.value.query.redirect
         : '/admin'
 
-    alertText.value = t('admin.alerts.authenticated')
-    alertOpen.value = true
+    store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
+    store.snackbarConfig.color = 'primary'
+    store.snackbarConfig.visible = true
 
     await router.push(to)
   }
@@ -77,8 +68,11 @@ async function login() {
   if (auth) {
     try {
       await signInWithEmailAndPassword(auth, email.value, password.value)
-      alertText.value = t('admin.alerts.authenticated')
-      alertOpen.value = true
+
+      store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
+      store.snackbarConfig.color = 'primary'
+      store.snackbarConfig.visible = true
+
       const to =
         route.currentRoute.value.query.redirect &&
         typeof route.currentRoute.value.query.redirect === 'string'
@@ -89,8 +83,9 @@ async function login() {
       const errorCode = error.code
 
       //TODO i18n
-      alertText.value = errorCode.split('/')[1]
-      alertErrorOpen.value = true
+      store.snackbarConfig.message = errorCode.split('/')[1]
+      store.snackbarConfig.color = 'error'
+      store.snackbarConfig.visible = true
     }
   }
 }
