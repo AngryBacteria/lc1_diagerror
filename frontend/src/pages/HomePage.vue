@@ -11,10 +11,10 @@ console.log(auth)
 </script>
 
 <template>
-  <main>
-    <h1>Hello</h1>
-    <v-btn> I am a Button </v-btn>
-    <v-icon icon="mdi-home" />
-    <p>{{ t('common.test') }}</p>
-  </main>
+  <h1>Hello</h1>
+  <v-btn append-icon="mdi-home"> I am a Button </v-btn>
+  <p>{{ t('common.test') }}</p>
+  <router-link to="/admin">admin</router-link>
+  <br />
+  <router-link to="/questionnaire">questionnaire</router-link>
 </template>
