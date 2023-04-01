@@ -1,9 +1,7 @@
 <template>
   <h1>login component</h1>
 
-  <v-card>
-    
-  </v-card>
+  <v-card> </v-card>
 
   <v-snackbar color="success" close-delay="1000" v-model="alertOpen" location="top">
     {{ alertText }}
@@ -19,7 +17,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { getCurrentUser, useFirebaseAuth } from 'vuefire'
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
-import { useTypedI18n } from '@/composables/useTypedI18n';
+import { useTypedI18n } from '@/composables/useTypedI18n'
 const router = useRouter()
 const route = useRouter()
 const email = ref('')
@@ -34,7 +32,7 @@ const alertErrorOpen = ref(false)
 const { t } = useTypedI18n()
 
 alertText.value = t('alerts.authenticated')
-    alertOpen.value = true
+alertOpen.value = true
 
 //Automatic restore from storage if present
 onMounted(async () => {
@@ -77,5 +75,4 @@ async function login() {
   }
 }
 </script>
-<style scoped>
-</style>
+<style scoped></style>
