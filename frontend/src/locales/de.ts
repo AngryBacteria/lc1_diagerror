@@ -1,11 +1,19 @@
 export default {
-  common: {
-    test: 'Hallo Welt!'
+  questionnaire: {
+    common: {
+      test: 'Hallo Welt!'
+    },
+    navigation: {
+      language: 'Sprache'
+    }
   },
-  navigation: {
-    language: 'Sprache'
-  },
-  alerts: {
-    authenticated: 'Erfolgreich authentifiziert'
+  admin: {
+    loginComponent: {
+      authenticate: 'autnentifitieren',
+      login: 'anmelden',
+      alerts: {
+        authenticated: 'Erfolgreich authentifiziert'
+      }
+    }
   }
 }

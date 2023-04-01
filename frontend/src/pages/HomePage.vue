@@ -13,7 +13,7 @@ console.log(auth)
 <template>
   <h1>Hello</h1>
   <v-btn append-icon="mdi-home"> I am a Button </v-btn>
-  <p>{{ t('common.test') }}</p>
+  <p>{{ t('questionnaire.common.test') }}</p>
   <router-link to="/admin">admin</router-link>
   <br />
   <router-link to="/questionnaire">questionnaire</router-link>

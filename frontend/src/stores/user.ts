@@ -1,3 +1,4 @@
+import { watch, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import type { MessageLanguages } from '@/plugins/i18n'
@@ -8,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   //other fields
   const i18n = useI18n()
   const refUser = useCurrentUser()
+  const isLoggedIn = ref(false)
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
@@ -15,10 +17,19 @@ export const useUserStore = defineStore('user', () => {
   //init code
   i18n.locale.value = language.value
 
+  //functions
   function changeLanguage(systemLanguage: MessageLanguages) {
     language.value = systemLanguage
     i18n.locale.value = systemLanguage
   }
 
-  return { language, changeLanguage, refUser }
+  watch(
+    refUser,
+    (newRefUser) => {
+      isLoggedIn.value = !!newRefUser
+    },
+    { deep: true }
+  )
+
+  return { language, changeLanguage, refUser, isLoggedIn }
 })

@@ -10,7 +10,6 @@ const { smAndUp } = useDisplay()
 </script>
 
 <template>
-  <p>todo user-layout</p>
   <v-layout>
     <v-app-bar color="background">
       <template v-slot:prepend>
@@ -22,7 +21,7 @@ const { smAndUp } = useDisplay()
         <v-menu>
           <template v-slot:activator="{ props }">
             <v-btn v-if="smAndUp" variant="tonal" color="primary" v-bind="props">
-              {{ t('navigation.language') }} ({{ store.language }})
+              {{ t('questionnaire.navigation.language') }} ({{ store.language }})
             </v-btn>
             <v-btn v-else variant="tonal" color="primary" v-bind="props">{{
               store.language
@@ -43,9 +42,7 @@ const { smAndUp } = useDisplay()
     </v-app-bar>
 
     <v-main>
-      <Suspense>
-        <RouterView></RouterView>
-      </Suspense>
+      <RouterView></RouterView>
     </v-main>
   </v-layout>
 </template>

@@ -1,7 +1,30 @@
 <template>
-  <h1>login component</h1>
+  <v-card
+    style="margin-left: auto; margin-right: auto"
+    width="700"
+    title="Authentifikation"
+    subtitle="Melden sie sich mit dem Admin-Konto an"
+  >
+    <v-card-text>
+      <v-text-field v-model="email" label="Email" required></v-text-field>
+      <v-text-field v-model="password" label="Passwort" required type="password"></v-text-field>
+    </v-card-text>
 
-  <v-card> </v-card>
+    <v-card-actions>
+      <v-btn
+        variant="flat"
+        color="primary"
+        prepend-icon="mdi-login"
+        elevation="3"
+        rounded="false"
+        size="large"
+        block
+        @click="login()"
+      >
+        Anmelden
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 
   <v-snackbar color="success" close-delay="1000" v-model="alertOpen" location="top">
     {{ alertText }}
@@ -31,9 +54,6 @@ const alertErrorOpen = ref(false)
 // i18n
 const { t } = useTypedI18n()
 
-alertText.value = t('alerts.authenticated')
-alertOpen.value = true
-
 //Automatic restore from storage if present
 onMounted(async () => {
   const currentUser = await getCurrentUser()
@@ -43,9 +63,9 @@ onMounted(async () => {
       route.currentRoute.value.query.redirect &&
       typeof route.currentRoute.value.query.redirect === 'string'
         ? route.currentRoute.value.query.redirect
-        : '/'
+        : '/admin'
 
-    alertText.value = t('alerts.authenticated')
+    alertText.value = t('admin.alerts.authenticated')
     alertOpen.value = true
 
     await router.push(to)
@@ -57,13 +77,13 @@ async function login() {
   if (auth) {
     try {
       await signInWithEmailAndPassword(auth, email.value, password.value)
-      alertText.value = t('alerts.authenticated')
+      alertText.value = t('admin.alerts.authenticated')
       alertOpen.value = true
       const to =
         route.currentRoute.value.query.redirect &&
         typeof route.currentRoute.value.query.redirect === 'string'
           ? route.currentRoute.value.query.redirect
-          : '/'
+          : '/admin'
       await router.push(to)
     } catch (error: any) {
       const errorCode = error.code
