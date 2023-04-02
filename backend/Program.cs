@@ -1,3 +1,8 @@
+using backend.EndpointFilters;
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,12 +10,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Cors
+//Firebase
+FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile("X:\\Programming\\dotnet\\LC1_DiagError\\backend\\Data\\firebaseServiceAccount.json"),
+});
+FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(firebaseApp);
+
+//Dependency Injection as Singleton
+builder.Services.AddSingleton(firebaseApp);
+builder.Services.AddSingleton(firebaseAuth);
+
+//cors
 builder.Services.AddCors();
 
 var app = builder.Build();
 
-//Cors
+//cors
 app.UseCors(builder => builder
 .AllowAnyHeader()
 .AllowAnyMethod()
@@ -36,18 +52,24 @@ app.MapGet("/weatherforecast", () =>
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
-            DateTime.Now.AddDays(index),
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
             summaries[Random.Shared.Next(summaries.Length)]
         ))
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetWeatherForecast")
+.WithOpenApi();
+
+app.MapGet("/hello", () =>
+{
+    return "Hello World";
+}).AddEndpointFilter<FirebaseAuthFilter>();
 
 app.Run();
 
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
+internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
