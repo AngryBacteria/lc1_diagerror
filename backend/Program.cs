@@ -13,11 +13,11 @@ builder.Services.AddSwaggerGen();
 //Firebase
 FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions()
 {
-    Credential = GoogleCredential.FromFile("X:\\Programming\\dotnet\\LC1_DiagError\\backend\\Data\\firebaseServiceAccount.json"),
+    Credential = GoogleCredential.FromFile("Data\\firebaseServiceAccount.json"),
 });
 FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(firebaseApp);
 
-//Dependency Injection as Singleton
+//Dependency Injection as
 builder.Services.AddSingleton(firebaseApp);
 builder.Services.AddSingleton(firebaseAuth);
 
