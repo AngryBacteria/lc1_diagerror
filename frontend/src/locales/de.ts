@@ -5,11 +5,14 @@ export default {
     },
     navigation: {
       language: 'Sprache'
+    },
+    validation: {
+      fieldRequired: 'Dieses Feld ist erforderlich'
     }
   },
   admin: {
     loginComponent: {
-      authenticate: 'autnentifitieren',
+      authenticate: 'authentifizieren',
       login: 'anmelden',
       alerts: {
         authenticated: 'Erfolgreich authentifiziert'

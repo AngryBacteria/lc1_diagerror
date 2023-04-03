@@ -5,6 +5,9 @@ export default {
     },
     navigation: {
       language: 'Langue'
+    },
+    validation: {
+      fieldRequired: ''
     }
   },
   admin: {

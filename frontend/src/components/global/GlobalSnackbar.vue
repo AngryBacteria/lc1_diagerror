@@ -13,13 +13,12 @@
 import { useUserStore } from '@/stores/user'
 
 export interface SnackbarConfig {
-  visible: boolean;
-  message: string;
-  color: string;
-  timeout: string;
-  location: "top" | "bottom" | "right" | "left";
+  visible: boolean
+  message: string
+  color: string
+  timeout: string
+  location: 'top' | 'bottom' | 'right' | 'left'
 }
 
 const store = useUserStore()
-
 </script>

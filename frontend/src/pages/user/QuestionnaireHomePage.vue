@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import FreeTextQuestion from '@/components/questionnaire/FreeTextQuestion.vue';
+import FreeTextQuestion from '@/components/questionnaire/FreeTextQuestion.vue'
+import LikertQuestion from '@/components/questionnaire/LikertQuestion.vue';
 import { useTypedI18n } from '@/composables/useTypedI18n'
+import { useUserStore } from '@/stores/user'
 import { useFirebaseAuth } from 'vuefire'
 
 //const data = await fetch('https://localhost:7139/weatherforecast')
@@ -8,6 +10,7 @@ import { useFirebaseAuth } from 'vuefire'
 //console.log(json)
 const { t } = useTypedI18n()
 const auth = useFirebaseAuth()
+const store = useUserStore()
 console.log(auth)
 </script>
 
@@ -20,9 +23,10 @@ console.log(auth)
   <router-link to="/questionnaire">questionnaire</router-link>
 
   <v-form>
-    <free-text-question></free-text-question>
-    <free-text-question></free-text-question>
+    <free-text-question :index="0"></free-text-question>
+    <likert-question :index="1"></likert-question>
     <v-btn type="submit" class="mt-2">Submit</v-btn>
+    <v-btn @click="store.clearAnswers()" class="mt-2">Clear</v-btn>
   </v-form>
 </template>
 

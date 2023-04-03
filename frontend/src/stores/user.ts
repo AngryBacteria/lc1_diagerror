@@ -1,6 +1,6 @@
 import { watch, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useLocalStorage } from '@vueuse/core'
+import { useLocalStorage, useSessionStorage } from '@vueuse/core'
 import type { MessageLanguages } from '@/plugins/i18n'
 import { useI18n } from 'vue-i18n'
 import { useCurrentUser } from 'vuefire'
@@ -14,12 +14,15 @@ export const useUserStore = defineStore('user', () => {
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
+
+  const answers = useSessionStorage<Array<String>>('answers', [])
+
   const snackbarConfig = useLocalStorage<SnackbarConfig>('snackbarConfig', {
     visible: false,
     message: 'TestMessage',
     color: 'primary',
     timeout: '2000',
-    location: "top"
+    location: 'top'
   })
 
   //init code
@@ -31,13 +34,17 @@ export const useUserStore = defineStore('user', () => {
     i18n.locale.value = systemLanguage
   }
 
+  function clearAnswers() {
+    answers.value = []
+  }
+
   function resetSnackbarConfig() {
     snackbarConfig.value = {
       visible: false,
       message: 'TestMessage',
       color: 'primary',
       timeout: '3000',
-      location: "top"
+      location: 'top'
     }
   }
 
@@ -49,5 +56,14 @@ export const useUserStore = defineStore('user', () => {
     { deep: true }
   )
 
-  return { language, changeLanguage, refUser, isLoggedIn, snackbarConfig, resetSnackbarConfig }
+  return {
+    language,
+    changeLanguage,
+    refUser,
+    isLoggedIn,
+    snackbarConfig,
+    resetSnackbarConfig,
+    answers,
+    clearAnswers
+  }
 })
