@@ -2,15 +2,17 @@
   <v-card>
     <h1>FreeText Question</h1>
     <h4>Subtitle</h4>
-    <v-text-field
+    <v-textarea
       v-model="store.answers[props.index]"
       color="primary"
       variant="underlined"
       :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
       required
       label="Antwort"
+      auto-grow
+      rows="2"
     >
-    </v-text-field>
+    </v-textarea>
   </v-card>
 </template>
 

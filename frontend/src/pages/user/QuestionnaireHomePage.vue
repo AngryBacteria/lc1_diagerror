@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FreeTextQuestion from '@/components/questionnaire/FreeTextQuestion.vue'
-import LikertQuestion from '@/components/questionnaire/LikertQuestion.vue';
+import LikertQuestion from '@/components/questionnaire/LikertQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
 import { useFirebaseAuth } from 'vuefire'
