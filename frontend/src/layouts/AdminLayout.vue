@@ -32,7 +32,7 @@ async function logout() {
             <v-btn v-if="store.isLoggedIn" variant="elevated" color="primary" v-bind="props">
               {{ store.refUser?.email }}
             </v-btn>
-            <v-btn v-if="!store.isLoggedIn" variant="elevated" color="primary" v-bind="props">
+            <v-btn v-if="!store.isLoggedIn" variant="elevated" color="error" v-bind="props">
               Nicht angemeldet
             </v-btn>
           </template>
@@ -59,7 +59,7 @@ async function logout() {
 
 <style>
 .v-main {
-  margin-top: 0;
+  margin-top: 2%;
   margin-left: 5%;
   margin-right: 5%;
 }

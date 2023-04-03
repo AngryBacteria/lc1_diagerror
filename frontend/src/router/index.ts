@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getCurrentUser } from 'vuefire';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,7 +16,7 @@ const router = createRouter({
         {
           path: '',
           name: 'questionnaire-home',
-          component: () => import('@/pages/HomePage.vue')
+          component: () => import('@/pages/user/QuestionnaireHomePage.vue')
         }
       ]
     },
@@ -27,7 +28,8 @@ const router = createRouter({
         {
           path: '',
           name: 'admin-home',
-          component: () => import('@/pages/HomePage.vue')
+          meta: { requiresAuth: true },
+          component: () => import('@/pages/admin/AdminHomePage.vue')
         },
         {
           path: '/admin/login',
@@ -38,5 +40,21 @@ const router = createRouter({
     }
   ]
 })
+
+//Router gard for protected routes
+router.beforeEach(async (to) => {
+  if (to.meta.requiresAuth) {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) {
+      //TODO error message
+      return {
+        path: '/admin/login',
+        query: {
+          redirect: to.fullPath,
+        },
+      };
+    }
+  }
+});
 
 export default router

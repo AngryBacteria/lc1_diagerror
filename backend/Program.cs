@@ -17,7 +17,7 @@ FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions()
 });
 FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(firebaseApp);
 
-//Dependency Injection as
+//Dependency Injection as Singleton
 builder.Services.AddSingleton(firebaseApp);
 builder.Services.AddSingleton(firebaseAuth);
 
@@ -65,6 +65,11 @@ app.MapGet("/weatherforecast", () =>
 app.MapGet("/hello", () =>
 {
     return "Hello World";
+});
+
+app.MapGet("/secured", () =>
+{
+    return "Endpoint secured by firebase";
 }).AddEndpointFilter<FirebaseAuthFilter>();
 
 app.Run();
