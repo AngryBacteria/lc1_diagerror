@@ -6,7 +6,7 @@
       :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
     >
       <v-btn-toggle elevation="1" divided v-model="store.answers[props.index]">
-        <v-btn v-for="item in labels" color="primary" :key="item">
+        <v-btn v-for="item in labels" :key="item" color="primary">
           {{ item }}
         </v-btn>
       </v-btn-toggle>
@@ -20,7 +20,13 @@ import { useUserStore } from '@/stores/user'
 import { computed } from 'vue'
 
 const labelsEnglish = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']
-const labelsGerman = ['Trifft nicht zu', 'Trifft eher nicht zu', 'Teils-teils', 'Trifft eher zu', 'Trifft zu']
+const labelsGerman = [
+  'Trifft nicht zu',
+  'Trifft eher nicht zu',
+  'Teils-teils',
+  'Trifft eher zu',
+  'Trifft zu'
+]
 
 const labels = computed(() => {
   if (i18n.locale.value === 'de') {

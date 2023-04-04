@@ -1,18 +1,21 @@
 <template>
   <v-card>
-    <h1>FreeText Question</h1>
+    <h1>Number Question</h1>
     <h4>Subtitle</h4>
-    <v-textarea
+    <v-text-field
       v-model="store.answers[props.index]"
       color="primary"
       variant="underlined"
-      :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+      :rules="[
+        () =>
+          Number.isInteger(Number(store.answers[props.index])) ||
+          t('questionnaire.validation.fieldIsNumber'),
+        () => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
+      ]"
       required
       label="Antwort"
-      auto-grow
-      rows="1"
     >
-    </v-textarea>
+    </v-text-field>
   </v-card>
 </template>
 

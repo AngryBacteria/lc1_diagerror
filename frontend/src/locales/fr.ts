@@ -7,7 +7,8 @@ export default {
       language: 'Langue'
     },
     validation: {
-      fieldRequired: ''
+      fieldRequired: '',
+      fieldIsNumber: ''
     }
   },
   admin: {

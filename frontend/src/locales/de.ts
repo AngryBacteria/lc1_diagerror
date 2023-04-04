@@ -7,7 +7,8 @@ export default {
       language: 'Sprache'
     },
     validation: {
-      fieldRequired: 'Dieses Feld ist erforderlich'
+      fieldRequired: 'Dieses Feld ist erforderlich',
+      fieldIsNumber: 'Dieses Feld muss eine Nummer sein'
     }
   },
   admin: {
