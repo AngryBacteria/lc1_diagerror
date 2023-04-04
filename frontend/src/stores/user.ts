@@ -15,7 +15,7 @@ export const useUserStore = defineStore('user', () => {
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
 
-  const answers = useSessionStorage<Array<String>>('answers', [])
+  const answers = useSessionStorage<any[]>('answers', [])
 
   const snackbarConfig = useLocalStorage<SnackbarConfig>('snackbarConfig', {
     visible: false,

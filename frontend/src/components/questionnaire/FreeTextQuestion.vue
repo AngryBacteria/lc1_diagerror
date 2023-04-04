@@ -35,8 +35,4 @@ const props = defineProps({
   padding: 1rem;
   margin: 1rem;
 }
-
-.v-text-field {
-  padding-top: 1rem;
-}
 </style>

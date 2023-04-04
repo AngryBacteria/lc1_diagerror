@@ -5,7 +5,7 @@
     <v-input
       :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
     >
-      <v-btn-toggle elevation="1" variant="outlined" divided v-model="store.answers[props.index]">
+      <v-btn-toggle elevation="1" divided v-model="store.answers[props.index]">
         <v-btn v-for="item in labels" color="primary" :key="item">
           {{ item }}
         </v-btn>
@@ -48,9 +48,5 @@ const props = defineProps({
 .v-card {
   padding: 1rem;
   margin: 1rem;
-}
-
-.v-text-field {
-  padding-top: 1rem;
 }
 </style>

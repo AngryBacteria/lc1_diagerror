@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import FreeTextQuestion from '@/components/questionnaire/FreeTextQuestion.vue'
 import LikertQuestion from '@/components/questionnaire/LikertQuestion.vue'
+import MultipleChoiceQuestion from '@/components/questionnaire/MultipleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
 import { useFirebaseAuth } from 'vuefire'
@@ -25,6 +26,7 @@ console.log(auth)
   <v-form>
     <free-text-question :index="0"></free-text-question>
     <likert-question :index="1"></likert-question>
+    <MultipleChoiceQuestion :index="2"></MultipleChoiceQuestion>    
     <v-btn type="submit" class="mt-2">Submit</v-btn>
     <v-btn @click="store.clearAnswers()" class="mt-2">Clear</v-btn>
   </v-form>
