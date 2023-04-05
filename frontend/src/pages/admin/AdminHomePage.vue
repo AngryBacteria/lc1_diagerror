@@ -12,5 +12,5 @@ console.log(auth)
   <h1>Admin Home Page</h1>
   <router-link to="/admin">admin</router-link>
   <br />
-  <router-link to="/questionnaire">questionnaire</router-link>
+  <router-link to="/questionnaire/home">questionnaire</router-link>
 </template>

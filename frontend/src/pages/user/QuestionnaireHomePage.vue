@@ -22,7 +22,7 @@ console.log(auth)
   <p>{{ t('questionnaire.common.test') }}</p>
   <router-link to="/admin">admin</router-link>
   <br />
-  <router-link to="/questionnaire">questionnaire</router-link>
+  <router-link to="/questionnaire/home">questionnaire</router-link>
 
   <v-form>
     <free-text-question :index="0"></free-text-question>

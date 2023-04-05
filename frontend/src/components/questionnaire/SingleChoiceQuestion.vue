@@ -11,7 +11,7 @@
         v-for="item in optionsRef"
         :key="item.index"
         :label="item.label"
-        :value="item.index"
+        :value="`${item.index}`"
         color="primary"
         density="compact"
       >
@@ -51,7 +51,7 @@ const usedOption = ref(optionsEng)
 const optionsRef = computed<choice[]>(() => {
   const output: choice[] = []
   usedOption.value.forEach((element, index) => {
-    output.push({ index: index + 1, label: element })
+    output.push({ index: index, label: element })
   })
   return output
 })

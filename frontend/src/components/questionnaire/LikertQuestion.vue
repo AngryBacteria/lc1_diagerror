@@ -5,8 +5,8 @@
     <v-input
       :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
     >
-      <v-btn-toggle elevation="1" divided v-model="store.answers[props.index]">
-        <v-btn v-for="item in labels" :key="item" color="primary">
+      <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
+        <v-btn v-for="item in labels" :key="item" density="compact" color="primary">
           {{ item }}
         </v-btn>
       </v-btn-toggle>
@@ -23,9 +23,16 @@ const labelsEnglish = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Str
 const labelsGerman = [
   'Trifft nicht zu',
   'Trifft eher nicht zu',
-  'Teils-teils',
+  'Neutral',
   'Trifft eher zu',
   'Trifft zu'
+]
+const labelsFrench = [
+  "Pas du tout d'accord",
+  "Pas d'accord",
+  'neutre',
+  "D'accord",
+  "Tout à fait d'accord"
 ]
 
 const labels = computed(() => {
@@ -35,7 +42,7 @@ const labels = computed(() => {
   if (i18n.locale.value === 'en') {
     return labelsEnglish
   } else {
-    return labelsEnglish
+    return labelsFrench
   }
 })
 

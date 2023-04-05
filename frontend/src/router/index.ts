@@ -6,17 +6,27 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/questionnaire'
+      redirect: '/questionnaire/home'
     },
     {
       path: '/questionnaire',
-      name: 'home-questionnaire',
+      name: 'layout-questionnaire',
       component: () => import('@/layouts/UserLayout.vue'),
       children: [
         {
-          path: '',
-          name: 'questionnaire-home',
+          path: '/questionnaire/home',
+
           component: () => import('@/pages/user/QuestionnaireHomePage.vue')
+        },
+        {
+          path: '/questionnaire/invite/:invitationCode',
+
+          component: () => import('@/pages/user/InvitePage.vue')
+        },
+        {
+          path: '/questionnaire/invite/',
+
+          component: () => import('@/pages/user/InvitePage.vue')
         }
       ]
     },
@@ -45,7 +55,19 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   if (to.meta.requiresAuth) {
     const currentUser = await getCurrentUser()
+
     if (!currentUser) {
+      //TODO error message
+      return {
+        path: '/admin/login',
+        query: {
+          redirect: to.fullPath
+        }
+      }
+    }
+    const token = await currentUser?.getIdTokenResult()
+
+    if (!token || token.claims.admin != true) {
       //TODO error message
       return {
         path: '/admin/login',
