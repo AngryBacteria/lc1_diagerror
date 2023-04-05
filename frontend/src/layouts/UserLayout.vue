@@ -47,10 +47,4 @@ const { smAndUp } = useDisplay()
   </v-layout>
 </template>
 
-<style>
-.v-main {
-  margin-top: 0;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-</style>
+<style></style>

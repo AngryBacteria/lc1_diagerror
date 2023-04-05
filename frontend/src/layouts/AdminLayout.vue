@@ -57,10 +57,4 @@ async function logout() {
   </v-layout>
 </template>
 
-<style>
-.v-main {
-  margin-top: 2%;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-</style>
+<style></style>
