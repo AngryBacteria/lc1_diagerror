@@ -6,26 +6,24 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/questionnaire/home'
+      redirect: '/questionnaire/invite'
     },
     {
       path: '/questionnaire',
       name: 'layout-questionnaire',
+      redirect: '/questionnaire/invite',
       component: () => import('@/layouts/UserLayout.vue'),
       children: [
         {
-          path: '/questionnaire/home',
-
-          component: () => import('@/pages/user/QuestionnaireHomePage.vue')
+          path: 'test',
+          component: () => import('@/pages/user/QuestionnaireTestPage.vue')
         },
         {
-          path: '/questionnaire/invite/:invitationCode',
-
+          path: 'invite/:invitationCode',
           component: () => import('@/pages/user/InvitePage.vue')
         },
         {
-          path: '/questionnaire/invite/',
-
+          path: 'invite',
           component: () => import('@/pages/user/InvitePage.vue')
         }
       ]
@@ -42,7 +40,7 @@ const router = createRouter({
           component: () => import('@/pages/admin/AdminHomePage.vue')
         },
         {
-          path: '/admin/login',
+          path: 'login',
           name: 'admin-login',
           component: () => import('@/components/admin/LoginForm.vue')
         }

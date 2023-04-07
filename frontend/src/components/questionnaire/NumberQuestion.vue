@@ -5,10 +5,11 @@
     <v-text-field
       v-model="store.answers[props.index]"
       color="primary"
-      variant="underlined"
+      type="number"
       :rules="[
         () =>
-          Number.isInteger(Number(store.answers[props.index])) ||
+          (Number.isInteger(Number(store.answers[props.index])) &&
+            store.answers[props.index] > 0) ||
           t('questionnaire.validation.fieldIsNumber'),
         () => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
       ]"

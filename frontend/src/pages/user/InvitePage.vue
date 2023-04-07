@@ -2,18 +2,30 @@
   <div v-if="readyFlag">
     <p>Questionnaire code loaded: {{ inviteCode }}</p>
   </div>
-  <v-card v-else style="margin: 2rem auto 0 auto; padding: 1rem" max-width="95%" elevation="1">
-    <div class="text-h6 font-weight-regular mb-2">Bitte geben sie ihren Einladungscode ein</div>
+
+  <v-card v-else style="margin: 2rem auto 0 auto; padding: 1rem" max-width="50%" elevation="1">
+    <div class="text-h6 font-weight-regular mb-2">
+      {{ t('questionnaire.navigation.provideCode') }}
+    </div>
     <v-form @submit.prevent v-model="validForm">
       <v-text-field
         v-model="inviteCode"
-        label="Einladungscode"
+        autocomplete="off"
+        :label="t('questionnaire.navigation.invitationCode')"
         rounded
         color="primary"
-        :rules="[() => !!inviteCode || t('questionnaire.validation.fieldRequired')]"
+        :rules="[
+          () => !!inviteCode || t('questionnaire.validation.fieldRequired'),
+          () => inviteCode.length === 6 || t('questionnaire.validation.sixDigits')
+        ]"
       ></v-text-field>
-      <v-btn type="submit" @click="loadQuestionnaire()" :loading="loadingFlag">
-        Umfrage starten</v-btn
+      <v-btn
+        type="submit"
+        @click="loadQuestionnaire()"
+        :loading="loadingFlag"
+        :disabled="!validForm"
+      >
+        {{ t('questionnaire.navigation.startQuestionnaire') }}</v-btn
       >
     </v-form>
   </v-card>
@@ -26,8 +38,6 @@ import { useRoute } from 'vue-router'
 
 const { t } = useTypedI18n()
 const route = useRoute()
-
-//TODO i18n
 
 const readyFlag = ref(false)
 const loadingFlag = ref(false)

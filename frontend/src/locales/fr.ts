@@ -4,11 +4,16 @@ export default {
       test: 'Salut le monde'
     },
     navigation: {
-      language: 'Langue'
+      language: 'Langue',
+      startQuestionnaire: '',
+      questionnaire: '',
+      invitationCode: '',
+      provideCode: ''
     },
     validation: {
       fieldRequired: '',
-      fieldIsNumber: ''
+      fieldIsNumber: '',
+      sixDigits: ''
     }
   },
   admin: {

@@ -1,23 +1,39 @@
 <template>
-  <v-card>
-    <h1>Likert-Scale Question</h1>
-    <h4>Subtitle</h4>
-    <v-input
-      :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
-    >
-      <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
-        <v-btn v-for="item in labels" :key="item" density="compact" color="primary">
-          {{ item }}
-        </v-btn>
-      </v-btn-toggle>
-    </v-input>
-  </v-card>
+  <div v-if="mdAndUp">
+    <v-card>
+      <h1>Likert-Scale Question</h1>
+      <h4>Subtitle</h4>
+      <v-input
+        :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+      >
+        <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
+          <v-btn
+            v-for="(item, index) in labels"
+            :key="item"
+            density="compact"
+            :value="`${index}`"
+            color="primary"
+          >
+            {{ item }}
+          </v-btn>
+        </v-btn-toggle>
+      </v-input>
+    </v-card>
+  </div>
+
+  <div v-else>
+    <single-choice-question :index="props.index"></single-choice-question>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
 import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
+import SingleChoiceQuestion from './SingleChoiceQuestion.vue'
+
+const { mdAndUp } = useDisplay()
 
 const labelsEnglish = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']
 const labelsGerman = [

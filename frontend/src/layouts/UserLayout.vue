@@ -10,11 +10,13 @@ const { smAndUp } = useDisplay()
 </script>
 
 <template>
-  <v-layout>
+  <v-layout class="mt-2 mr-6 ml-6 mb-4">
     <v-app-bar color="background">
       <template v-slot:prepend>
-        <img v-if="smAndUp" src="../assets/UKNLogo.svg" alt="Logo" style="height: 80px" />
-        <img v-else src="../assets/InselLogo.svg" alt="Logo" style="height: 60px" />
+        <router-link to="/">
+          <img v-if="smAndUp" src="../assets/UKNLogo.svg" alt="Logo" style="height: 80px" />
+          <img v-else src="../assets/InselLogo.svg" alt="Logo" style="height: 60px" />
+        </router-link>
       </template>
 
       <template v-slot:append>
