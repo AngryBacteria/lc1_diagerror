@@ -2,8 +2,19 @@
   <div v-if="readyFlag">
     <p>Questionnaire code loaded: {{ inviteCode }}</p>
   </div>
+  <div v-if="errorFlag">
+    <v-alert 
+    icon="mdi-alert-circle-outline"
+    text="Error in request"
+    color="error"
+    rounded
+    elevation="3"
+    closable
+    close-icon="mdi-close"
+    ></v-alert>
+  </div>
 
-  <v-card v-else style="margin: 2rem auto 0 auto; padding: 1rem" max-width="50%" elevation="1">
+  <v-card v-if="!readyFlag" style="margin: 2rem auto 0 auto; padding: 1rem" max-width="50%" elevation="1">
     <div class="text-h6 font-weight-regular mb-2">
       {{ t('questionnaire.navigation.provideCode') }}
     </div>
@@ -39,9 +50,14 @@ import { useRoute } from 'vue-router'
 const { t } = useTypedI18n()
 const route = useRoute()
 
+//flags
 const readyFlag = ref(false)
 const loadingFlag = ref(false)
 const inviteCode = ref()
+
+const errorFlag = ref(true)
+const errorMessage = ref('')
+
 const validForm = ref(false)
 
 const pathParam = route.params.invitationCode
@@ -64,9 +80,24 @@ async function loadQuestionnaire() {
     loadingFlag.value = true
     await new Promise((resolve) => setTimeout(resolve, 1000))
     loadingFlag.value = false
+    errorFlag.value = false
     readyFlag.value = true
   }
 }
+
+function reset() {
+  readyFlag.value = false
+  loadingFlag.value = false
+  inviteCode.value = false
+  errorFlag.value = false
+  errorMessage.value = ''
+}
 </script>
 
-<style></style>
+<style>
+
+.mdi-close {
+  color: black!important;
+}
+
+</style>

@@ -11,12 +11,10 @@ export const useUserStore = defineStore('user', () => {
   const i18n = useI18n()
   const refUser = useCurrentUser()
   const isLoggedIn = ref(false)
+  const apiEndpoint = 'https://localhost:7139'
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
-
-  const answers = useSessionStorage<any[]>('answers', [])
-
   const snackbarConfig = useLocalStorage<SnackbarConfig>('snackbarConfig', {
     visible: false,
     message: 'TestMessage',
@@ -24,6 +22,9 @@ export const useUserStore = defineStore('user', () => {
     timeout: '2000',
     location: 'top'
   })
+
+  const answers = useSessionStorage<any[]>('answers', [])
+  const questionnaire = useSessionStorage<any[]>('questionnaire', null)
 
   //init code
   i18n.locale.value = language.value
@@ -64,6 +65,8 @@ export const useUserStore = defineStore('user', () => {
     snackbarConfig,
     resetSnackbarConfig,
     answers,
-    clearAnswers
+    clearAnswers,
+    questionnaire,
+    apiEndpoint
   }
 })
