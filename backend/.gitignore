@@ -37,3 +37,7 @@ msbuild.wrn
 .vs/
 
 Data/firebaseServiceAccount.json
+
+# Sqlite
+*.db-wal
+*.db-shm

@@ -1,7 +1,9 @@
 using backend.EndpointFilters;
+using backend.Models;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,10 @@ FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(firebaseApp);
 //Dependency Injection as Singleton
 builder.Services.AddSingleton(firebaseApp);
 builder.Services.AddSingleton(firebaseAuth);
+
+//Sqlite database
+var connectionString = builder.Configuration.GetConnectionString("diagError") ?? "Data Source=diagError.db";
+builder.Services.AddDbContext<DiagErrorDb>();
 
 //cors
 builder.Services.AddCors();
@@ -71,6 +77,17 @@ app.MapGet("/secured", () =>
 {
     return "Endpoint secured by firebase";
 }).AddEndpointFilter<FirebaseAuthFilter>();
+
+app.MapGet("/question", async (DiagErrorDb db) => await db.Questions.ToListAsync());
+
+
+app.MapPost("/question", async (DiagErrorDb db, Question question) =>
+{
+    await db.Questions.AddAsync(question);
+    await db.SaveChangesAsync();
+    return Results.Created($"/question/{question.Id}", question);
+});
+
 
 app.Run();
 
