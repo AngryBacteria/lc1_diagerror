@@ -9,7 +9,7 @@ namespace backend.Models
 
         public string DbPath { get; }
 
-        public DiagErrorDb()
+        public DiagErrorDb(DbContextOptions options): base (options)
         {
             var projectPath = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -30,11 +30,14 @@ namespace backend.Models
     }
     public class Questionnaire
     {
-        public int Id { get; set; }
+        public int QuestionnaireId { get; set; }
+        public List<Question> Questions { get; set; }
     }
 
     public class Question
     {
-        public int Id { get; set; }
+        public int QuestionId { get; set; }
+        public int QuestionnaireId { get; set; }
+        public Questionnaire Questionnaire { get; set; }
     }
 }

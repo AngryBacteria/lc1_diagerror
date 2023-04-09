@@ -25,7 +25,7 @@ builder.Services.AddSingleton(firebaseAuth);
 
 //Sqlite database
 var connectionString = builder.Configuration.GetConnectionString("diagError") ?? "Data Source=diagError.db";
-builder.Services.AddDbContext<DiagErrorDb>();
+builder.Services.AddSqlite<DiagErrorDb>(connectionString);
 
 //cors
 builder.Services.AddCors();
@@ -85,7 +85,7 @@ app.MapPost("/question", async (DiagErrorDb db, Question question) =>
 {
     await db.Questions.AddAsync(question);
     await db.SaveChangesAsync();
-    return Results.Created($"/question/{question.Id}", question);
+    return Results.Created($"/question/{question.QuestionId}", question);
 });
 
 

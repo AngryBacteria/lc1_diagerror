@@ -34,7 +34,7 @@ msbuild.err
 msbuild.wrn
 
 # Visual Studio 2015
-.vs/
+.vs/*
 
 Data/firebaseServiceAccount.json
 
