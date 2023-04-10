@@ -33,8 +33,6 @@ namespace backend.EndpointFilters
                 }
 
                 String authToken = authHeaderValue.Substring("Bearer ".Length).Trim();
-                Console.WriteLine(authToken);
-
                 FirebaseToken firebaseToken = await _firebaseAuth.VerifyIdTokenAsync(authToken);
                 
                 //If firebaseToken has the admin claim and its true, authorize 
@@ -53,7 +51,7 @@ namespace backend.EndpointFilters
                     return Results.Unauthorized(); 
                 }
             }
-            catch(Exception e) {
+            catch(Exception) {
                 return Results.Unauthorized();
             }
         }

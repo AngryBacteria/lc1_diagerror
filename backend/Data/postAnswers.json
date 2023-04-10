@@ -1,0 +1,32 @@
+[
+    {
+      "questionId": 1,
+      "text": "43",
+      "date": "2023-04-10",
+      "invitationId": "QS123456"
+    },
+    {
+      "questionId": 2,
+      "text": "Ich habe ein Infoblatt erhalten",
+      "date": "2023-04-10",
+      "invitationId": "QS123456"
+    },
+    {
+      "questionId": 3,
+      "text": "2",
+      "date": "2023-04-10",
+      "invitationId": "QS123456"
+    },
+    {
+      "questionId": 4,
+      "text": "3",
+      "date": "2023-04-10",
+      "invitationId": "QS123456"
+    },
+    {
+      "questionId": 5,
+      "text": "1",
+      "date": "2023-04-10",
+      "invitationId": "QS123456"
+    }
+  ]

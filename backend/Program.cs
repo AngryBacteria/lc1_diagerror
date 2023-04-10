@@ -3,9 +3,7 @@ using backend.Models;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,26 +48,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
 app.MapGet("/hello", () =>
 {
     return "Hello World";
@@ -80,10 +58,11 @@ app.MapGet("/secured", () =>
     return "Endpoint secured by firebase";
 }).AddEndpointFilter<FirebaseAuthFilter>();
 
-//Endpoints for Questionnaires with answers
-app.MapGet("/questionnaire/complete", async (DiagErrorDb db) => await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync()) ;
+//Endpoints for GET all Questionnaires with answers
+app.MapGet("/questionnaire/complete", async (DiagErrorDb db) => await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync());
 
-app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string id, string identifier, string language) => 
+//Endpoints for GET all Questionnaires with answers and filtering possibilities
+app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string? id, string? identifier, string? language) => 
 {
     var questionnaires = db.Questionnaires
             .Include(q => q.Questions)
@@ -108,9 +87,10 @@ app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string id, s
     return await questionnaires.ToListAsync();
 });
 
-//Endpoints for questionnaires without answers
+//Endpoints for GET Questionnaires without answers
 app.MapGet("/questionnaire/light", async (DiagErrorDb db) => await db.Questionnaires.Include(q => q.Questions).ToListAsync());
 
+//Endpoints for POST Questionnaires without answers
 app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire questionnaire) =>
 {
     await db.Questionnaires.AddAsync(questionnaire);
@@ -119,12 +99,13 @@ app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire questio
     return Results.Created($"/questionnaire/light/{questionnaire.QuestionnaireId}", questionnaire);
 });
 
-//Endpoints for questions with answers
+//Endpoints for GET Questions with answers
 app.MapGet("/question/complete", async (DiagErrorDb db) => await db.Questions.Include(a => a.Answers).ToListAsync());
 
-//Endpoints for questions without answers
+//Endpoints for GET Questions without answers
 app.MapGet("/question/light", async (DiagErrorDb db) => await db.Questions.ToListAsync());
 
+//Endpoints for POST Questions without answers
 app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
 {
     await db.Questions.AddAsync(question);
@@ -132,19 +113,15 @@ app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
     return Results.Created($"/question/light/{question.QuestionId}", question);
 });
 
-//Endpoints for answers
+//Endpoints for GET answers
 app.MapGet("/answer", async (DiagErrorDb db) => await db.Answers.ToListAsync());
 
-app.MapPost("/answer", async (DiagErrorDb db, Answer answer) =>
+//Endpoints for POST answers
+app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
 {
-    await db.Answers.AddAsync(answer);
+    await db.Answers.AddRangeAsync(answers);
     await db.SaveChangesAsync();
-    return Results.Created($"/answer/{answer.AnswerId}", answer);
+    return Results.Ok();
 });
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

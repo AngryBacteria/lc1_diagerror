@@ -88,6 +88,7 @@ namespace backend.Models
         public string Subtext { get; set; }
         public bool Optional { get; set; }
         public QuestionType Questiontype { get; set; }
+        public List<Option> Options { get; set; } = new List<Option>();
     }
 
     public class Answer
@@ -99,6 +100,13 @@ namespace backend.Models
         public string Text { get; set; }
         public DateOnly Date { get; set; }
         public string InvitationId { get; set; }
+    }
+
+    public class Option
+    {
+        public int OptionId { get; set; }
+        public int Index { get; set; }
+        public String Value { get; set; }
     }
 
 }

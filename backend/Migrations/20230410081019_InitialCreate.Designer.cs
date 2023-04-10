@@ -11,7 +11,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(DiagErrorDb))]
-    [Migration("20230409151108_InitialCreate")]
+    [Migration("20230410081019_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -48,6 +48,29 @@ namespace backend.Migrations
                         {
                             t.HasCheckConstraint("CHK_InvitationIdLength", "LENGTH(InvitationId) = 8");
                         });
+                });
+
+            modelBuilder.Entity("backend.Models.Option", b =>
+                {
+                    b.Property<int>("OptionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("QuestionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OptionId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Option");
                 });
 
             modelBuilder.Entity("backend.Models.Question", b =>
@@ -134,6 +157,13 @@ namespace backend.Migrations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("backend.Models.Option", b =>
+                {
+                    b.HasOne("backend.Models.Question", null)
+                        .WithMany("Options")
+                        .HasForeignKey("QuestionId");
+                });
+
             modelBuilder.Entity("backend.Models.Question", b =>
                 {
                     b.HasOne("backend.Models.Questionnaire", "Questionnaire")
@@ -148,6 +178,8 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Models.Question", b =>
                 {
                     b.Navigation("Answers");
+
+                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("backend.Models.Questionnaire", b =>

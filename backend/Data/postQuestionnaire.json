@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "answers": [],
+      "text": "Wie alt sind sie?",
+      "subtext": "Bitte eine positive Zahl eingeben",
+      "optional": false,
+      "questiontype": "FreeText",
+      "options": []
+    },
+    {
+      "answers": [],
+      "text": "Wie haben sie von dieser Umfrage gehört?",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "FreeText",
+      "options": []
+    },
+    {
+      "answers": [],
+      "text": "Ich war zufrieden mit meinem Aufenthalt im UKN",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "Likert",
+      "options": []
+    },
+    {
+      "answers": [],
+      "text": "Meine Diagnose hat sich bestätigt seit dem Aufenthalt im UKN",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "Likert",
+      "options": []
+    },
+    {
+      "answers": [],
+      "text": "Wann waren sie das letzte mal im Spital",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "SingleChoice",
+      "options": [
+        {
+          "index": 0,
+          "value": "Vor 4 Monaten"
+        },
+        {
+          "index": 1,
+          "value": "Vor 2 Monaten"
+        },
+        {
+          "index": 2,
+          "value": "Vor 1 Monaten"
+        },
+        {
+          "index": 3,
+          "value": "Kürzlich"
+        }
+      ]
+    }
+  ],
+  "identifier": "QS",
+  "language": "DE",
+  "title": "Fragebogen für die Qualitätssicherung am UKN auf Deutsch",
+  "description": "Beinhaltet Metriken zu Diagnosefehlern und Qualitätssicherung für Patienten des UKN. Gedacht ist es diesen Fragebogen 14 Tagen nach dem Aufenthalt auszufüllen",
+  "descriptionForCustomer": "Wir danken ihnen für ihre Teilnahme. Mit diesem Fragebogen versuchen wir Diagnosefehler am Inselspital zu identifizieren, um die Qualität der Behandlung zu verbessern",
+  "validAfterDays": 15,
+  "validForDays": 15
+}
