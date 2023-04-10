@@ -1,10 +1,11 @@
 import { watch, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useLocalStorage, useSessionStorage } from '@vueuse/core'
+import { StorageSerializers, useLocalStorage, useSessionStorage } from '@vueuse/core'
 import type { MessageLanguages } from '@/plugins/i18n'
 import { useI18n } from 'vue-i18n'
 import { useCurrentUser } from 'vuefire'
 import type { SnackbarConfig } from '@/components/global/GlobalSnackbar.vue'
+import type { Questionnaire } from '@/data/interfaces'
 
 export const useUserStore = defineStore('user', () => {
   //other fields
@@ -24,7 +25,10 @@ export const useUserStore = defineStore('user', () => {
   })
 
   const answers = useSessionStorage<any[]>('answers', [])
-  const questionnaire = useSessionStorage<any[]>('questionnaire', null)
+  const questionnaire = useSessionStorage<Questionnaire>('key', null, {
+    serializer: StorageSerializers.object
+  })
+  const inviteCode = useSessionStorage<string>('inviteCode', null)
 
   //init code
   i18n.locale.value = language.value
@@ -37,6 +41,12 @@ export const useUserStore = defineStore('user', () => {
 
   function clearAnswers() {
     answers.value = []
+  }
+
+  function abortQuestionnaire() {
+    answers.value = []
+    questionnaire.value = null
+    inviteCode.value = ''
   }
 
   function resetSnackbarConfig() {
@@ -66,7 +76,9 @@ export const useUserStore = defineStore('user', () => {
     resetSnackbarConfig,
     answers,
     clearAnswers,
+    abortQuestionnaire,
     questionnaire,
-    apiEndpoint
+    apiEndpoint,
+    inviteCode
   }
 })

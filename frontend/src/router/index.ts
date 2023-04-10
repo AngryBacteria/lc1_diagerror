@@ -15,10 +15,6 @@ const router = createRouter({
       component: () => import('@/layouts/UserLayout.vue'),
       children: [
         {
-          path: 'test',
-          component: () => import('@/pages/user/QuestionnaireTestPage.vue')
-        },
-        {
           path: 'invite/:invitationCode',
           component: () => import('@/pages/user/InvitePage.vue')
         },
