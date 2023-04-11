@@ -82,7 +82,6 @@ async function login() {
     } catch (error: any) {
       const errorCode = error.code
 
-      //TODO i18n
       store.snackbarConfig.message = errorCode.split('/')[1]
       store.snackbarConfig.color = 'error'
       store.snackbarConfig.visible = true

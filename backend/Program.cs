@@ -93,7 +93,10 @@ app.MapGet("/questionnaire/light", async (DiagErrorDb db) => await db.Questionna
 //TEST ENDPOINT TODO REMOVE
 app.MapGet("/questionnaire/light/hui", async (DiagErrorDb db) => 
 {
-    return Results.Ok(await db.Questionnaires.Include(q => q.Questions).FirstOrDefaultAsync(q => q.QuestionnaireId == 1));
+    return Results.Ok(await db.Questionnaires
+    .Include(q => q.Questions)
+    .ThenInclude(q => q.Options)
+    .FirstOrDefaultAsync(q => q.QuestionnaireId == 1));
 });
 
 //Endpoints for POST Questionnaires without answers

@@ -34,21 +34,55 @@ export const useUserStore = defineStore('user', () => {
   i18n.locale.value = language.value
 
   //functions
+  /**
+   * Function to change the language of the website
+   * @param systemLanguage One of the 3 valid Languages (EN, DE, FR)
+   */
   function changeLanguage(systemLanguage: MessageLanguages) {
     language.value = systemLanguage
     i18n.locale.value = systemLanguage
   }
 
+  /**
+   * Deleted the answers in the store
+   */
   function clearAnswers() {
     answers.value = []
   }
 
+  /**
+   * Function to abort the current Questionnaire. Deleted all answers, the inviteCode and the Questionnaire
+   */
   function abortQuestionnaire() {
     answers.value = []
     questionnaire.value = null
     inviteCode.value = ''
   }
 
+  //TODO submitting to backend
+  /**
+   * Function that builds valid Answer Objects for submitting them to the Database
+   * @param validForm Boolean to indicate if the form was valid or not
+   */
+  function submitQuestionnaire() {
+    if (!questionnaire.value || !answers.value || !inviteCode) return
+
+    console.log('executed')
+
+    const formattedAnswers = answers.value.map((answer, index) => {
+      return {
+        questionId: questionnaire.value.questions.at(index)?.questionId,
+        text: answer,
+        date: new Date().toISOString().split('T')[0],
+        invitationId: inviteCode.value
+      }
+    })
+    console.log(formattedAnswers)
+  }
+
+  /**
+   * Function to reset the snackBar Config with default values
+   */
   function resetSnackbarConfig() {
     snackbarConfig.value = {
       visible: false,
@@ -59,6 +93,9 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  /**
+   * Watcher to keep the isLoggedIn ref up to date
+   */
   watch(
     refUser,
     (newRefUser) => {
@@ -77,6 +114,7 @@ export const useUserStore = defineStore('user', () => {
     answers,
     clearAnswers,
     abortQuestionnaire,
+    submitQuestionnaire,
     questionnaire,
     apiEndpoint,
     inviteCode

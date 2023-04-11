@@ -8,7 +8,10 @@ export default {
       startQuestionnaire: '',
       questionnaire: '',
       invitationCode: '',
-      provideCode: ''
+      provideCode: '',
+      submitQuestionnaire: '',
+      clearAnswers: '',
+      abortQuestionnaire: ''
     },
     validation: {
       fieldRequired: '',

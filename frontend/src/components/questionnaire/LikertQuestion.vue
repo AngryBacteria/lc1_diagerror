@@ -1,9 +1,10 @@
 <template>
-  <div v-if="mdAndUp">
-    <v-card>
-      <h1>Likert-Scale Question</h1>
-      <h4>Subtitle</h4>
+  <div>
+    <v-card v-if="mdAndUp">
+      <h1>{{ props.question.text }}</h1>
+      <h4>{{ props.question.subtext }}</h4>
       <v-input
+        :model-value="store.answers[props.index]"
         :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
       >
         <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
@@ -19,21 +20,58 @@
         </v-btn-toggle>
       </v-input>
     </v-card>
-  </div>
 
-  <div v-else>
-    <single-choice-question :index="props.index"></single-choice-question>
+    <v-card v-else>
+      <h1>{{ question.text }}</h1>
+      <h4>{{ question.subtext }}</h4>
+      <v-radio-group
+        density="compact"
+        v-model="store.answers[props.index]"
+        :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+      >
+        <v-radio
+          v-for="(option, index) in labels"
+          :key="index"
+          :label="option"
+          :value="`${index}`"
+          color="primary"
+          density="compact"
+        >
+        </v-radio>
+      </v-radio-group>
+    </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useTypedI18n } from '@/composables/useTypedI18n'
+import type { Question } from '@/data/interfaces'
 import { useUserStore } from '@/stores/user'
 import { computed } from 'vue'
+import type { PropType } from 'vue'
 import { useDisplay } from 'vuetify'
-import SingleChoiceQuestion from './SingleChoiceQuestion.vue'
 
-const { mdAndUp } = useDisplay()
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true
+  },
+  question: {
+    type: Object as PropType<Question>,
+    required: true
+  }
+})
+
+const labels = computed(() => {
+  if (i18n.locale.value === 'de') {
+    return labelsGerman
+  }
+  if (i18n.locale.value === 'en') {
+    return labelsEnglish
+  } else {
+    return labelsFrench
+  }
+})
 
 const labelsEnglish = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']
 const labelsGerman = [
@@ -51,26 +89,10 @@ const labelsFrench = [
   "Tout à fait d'accord"
 ]
 
-const labels = computed(() => {
-  if (i18n.locale.value === 'de') {
-    return labelsGerman
-  }
-  if (i18n.locale.value === 'en') {
-    return labelsEnglish
-  } else {
-    return labelsFrench
-  }
-})
-
 const i18n = useTypedI18n()
 const { t } = useTypedI18n()
+const { mdAndUp } = useDisplay()
 const store = useUserStore()
-const props = defineProps({
-  index: {
-    type: Number,
-    required: true
-  }
-})
 </script>
 
 <style scoped>

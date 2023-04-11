@@ -8,7 +8,10 @@ export default {
       startQuestionnaire: 'Start questionnaire',
       questionnaire: 'Questionnaire',
       invitationCode: 'Invitation code',
-      provideCode: 'Please provide your invitation code'
+      provideCode: 'Please provide your invitation code',
+      submitQuestionnaire: 'Submit Questionnaire',
+      clearAnswers: 'Clear answers',
+      abortQuestionnaire: 'Abort Questionnaire'
     },
     validation: {
       fieldRequired: 'This field is required',

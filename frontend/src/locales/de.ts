@@ -8,7 +8,10 @@ export default {
       startQuestionnaire: 'Umfrage starten',
       questionnaire: 'Umfrage',
       invitationCode: 'Einladungscode',
-      provideCode: 'Bitte geben sie ihren Einladungscode ein'
+      provideCode: 'Bitte geben sie ihren Einladungscode ein',
+      submitQuestionnaire: 'Umfrage abschicken',
+      clearAnswers: 'Antworten löschen',
+      abortQuestionnaire: 'Umfrage abbrechen'
     },
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',

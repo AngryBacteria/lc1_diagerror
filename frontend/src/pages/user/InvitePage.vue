@@ -13,7 +13,6 @@
       close-icon="mdi-close"
     ></v-alert>
   </div>
-  <div v-if="alreadyUsed">Code has already been used</div>
 
   <v-card
     v-if="!store.questionnaire || error"
@@ -62,7 +61,6 @@ const route = useRoute()
 const store = useUserStore()
 
 const validForm = ref(false)
-const alreadyUsed = ref(false)
 
 const { execute, error, isFetching, data } = useFetch(
   'https://localhost:7184/questionnaire/light/hui',

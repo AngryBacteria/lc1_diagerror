@@ -1,5 +1,5 @@
 export interface Questionnaire {
-  questionnaireId: number
+  questionnaireId?: number
   questions: Question[]
   identifier: string
   language: string
@@ -11,18 +11,18 @@ export interface Questionnaire {
 }
 
 export interface Question {
-  questionId: number
+  questionId?: number
   questionnaireId: number
   answers: Answer[]
   text: string
   subtext: string
   optional: boolean
-  questiontype: string
+  questiontype: 'Likert' | 'FreeText' | 'SingleChoice'
   options: Option[]
 }
 
 export interface Answer {
-  answerId: number
+  answerId?: number
   questionId: number
   text: string
   date: string
@@ -30,7 +30,7 @@ export interface Answer {
 }
 
 export interface Option {
-  optionId: number
+  optionId?: number
   index: number
   value: string
 }
