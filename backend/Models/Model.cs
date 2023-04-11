@@ -35,14 +35,62 @@ namespace backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-        
-
+   
             modelBuilder.Entity<Answer>()
                 .ToTable(b => b.HasCheckConstraint("CHK_InvitationIdLength", "LENGTH(InvitationId) = 8"));
 
             modelBuilder.Entity<Questionnaire>()
                 .ToTable(b => b.HasCheckConstraint("CHK_IdentifierLength", "LENGTH(Identifier) = 2"));
         }
+
+        /* Todo auto increment the index for each question grouped by questionnaire
+         * WORK IN PROGRESS
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // Get the added questions
+            var addedQuestions = ChangeTracker.Entries<Question>()
+                .Where(e => e.State == EntityState.Added)
+                .Select(e => e.Entity);
+
+            // Group the added questions by questionnaire
+            var groups = addedQuestions.GroupBy(q => q.QuestionnaireId);
+
+            // Calculate the index for each question in each group
+            foreach (var group in groups)
+            {
+                int index = Questions
+                    .Where(q => q.QuestionnaireId == group.Key)
+                    .Select(q => q.Index)
+                    .DefaultIfEmpty(0)
+                    .Max() + 1;
+                foreach (var question in group.OrderBy(q => q.QuestionId))
+                {
+                    question.Index = index++;
+                }
+            }
+
+            // Get the deleted questions
+            var deletedQuestions = ChangeTracker.Entries<Question>()
+                .Where(e => e.State == EntityState.Deleted)
+                .Select(e => e.Entity);
+
+            // Update the index of the remaining questions in each questionnaire
+            foreach (var deletedQuestion in deletedQuestions)
+            {
+                var questions = Questions
+                    .Where(q => q.QuestionnaireId == deletedQuestion.QuestionnaireId && q.Index > deletedQuestion.Index)
+                    .OrderBy(q => q.Index)
+                    .ToList();
+
+                foreach (var question in questions)
+                {
+                    question.Index--;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        */
     }
 
     [JsonConverter(typeof(EnumConverter<Language>))]
@@ -89,6 +137,7 @@ namespace backend.Models
         public bool Optional { get; set; }
         public QuestionType Questiontype { get; set; }
         public List<Option> Options { get; set; } = new List<Option>();
+        public int Index { get; set; }
     }
 
     public class Answer
@@ -108,5 +157,4 @@ namespace backend.Models
         public int Index { get; set; }
         public String Value { get; set; }
     }
-
 }

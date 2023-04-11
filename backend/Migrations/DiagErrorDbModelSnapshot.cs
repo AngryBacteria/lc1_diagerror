@@ -76,6 +76,9 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("Optional")
                         .HasColumnType("INTEGER");
 

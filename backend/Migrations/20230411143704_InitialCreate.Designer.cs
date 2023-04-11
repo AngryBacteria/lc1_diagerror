@@ -11,7 +11,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(DiagErrorDb))]
-    [Migration("20230410081019_InitialCreate")]
+    [Migration("20230411143704_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -77,6 +77,9 @@ namespace backend.Migrations
                 {
                     b.Property<int>("QuestionId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Index")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Optional")

@@ -41,7 +41,8 @@ namespace backend.Migrations
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     Subtext = table.Column<string>(type: "TEXT", nullable: false),
                     Optional = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Questiontype = table.Column<int>(type: "INTEGER", nullable: false)
+                    Questiontype = table.Column<int>(type: "INTEGER", nullable: false),
+                    Index = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
