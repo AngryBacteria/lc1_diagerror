@@ -153,7 +153,7 @@ app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string?
     }
 
     //filter by language
-    var filteredQuestionnaires = questionnaires.Where(q => language == null || Enum.IsDefined(typeof(Language), language) && q.Language == Enum.Parse<Language>(language, true));
+    var filteredQuestionnaires = questionnaires.Where(q => language == null || Enum.IsDefined(typeof(Language), language.ToUpper()) && q.Language == Enum.Parse<Language>(language.ToUpper(), true));
 
     //return all found questionnaires or exact match by language
     var result = filteredQuestionnaires.Any() ? await filteredQuestionnaires.ToListAsync() : await questionnaires.ToListAsync();
