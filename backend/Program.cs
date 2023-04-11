@@ -3,6 +3,8 @@ using backend.Models;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -131,6 +133,31 @@ app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
     await db.Answers.AddRangeAsync(answers);
     await db.SaveChangesAsync();
     return Results.Ok();
+});
+
+//Endpoints for POST Invitation code
+app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string? language) => 
+{
+    string identifier = invitationCode[..2];//Extract Identifier out of invitationCode
+
+    //Searching for questionnaires with matching identifier
+    var questionnaires = db.Questionnaires
+         .Include(q => q.Questions)
+         .Where(q => q.Identifier == identifier)
+         .AsQueryable();
+
+    //if no questionnaire found
+    if (questionnaires == null || !questionnaires.Any())
+    {
+        return Results.NotFound("No Questionnaire found with this invitation code");
+    }
+
+    //filter by language
+    var filteredQuestionnaires = questionnaires.Where(q => language == null || Enum.IsDefined(typeof(Language), language) && q.Language == Enum.Parse<Language>(language, true));
+
+    //return all found questionnaires or exact match by language
+    var result = filteredQuestionnaires.Any() ? await filteredQuestionnaires.ToListAsync() : await questionnaires.ToListAsync();
+    return Results.Ok(result);
 });
 
 app.Run();
