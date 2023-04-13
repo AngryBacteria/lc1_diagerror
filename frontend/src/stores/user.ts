@@ -66,7 +66,7 @@ export const useUserStore = defineStore('user', () => {
    */
   function submitQuestionnaire() {
     if (!questionnaire.value || !answers.value || !inviteCode) return
-    
+
     const formattedAnswers = questionnaire.value.questions.map((question) => {
       return {
         questionId: question.questionId,

@@ -23,13 +23,14 @@
     <div class="text-h6 font-weight-regular mb-2">
       {{ t('questionnaire.navigation.provideCode') }}
     </div>
-    <v-form @submit.prevent v-model="validForm">
+    <v-form @submit.prevent v-model="validForm" ref="codeForm">
       <v-text-field
         v-model="store.inviteCode"
         autocomplete="off"
         :label="t('questionnaire.navigation.invitationCode')"
         rounded
         color="primary"
+        validate-on="input"
         :rules="[
           () => !!store.inviteCode || t('questionnaire.validation.fieldRequired'),
           () => store.inviteCode.length === 8 || t('questionnaire.validation.sixDigits')
@@ -58,9 +59,10 @@ import QuestionnairePage from '@/pages/user/QuestionnairePage.vue'
 import { useI18n } from 'vue-i18n'
 import { watch } from 'vue'
 import { computed } from 'vue'
+import { onMounted } from 'vue'
 
 const { t } = useTypedI18n()
-const i18n = useI18n();
+const i18n = useI18n()
 const route = useRoute()
 const store = useUserStore()
 
@@ -70,13 +72,11 @@ const url = computed(() => {
   return `${store.apiEndpoint}/invitation?invitationCode=${store.inviteCode}&language=${i18n.locale.value}`
 })
 
-const { execute, error, isFetching, data } = useFetch(url,{immediate: false})
+const { execute, error, isFetching, data } = useFetch(url, { immediate: false })
   .post()
   .json<Questionnaire[]>()
 
-
-watch(i18n.locale, (newLocale) => {
-  console.log('Locale Changed, fetching new questionnaire with language: ', newLocale)
+watch(i18n.locale, () => {
   loadQuestionnaire()
 })
 
@@ -95,10 +95,13 @@ async function initPage() {
   }
 }
 
-//TODO fix issue that the invite code form button gets disabled on reload
+//Validation on page reload
+const codeForm = ref<any>(null)
+onMounted(() => {
+  if (store.inviteCode && store.inviteCode.length != 0 && codeForm.value) codeForm.value.validate()
+})
 
 async function loadQuestionnaire() {
-  console.log(url)
   await execute()
   if (data.value) {
     store.questionnaire = data.value[0]

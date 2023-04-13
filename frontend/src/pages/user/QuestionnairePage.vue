@@ -1,7 +1,7 @@
 <template>
-  <v-form @submit.prevent v-model="validForm" ref="myForm">
+  <v-form @submit.prevent v-model="validForm" ref="mainForm">
     <p>{{ store.questionnaire.descriptionForCustomer }}</p>
-    <template v-for="(question) in store.questionnaire.questions" :key="question.questionId">
+    <template v-for="question in store.questionnaire.questions" :key="question.questionId">
       <FreeTextQuestion
         v-if="question.questiontype === 'FreeText'"
         :index="question.index"
@@ -34,7 +34,8 @@ import LikertQuestionVue from '@/components/questionnaire/LikertQuestion.vue'
 import SingleChoiceQuestion from '@/components/questionnaire/SingleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
-import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { onMounted, watch } from 'vue'
 import { ref } from 'vue'
 
 const store = useUserStore()
@@ -42,11 +43,22 @@ const { t } = useTypedI18n()
 const validForm = ref(true)
 
 //Validation on page reload
-//TODO fix issue that questionnaire button gets disabled on language change
-const myForm = ref<any>(null)
+const mainForm = ref<any>(null)
 onMounted(() => {
-  if (store.answers.length != 0 && myForm.value) myForm.value.validate()
+  if (store.answers.length != 0 && mainForm.value) mainForm.value.validate()
 })
+
+const { questionnaire } = storeToRefs(store)
+watch(
+  questionnaire,
+  async () => {
+    if (store.answers.length != 0 && mainForm.value) {
+      console.log('locale changed')
+      mainForm.value.validate()
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <style>
