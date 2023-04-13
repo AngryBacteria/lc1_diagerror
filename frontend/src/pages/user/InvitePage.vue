@@ -55,21 +55,30 @@ import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import type { Questionnaire } from '@/data/interfaces'
 import QuestionnairePage from '@/pages/user/QuestionnairePage.vue'
+import { useI18n } from 'vue-i18n'
+import { watch } from 'vue'
+import { computed } from 'vue'
 
 const { t } = useTypedI18n()
+const i18n = useI18n();
 const route = useRoute()
 const store = useUserStore()
 
 const validForm = ref(false)
 
-const { execute, error, isFetching, data } = useFetch(
-  'https://localhost:7184/questionnaire/light/hui',
-  {
-    immediate: false
-  }
-)
-  .get()
-  .json<Questionnaire>()
+const url = computed(() => {
+  return `${store.apiEndpoint}/invitation?invitationCode=${store.inviteCode}&language=${i18n.locale.value}`
+})
+
+const { execute, error, isFetching, data } = useFetch(url,{immediate: false})
+  .post()
+  .json<Questionnaire[]>()
+
+
+watch(i18n.locale, (newLocale) => {
+  console.log('Locale Changed, fetching new questionnaire with language: ', newLocale)
+  loadQuestionnaire()
+})
 
 const pathParam = route.params.invitationCode
 initPage()
@@ -86,13 +95,13 @@ async function initPage() {
   }
 }
 
+//TODO fix issue that the invite code form button gets disabled on reload
+
 async function loadQuestionnaire() {
-  if (store.questionnaire) return
-
+  console.log(url)
   await execute()
-
   if (data.value) {
-    store.questionnaire = data.value
+    store.questionnaire = data.value[0]
   }
 }
 </script>

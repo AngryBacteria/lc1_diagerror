@@ -11,6 +11,7 @@ namespace backend.Models
         public DbSet<Questionnaire> Questionnaires { get; set; } = null!;
         public DbSet<Question> Questions { get; set; } = null!;
         public DbSet<Answer> Answers { get; set; } = null!;
+        public DbSet<Option> Options { get; set; } = null!;
 
         public string DbPath { get; }
 

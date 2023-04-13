@@ -19,6 +19,7 @@ export interface Question {
   optional: boolean
   questiontype: 'Likert' | 'FreeText' | 'SingleChoice'
   options: Option[]
+  index: number
 }
 
 export interface Answer {

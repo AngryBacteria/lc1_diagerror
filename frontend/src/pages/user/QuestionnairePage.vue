@@ -1,20 +1,20 @@
 <template>
   <v-form @submit.prevent v-model="validForm" ref="myForm">
     <p>{{ store.questionnaire.descriptionForCustomer }}</p>
-    <template v-for="(question, index) in store.questionnaire.questions" :key="question.questionId">
+    <template v-for="(question) in store.questionnaire.questions" :key="question.questionId">
       <FreeTextQuestion
         v-if="question.questiontype === 'FreeText'"
-        :index="index"
+        :index="question.index"
         :question="question"
       />
       <LikertQuestionVue
         v-if="question.questiontype === 'Likert'"
-        :index="index"
+        :index="question.index"
         :question="question"
       />
       <SingleChoiceQuestion
         v-if="question.questiontype === 'SingleChoice'"
-        :index="index"
+        :index="question.index"
         :question="question"
       />
     </template>
@@ -42,6 +42,7 @@ const { t } = useTypedI18n()
 const validForm = ref(true)
 
 //Validation on page reload
+//TODO fix issue that questionnaire button gets disabled on language change
 const myForm = ref<any>(null)
 onMounted(() => {
   if (store.answers.length != 0 && myForm.value) myForm.value.validate()

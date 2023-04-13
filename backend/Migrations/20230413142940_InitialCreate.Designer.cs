@@ -11,7 +11,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(DiagErrorDb))]
-    [Migration("20230411143704_InitialCreate")]
+    [Migration("20230413142940_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -70,7 +70,7 @@ namespace backend.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Option");
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("backend.Models.Question", b =>

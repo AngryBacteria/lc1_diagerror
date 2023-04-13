@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
   const i18n = useI18n()
   const refUser = useCurrentUser()
   const isLoggedIn = ref(false)
-  const apiEndpoint = 'https://localhost:7139'
+  const apiEndpoint = 'https://localhost:7184'
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
@@ -66,13 +66,11 @@ export const useUserStore = defineStore('user', () => {
    */
   function submitQuestionnaire() {
     if (!questionnaire.value || !answers.value || !inviteCode) return
-
-    console.log('executed')
-
-    const formattedAnswers = answers.value.map((answer, index) => {
+    
+    const formattedAnswers = questionnaire.value.questions.map((question) => {
       return {
-        questionId: questionnaire.value.questions.at(index)?.questionId,
-        text: answer,
+        questionId: question.questionId,
+        text: answers.value.at(question.index),
         date: new Date().toISOString().split('T')[0],
         invitationId: inviteCode.value
       }

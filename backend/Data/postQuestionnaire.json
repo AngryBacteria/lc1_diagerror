@@ -1,4 +1,4 @@
-{
+[{
   "questions": [
     {
       "answers": [],
@@ -70,4 +70,77 @@
   "descriptionForCustomer": "Wir danken ihnen für ihre Teilnahme. Mit diesem Fragebogen versuchen wir Diagnosefehler am Inselspital zu identifizieren, um die Qualität der Behandlung zu verbessern",
   "validAfterDays": 15,
   "validForDays": 15
-}
+},
+{
+  "questions": [
+    {
+      "answers": [],
+      "text": "How old are you?",
+      "subtext": "Please provide a positive number",
+      "optional": false,
+      "questiontype": "FreeText",
+      "options": [],
+      "index" :  1
+    },
+    {
+      "answers": [],
+      "text": "How did you hear from this questionnaire?",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "FreeText",
+      "options": [],
+      "index": 2
+    },
+    {
+      "answers": [],
+      "text": "I am satisfied with my treatment in the UKN",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "Likert",
+      "options": [],
+      "index": 3
+    },
+    {
+      "answers": [],
+      "text": "My diagnosis remained the same after my stay in the UKN",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "Likert",
+      "options": [],
+      "index": 4
+    },
+    {
+      "answers": [],
+      "text": "When was the last time you visited a hospital",
+      "subtext": "",
+      "optional": false,
+      "questiontype": "SingleChoice",
+      "options": [
+        {
+          "index": 0,
+          "value": "4 months ago"
+        },
+        {
+          "index": 1,
+          "value": "2 months ago"
+        },
+        {
+          "index": 2,
+          "value": "a month ago"
+        },
+        {
+          "index": 3,
+          "value": "recently"
+        }
+      ],
+      "index": 5
+    }
+  ],
+  "identifier": "QS",
+  "language": "EN",
+  "title": "Questionnaire for the quality assurance at the UKN in english",
+  "description": "Includes metrics on diagnostic errors and quality assurance for UKN patients. This questionnaire is intended to be completed 14 days after the stay.",
+  "descriptionForCustomer": "We thank you for your participation. With this questionnaire we try to identify diagnostic errors at Inselspital in order to improve the quality of treatment",
+  "validAfterDays": 15,
+  "validForDays": 15
+}]

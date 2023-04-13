@@ -79,7 +79,7 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Option",
+                name: "Options",
                 columns: table => new
                 {
                     OptionId = table.Column<int>(type: "INTEGER", nullable: false)
@@ -90,9 +90,9 @@ namespace backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Option", x => x.OptionId);
+                    table.PrimaryKey("PK_Options", x => x.OptionId);
                     table.ForeignKey(
-                        name: "FK_Option_Questions_QuestionId",
+                        name: "FK_Options_Questions_QuestionId",
                         column: x => x.QuestionId,
                         principalTable: "Questions",
                         principalColumn: "QuestionId");
@@ -104,8 +104,8 @@ namespace backend.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Option_QuestionId",
-                table: "Option",
+                name: "IX_Options_QuestionId",
+                table: "Options",
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
@@ -127,7 +127,7 @@ namespace backend.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "Option");
+                name: "Options");
 
             migrationBuilder.DropTable(
                 name: "Questions");

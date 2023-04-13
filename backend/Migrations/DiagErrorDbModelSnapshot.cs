@@ -67,7 +67,7 @@ namespace backend.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Option");
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("backend.Models.Question", b =>

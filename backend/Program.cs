@@ -3,8 +3,6 @@ using backend.Models;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,15 +51,18 @@ app.UseHttpsRedirection();
 app.MapGet("/hello", () =>
 {
     return "Hello World";
-});
+}).WithTags("Testing");
 
 app.MapGet("/secured", () =>
 {
     return "Endpoint secured by firebase";
-}).AddEndpointFilter<FirebaseAuthFilter>();
+}).WithTags("Testing").AddEndpointFilter<FirebaseAuthFilter>();
 
 //Endpoints for GET all Questionnaires with answers
-app.MapGet("/questionnaire/complete", async (DiagErrorDb db) => await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync());
+app.MapGet("/questionnaire/complete", async (DiagErrorDb db) => 
+{
+    return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync();
+}).WithTags("Questionnaire-Complete");
 
 //Endpoints for GET all Questionnaires with answers and filtering possibilities
 app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string? id, string? identifier, string? language) => 
@@ -87,34 +88,34 @@ app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string? id, 
     }
 
     return await questionnaires.ToListAsync();
-});
+}).WithTags("Questionnaire-Complete");
 
 //Endpoints for GET Questionnaires without answers
-app.MapGet("/questionnaire/light", async (DiagErrorDb db) => await db.Questionnaires.Include(q => q.Questions).ToListAsync());
-
-//TEST ENDPOINT TODO REMOVE
-app.MapGet("/questionnaire/light/hui", async (DiagErrorDb db) => 
+app.MapGet("/questionnaire/light", async (DiagErrorDb db) => 
 {
-    return Results.Ok(await db.Questionnaires
-    .Include(q => q.Questions)
-    .ThenInclude(q => q.Options)
-    .FirstOrDefaultAsync(q => q.QuestionnaireId == 1));
-});
+    return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Options).ToListAsync();
+}).WithTags("Questionnaire-Light");
 
 //Endpoints for POST Questionnaires without answers
-app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire questionnaire) =>
+app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
 {
-    await db.Questionnaires.AddAsync(questionnaire);
+    await db.Questionnaires.AddRangeAsync(questionnaires);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/questionnaire/light/{questionnaire.QuestionnaireId}", questionnaire);
-});
+    return Results.Ok();
+}).WithTags("Questionnaire-Light");
 
 //Endpoints for GET Questions with answers
-app.MapGet("/question/complete", async (DiagErrorDb db) => await db.Questions.Include(a => a.Answers).ToListAsync());
+app.MapGet("/question/complete", async (DiagErrorDb db) => 
+{
+    return await db.Questions.Include(a => a.Answers).ToListAsync();
+}).WithTags("Question-Complete");
 
 //Endpoints for GET Questions without answers
-app.MapGet("/question/light", async (DiagErrorDb db) => await db.Questions.ToListAsync());
+app.MapGet("/question/light", async (DiagErrorDb db) => 
+{
+    return await db.Questions.ToListAsync();
+}).WithTags("Question-Light");
 
 //Endpoints for POST Questions without answers
 app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
@@ -122,10 +123,13 @@ app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
     await db.Questions.AddAsync(question);
     await db.SaveChangesAsync();
     return Results.Created($"/question/light/{question.QuestionId}", question);
-});
+}).WithTags("Question-Light");
 
 //Endpoints for GET answers
-app.MapGet("/answer", async (DiagErrorDb db) => await db.Answers.ToListAsync());
+app.MapGet("/answer", async (DiagErrorDb db) => 
+{
+    return await db.Answers.ToListAsync();
+}).WithTags("Answer");
 
 //Endpoints for POST answers
 app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
@@ -133,7 +137,7 @@ app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
     await db.Answers.AddRangeAsync(answers);
     await db.SaveChangesAsync();
     return Results.Ok();
-});
+}).WithTags("Answer");
 
 //Endpoints for POST Invitation code
 app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string? language) => 
@@ -143,6 +147,7 @@ app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string?
     //Searching for questionnaires with matching identifier
     var questionnaires = db.Questionnaires
          .Include(q => q.Questions)
+         .ThenInclude(q => q.Options)
          .Where(q => q.Identifier == identifier)
          .AsQueryable();
 
@@ -158,6 +163,6 @@ app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string?
     //return all found questionnaires or exact match by language
     var result = filteredQuestionnaires.Any() ? await filteredQuestionnaires.ToListAsync() : await questionnaires.ToListAsync();
     return Results.Ok(result);
-});
+}).WithTags("Invitation");
 
 app.Run();
