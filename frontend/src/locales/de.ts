@@ -16,6 +16,7 @@ export default {
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',
       fieldIsNumber: 'Dieses Feld muss eine positive Nummer sein',
+      //TODO fix after sprint 2/3
       sixDigits: 'Der Einladungscode muss 6 Zeichen lang sein'
     }
   },

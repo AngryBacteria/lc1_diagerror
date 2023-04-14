@@ -42,14 +42,20 @@ import { ref } from 'vue'
 
 const store = useUserStore()
 const { t } = useTypedI18n()
-const validForm = ref(true)
 
-//Validation on page reload
+const validForm = ref(true)
 const mainForm = ref<any>(null)
+
+/**
+ * Form validation on page reload if answers are already existing
+ */
 onMounted(() => {
   if (store.answers.length != 0 && mainForm.value) mainForm.value.validate()
 })
 
+/**
+ * Submits questionnaire if the form is valid
+ */
 function submitForm() {
   mainForm.value.validate()
   if (validForm.value) {

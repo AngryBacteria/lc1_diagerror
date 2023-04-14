@@ -6,12 +6,12 @@ import { signOut } from 'firebase/auth'
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs'
 import { useTypedI18n } from '@/composables/useTypedI18n'
+import { APP_LANGUAGES } from '@/plugins/i18n'
 
 const store = useUserStore()
 const router = useRouter()
 const { t } = useTypedI18n()
-
-//TODO language picker
+const { smAndUp } = useDisplay()
 
 async function logout() {
   try {
@@ -77,6 +77,31 @@ const drawer = mdAndUp ? ref(true) : ref(false)
       <v-toolbar-title>Admin-Tool</v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-if="smAndUp"
+            variant="tonal"
+            color="primary"
+            v-bind="props"
+            style="margin-right: 1rem"
+          >
+            {{ t('questionnaire.navigation.language') }} ({{ store.language }})
+          </v-btn>
+          <v-btn v-else variant="tonal" color="primary" v-bind="props">{{ store.language }}</v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            @click="store.changeLanguage(item)"
+            v-for="(item, index) in APP_LANGUAGES"
+            :key="index"
+            :value="index"
+          >
+            <v-list-item-title>{{ item.toUpperCase() }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
       <v-menu>
         <template v-slot:activator="{ props }">

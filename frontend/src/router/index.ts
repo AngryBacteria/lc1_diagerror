@@ -47,12 +47,16 @@ const router = createRouter({
   ]
 })
 
-//Router gard for protected routes
 router.beforeEach(async (to) => {
+  /**
+   * Router gard for protected routes. Checks if user is logged in and has the admin claim.
+   * Displays a snackbar if user is redirected
+   */
   if (to.meta.requiresAuth) {
     const currentUser = await getCurrentUser()
     const store = useUserStore()
 
+    //Redirection
     if (!currentUser) {
       store.resetSnackbarConfig
       store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')
@@ -68,6 +72,7 @@ router.beforeEach(async (to) => {
     }
     const token = await currentUser?.getIdTokenResult()
 
+    //No admin right --> redirection
     if (!token || token.claims.admin != true) {
       store.resetSnackbarConfig
       store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')

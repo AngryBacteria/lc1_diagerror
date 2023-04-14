@@ -16,6 +16,11 @@ export const useUserStore = defineStore('user', () => {
 
   //store fields
   const language = useLocalStorage<MessageLanguages>('language', 'de')
+  const answers = useSessionStorage<any[]>('answers', [])
+  const questionnaire = useSessionStorage<Questionnaire>('key', null, {
+    serializer: StorageSerializers.object
+  })
+  const inviteCode = useSessionStorage<string>('inviteCode', null)
   const snackbarConfig = useLocalStorage<SnackbarConfig>('snackbarConfig', {
     visible: false,
     message: 'TestMessage',
@@ -24,18 +29,11 @@ export const useUserStore = defineStore('user', () => {
     location: 'top'
   })
 
-  const answers = useSessionStorage<any[]>('answers', [])
-  const questionnaire = useSessionStorage<Questionnaire>('key', null, {
-    serializer: StorageSerializers.object
-  })
-  const inviteCode = useSessionStorage<string>('inviteCode', null)
-
-  //init code
+  //init language
   i18n.locale.value = language.value
 
-  //functions
   /**
-   * Function to change the language of the website
+   * Changes the language of the website
    * @param systemLanguage One of the 3 valid Languages (EN, DE, FR)
    */
   function changeLanguage(systemLanguage: MessageLanguages) {
@@ -44,14 +42,14 @@ export const useUserStore = defineStore('user', () => {
   }
 
   /**
-   * Deleted the answers in the store
+   * Deletes all the answers in the store
    */
   function clearAnswers() {
     answers.value = []
   }
 
   /**
-   * Function to abort the current Questionnaire. Deleted all answers, the inviteCode and the Questionnaire
+   * Aborts the current questionnaire. Deletes all answers, the inviteCode and the questionnaire
    */
   function abortQuestionnaire() {
     answers.value = []
@@ -59,27 +57,34 @@ export const useUserStore = defineStore('user', () => {
     inviteCode.value = ''
   }
 
-  //TODO submitting to backend
+  //TODO submitting to backend and returning if it was successful
   /**
-   * Function that builds valid Answer Objects for submitting them to the Database
+   * Function that builds valid answer objects for submitting them to the database
    * @param validForm Boolean to indicate if the form was valid or not
    */
-  function submitQuestionnaire() {
-    if (!questionnaire.value || !answers.value || !inviteCode) return
+  function submitQuestionnaire(): { success: boolean; error: any } {
+    try {
+      if (!questionnaire.value || !answers.value || !inviteCode)
+        return { success: false, error: null }
 
-    const formattedAnswers = questionnaire.value.questions.map((question) => {
-      return {
-        questionId: question.questionId,
-        text: answers.value.at(question.index),
-        date: new Date().toISOString().split('T')[0],
-        invitationId: inviteCode.value
-      }
-    })
-    console.log(formattedAnswers)
+      const formattedAnswers = questionnaire.value.questions.map((question) => {
+        return {
+          questionId: question.questionId,
+          text: answers.value.at(question.index),
+          date: new Date().toISOString().split('T')[0],
+          invitationId: inviteCode.value
+        }
+      })
+      console.log(formattedAnswers)
+      return { success: true, error: null }
+    } catch (error) {
+      console.log(error)
+      return { success: false, error: error }
+    }
   }
 
   /**
-   * Function to reset the snackBar Config with default values
+   * Resets the snackBar config with default values
    */
   function resetSnackbarConfig() {
     snackbarConfig.value = {
