@@ -24,7 +24,11 @@ export default {
       authenticate: 'authenticate',
       login: 'login',
       alerts: {
-        authenticated: 'Successfully authenticated'
+        close: 'Close',
+        logoutFail: 'Something went wrong trying to logout',
+        authenticated: 'Successfully authenticated',
+        userRequired: 'You have to be authenticated',
+        adminRequired: 'You have to  be an admin'
       }
     }
   }

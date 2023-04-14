@@ -55,6 +55,7 @@ onMounted(async () => {
         ? route.currentRoute.value.query.redirect
         : '/admin'
 
+    store.resetSnackbarConfig
     store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
     store.snackbarConfig.color = 'primary'
     store.snackbarConfig.visible = true
@@ -69,6 +70,7 @@ async function login() {
     try {
       await signInWithEmailAndPassword(auth, email.value, password.value)
 
+      store.resetSnackbarConfig
       store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
       store.snackbarConfig.color = 'primary'
       store.snackbarConfig.visible = true
@@ -82,6 +84,7 @@ async function login() {
     } catch (error: any) {
       const errorCode = error.code
 
+      store.resetSnackbarConfig
       store.snackbarConfig.message = errorCode.split('/')[1]
       store.snackbarConfig.color = 'error'
       store.snackbarConfig.visible = true

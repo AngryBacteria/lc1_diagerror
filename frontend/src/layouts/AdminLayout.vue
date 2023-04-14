@@ -5,20 +5,27 @@ import { useFirebaseAuth } from 'vuefire'
 import { signOut } from 'firebase/auth'
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs'
+import { useTypedI18n } from '@/composables/useTypedI18n'
 
 const store = useUserStore()
 const router = useRouter()
+const { t } = useTypedI18n()
+
+//TODO language picker
 
 async function logout() {
   try {
     const auth = useFirebaseAuth()
     if (auth) {
       await signOut(auth)
-      //TODO react on failure
     }
     await router.push('/admin/login')
   } catch (error) {
-    //TODO react on failure
+    store.resetSnackbarConfig
+    store.snackbarConfig.message = t('admin.loginComponent.alerts.logoutFail')
+    store.snackbarConfig.color = 'error'
+    store.snackbarConfig.visible = true
+
     console.log(`Error while attempting to Log-Out: ${error}`)
   }
 }

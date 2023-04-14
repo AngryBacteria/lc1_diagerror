@@ -24,7 +24,11 @@ export default {
       authenticate: 'authentifizieren',
       login: 'anmelden',
       alerts: {
-        authenticated: 'Erfolgreich authentifiziert'
+        close: 'Schliessen',
+        logoutFail: 'Etwas ist schiefgelaufen beim ausloggen',
+        authenticated: 'Erfolgreich authentifiziert',
+        userRequired: 'Sie müssen authentifiziert sein',
+        adminRequired: 'Sie müssen Admin sein'
       }
     }
   }

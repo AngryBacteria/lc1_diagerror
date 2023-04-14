@@ -1,5 +1,7 @@
+import { useUserStore } from '@/stores/user'
 import { createRouter, createWebHistory } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
+import { i18n } from '@/plugins/i18n'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,9 +51,14 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   if (to.meta.requiresAuth) {
     const currentUser = await getCurrentUser()
+    const store = useUserStore()
 
     if (!currentUser) {
-      //TODO error message
+      store.resetSnackbarConfig
+      store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')
+      store.snackbarConfig.color = 'error'
+      store.snackbarConfig.visible = true
+
       return {
         path: '/admin/login',
         query: {
@@ -62,7 +69,11 @@ router.beforeEach(async (to) => {
     const token = await currentUser?.getIdTokenResult()
 
     if (!token || token.claims.admin != true) {
-      //TODO error message
+      store.resetSnackbarConfig
+      store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')
+      store.snackbarConfig.color = 'error'
+      store.snackbarConfig.visible = true
+
       return {
         path: '/admin/login',
         query: {

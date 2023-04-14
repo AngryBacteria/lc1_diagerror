@@ -6,6 +6,16 @@
     :location="store.snackbarConfig.location"
   >
     {{ store.snackbarConfig.message }}
+    <template v-slot:actions>
+      <v-btn
+        color="white"
+        variant="text"
+        prepend-icon="mdi-close"
+        @click="store.snackbarConfig.visible = false"
+      >
+        Close
+      </v-btn>
+    </template>
   </v-snackbar>
 </template>
 

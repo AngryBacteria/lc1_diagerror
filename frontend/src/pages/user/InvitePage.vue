@@ -30,18 +30,13 @@
         :label="t('questionnaire.navigation.invitationCode')"
         rounded
         color="primary"
-        validate-on="input"
+        validate-on="submit"
         :rules="[
           () => !!store.inviteCode || t('questionnaire.validation.fieldRequired'),
           () => store.inviteCode.length === 8 || t('questionnaire.validation.sixDigits')
         ]"
       ></v-text-field>
-      <v-btn
-        type="submit"
-        @click="loadQuestionnaire()"
-        :loading="isFetching"
-        :disabled="!validForm"
-      >
+      <v-btn type="submit" @click="submitCode()" :loading="isFetching">
         {{ t('questionnaire.navigation.startQuestionnaire') }}</v-btn
       >
     </v-form>
@@ -67,6 +62,8 @@ const route = useRoute()
 const store = useUserStore()
 
 const validForm = ref(false)
+const codeForm = ref<any>(null)
+const pathParam = route.params.invitationCode
 
 const url = computed(() => {
   return `${store.apiEndpoint}/invitation?invitationCode=${store.inviteCode}&language=${i18n.locale.value}`
@@ -77,10 +74,16 @@ const { execute, error, isFetching, data } = useFetch(url, { immediate: false })
   .json<Questionnaire[]>()
 
 watch(i18n.locale, () => {
-  loadQuestionnaire()
+  if (store.questionnaire) {
+    loadQuestionnaire()
+  }
 })
 
-const pathParam = route.params.invitationCode
+//Validation on page reload
+onMounted(() => {
+  if (store.inviteCode && store.inviteCode.length != 0 && codeForm.value) codeForm.value.validate()
+})
+
 initPage()
 
 async function initPage() {
@@ -95,16 +98,17 @@ async function initPage() {
   }
 }
 
-//Validation on page reload
-const codeForm = ref<any>(null)
-onMounted(() => {
-  if (store.inviteCode && store.inviteCode.length != 0 && codeForm.value) codeForm.value.validate()
-})
-
 async function loadQuestionnaire() {
   await execute()
   if (data.value) {
     store.questionnaire = data.value[0]
+  }
+}
+
+async function submitCode() {
+  await codeForm.value.validate()
+  if (validForm.value) {
+    await loadQuestionnaire()
   }
 }
 </script>

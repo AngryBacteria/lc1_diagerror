@@ -24,7 +24,11 @@ export default {
       authenticate: '',
       login: '',
       alerts: {
-        authenticated: 'authentifié avec succès'
+        close: '',
+        logoutFail: '',
+        authenticated: '',
+        userRequired: '',
+        adminRequired: ''
       }
     }
   }
