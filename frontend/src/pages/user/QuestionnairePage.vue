@@ -1,6 +1,9 @@
 <template>
   <v-form @submit.prevent v-model="validForm" ref="mainForm">
-    <p>{{ store.questionnaire.descriptionForCustomer }}</p>
+    <v-card>
+      <h1>{{ store.questionnaire.title }}</h1>
+      <p>{{ store.questionnaire.descriptionForCustomer }}</p>
+    </v-card>
     <template v-for="question in store.questionnaire.questions" :key="question.questionId">
       <FreeTextQuestion
         v-if="question.questiontype === 'FreeText'"
@@ -19,7 +22,7 @@
       />
     </template>
 
-    <v-btn :disabled="!validForm" type="submit" @click="store.submitQuestionnaire()" class="ma-2">
+    <v-btn type="submit" @click="submitForm()" class="ma-2">
       {{ t('questionnaire.navigation.submitQuestionnaire') }}
     </v-btn>
     <v-btn @click="store.abortQuestionnaire()" class="ma-2" color="error">
@@ -34,8 +37,7 @@ import LikertQuestionVue from '@/components/questionnaire/LikertQuestion.vue'
 import SingleChoiceQuestion from '@/components/questionnaire/SingleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
-import { storeToRefs } from 'pinia'
-import { onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import { ref } from 'vue'
 
 const store = useUserStore()
@@ -48,17 +50,12 @@ onMounted(() => {
   if (store.answers.length != 0 && mainForm.value) mainForm.value.validate()
 })
 
-const { questionnaire } = storeToRefs(store)
-watch(
-  questionnaire,
-  async () => {
-    if (store.answers.length != 0 && mainForm.value) {
-      console.log('locale changed')
-      mainForm.value.validate()
-    }
-  },
-  { deep: true }
-)
+function submitForm() {
+  mainForm.value.validate()
+  if (validForm.value) {
+    store.submitQuestionnaire()
+  }
+}
 </script>
 
 <style>
@@ -66,5 +63,10 @@ watch(
   max-width: 1000px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.v-card {
+  padding: 1rem;
+  margin: 1rem;
 }
 </style>
