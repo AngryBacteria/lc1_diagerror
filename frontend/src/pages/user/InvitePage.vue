@@ -65,6 +65,8 @@ const validForm = ref(false)
 const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
 
+//TODO react on different error codes (404 and 500)
+
 /**
  * Computed property for the url with the api endpoint, invite code and locale
  */

@@ -56,8 +56,8 @@ onMounted(() => {
 /**
  * Submits questionnaire if the form is valid
  */
-function submitForm() {
-  mainForm.value.validate()
+async function submitForm() {
+  await mainForm.value.validate()
   if (validForm.value) {
     store.submitQuestionnaire()
   }
