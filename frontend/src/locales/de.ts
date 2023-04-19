@@ -1,7 +1,9 @@
 export default {
   questionnaire: {
     common: {
-      test: 'Hallo Welt!'
+      test: 'Hallo Welt!',
+      404: 'konnte nicht gefunden werden',
+      500: 'Kommunikation mit dem Server ist fehlgeschlagen. Haben sie kein Internet?'
     },
     navigation: {
       language: 'Sprache',
@@ -11,22 +13,22 @@ export default {
       provideCode: 'Bitte geben sie ihren Einladungscode ein',
       submitQuestionnaire: 'Umfrage abschicken',
       clearAnswers: 'Antworten löschen',
-      abortQuestionnaire: 'Umfrage abbrechen'
+      abortQuestionnaire: 'Umfrage abbrechen',
+      codeAlreadyUsed: 'Anfrage verboten, dieser Einladungscode wurde schon verwendet',
     },
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',
       fieldIsNumber: 'Dieses Feld muss eine positive Nummer sein',
-      //TODO fix after sprint 2/3
-      sixDigits: 'Der Einladungscode muss 6 Zeichen lang sein'
+      eightDigits: 'Der Einladungscode muss 8 Zeichen lang sein'
     }
   },
   admin: {
     loginComponent: {
-      authenticate: 'authentifizieren',
-      login: 'anmelden',
+      authenticate: 'Authentifizieren',
+      login: 'Anmelden',
       alerts: {
         close: 'Schliessen',
-        logoutFail: 'Etwas ist schiefgelaufen beim ausloggen',
+        logoutFail: 'Etwas ist schiefgelaufen, bitte versuchen sie es erneut',
         authenticated: 'Erfolgreich authentifiziert',
         userRequired: 'Sie müssen authentifiziert sein',
         adminRequired: 'Sie müssen Admin sein'

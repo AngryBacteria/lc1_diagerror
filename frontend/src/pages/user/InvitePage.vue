@@ -5,7 +5,7 @@
   <div v-if="error">
     <v-alert
       icon="mdi-alert-circle-outline"
-      :text="'Error in Request: ' + error"
+      :text="errorMessage"
       color="error"
       rounded
       elevation="3"
@@ -33,7 +33,7 @@
         validate-on="submit"
         :rules="[
           () => !!store.inviteCode || t('questionnaire.validation.fieldRequired'),
-          () => store.inviteCode.length === 8 || t('questionnaire.validation.sixDigits')
+          () => store.inviteCode.length === 8 || t('questionnaire.validation.eightDigits')
         ]"
       ></v-text-field>
       <v-btn type="submit" @click="submitCode()" :loading="isFetching">
@@ -64,6 +64,7 @@ const store = useUserStore()
 const validForm = ref(false)
 const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
+const errorMessage = ref('')
 
 //TODO react on different error codes (404 and 500)
 
@@ -77,7 +78,7 @@ const url = computed(() => {
 /**
  * Function to fetch the api endpoint for questionnaires
  */
-const { execute, error, isFetching, data } = useFetch(url, { immediate: false })
+const { execute, error, statusCode, isFetching, data } = useFetch(url, { immediate: false })
   .post()
   .json<Questionnaire[]>()
 
@@ -121,6 +122,22 @@ async function loadQuestionnaire() {
   await execute()
   if (data.value) {
     store.questionnaire = data.value[0]
+    return
+  }
+  if (error.value) {
+    if (statusCode.value === 404) {
+      errorMessage.value = 
+      `${t('questionnaire.navigation.invitationCode')} 
+      "${store.inviteCode}"
+      ${t('questionnaire.common.404')}`
+      return
+    }
+    if (statusCode.value === 403) {
+      errorMessage.value = t('questionnaire.navigation.codeAlreadyUsed')
+    }
+    else {
+      errorMessage.value = t('questionnaire.common.500')
+    }
   }
 }
 
