@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-card v-if="mdAndUp">
-      <h1>{{ props.question.text }}</h1>
+      <h1 style="display: inline;">{{ props.question.text }}</h1>
+      <h1 v-if="!question.optional" style="color: #1fa481; display: inline;"><sup>*</sup></h1>
+
       <h4>{{ props.question.subtext }}</h4>
       <v-input
         :model-value="store.answers[props.index]"
-        :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+        :rules="rules"
       >
         <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
           <v-btn
@@ -27,7 +29,7 @@
       <v-radio-group
         density="compact"
         v-model="store.answers[props.index]"
-        :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+        :rules="rules"
       >
         <v-radio
           v-for="(option, index) in labels"
@@ -61,6 +63,17 @@ const props = defineProps({
     required: true
   }
 })
+
+const rules = [
+  () => {
+    if (!props.question.optional) {
+      return !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
+    }
+    else {
+      return true
+    }
+  }
+]
 
 const labels = computed(() => {
   if (i18n.locale.value === 'de') {

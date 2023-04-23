@@ -1,11 +1,13 @@
 <template>
   <v-card>
-    <h1>{{ question.text }}</h1>
+    <h1 style="display: inline;">{{ props.question.text }}</h1>
+    <h1 v-if="!question.optional" style="color: #1fa481; display: inline;"><sup>*</sup></h1>
+
     <h4>{{ question.subtext }}</h4>
     <v-radio-group
       density="compact"
       v-model="store.answers[props.index]"
-      :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+      :rules="rules"
     >
       <v-radio
         v-for="option in question.options"
@@ -38,6 +40,17 @@ const props = defineProps({
     required: true
   }
 })
+
+const rules = [
+  () => {
+    if (!props.question.optional) {
+      return !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
+    }
+    else {
+      return true
+    }
+  }
+]
 </script>
 
 <style scoped>

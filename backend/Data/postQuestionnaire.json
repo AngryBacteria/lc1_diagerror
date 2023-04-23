@@ -44,6 +44,15 @@
             "value": "Vierte Antwortmöglichkeit 3"
           }
         ]
+      },
+      {
+        "answers": [],
+        "text": "Das ist eine optionale Freitextfrage",
+        "subtext": "Man kann hier einen beliebigen String eingeben",
+        "optional": true,
+        "questiontype": "FreeText",
+        "options": [],
+        "index": 3
       }
     ],
     "identifier": "TF",
@@ -99,6 +108,15 @@
             "value": "Fourth Choice"
           }
         ]
+      },
+      {
+        "answers": [],
+        "text": "This is an optional free text question",
+        "subtext": "You can enter any string here",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
+        "index": 3
       }
     ],
     "identifier": "TF",
@@ -154,6 +172,15 @@
             "value": "Quatrième choix"
           }
         ]
+      },
+      {
+        "answers": [],
+        "text": "Il s'agit d'une question optional de texte libre",
+        "subtext": "Vous pouvez écrire n'importe quelle chaîne de caractères ici",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
+        "index": 3
       }
     ],
     "identifier": "TF",

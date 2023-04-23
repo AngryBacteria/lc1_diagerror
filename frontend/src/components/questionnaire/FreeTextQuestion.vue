@@ -1,11 +1,13 @@
 <template>
   <v-card>
-    <h1>{{ props.question.text }}</h1>
+    <h1 style="display: inline;">{{ props.question.text }}</h1>
+    <h1 v-if="!question.optional" style="color: #1fa481; display: inline;"><sup>*</sup></h1>
+    
     <h4>{{ props.question.subtext }}</h4>
     <v-textarea
       v-model="store.answers[props.index]"
       color="primary"
-      :rules="[() => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')]"
+      :rules="rules"
       required
       label="Antwort"
       auto-grow
@@ -33,6 +35,17 @@ const props = defineProps({
     required: true
   }
 })
+
+const rules = [
+  () => {
+    if (!props.question.optional) {
+      return !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
+    }
+    else {
+      return true
+    }
+  }
+]
 </script>
 
 <style scoped>

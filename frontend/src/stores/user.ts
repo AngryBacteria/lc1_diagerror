@@ -70,7 +70,7 @@ export const useUserStore = defineStore('user', () => {
       const formattedAnswers = questionnaire.value.questions.map((question) => {
         return {
           questionId: question.questionId,
-          text: answers.value.at(question.index),
+          text: answers.value.at(question.index) ? answers.value.at(question.index): "",
           date: new Date().toISOString().split('T')[0],
           invitationId: inviteCode.value
         }

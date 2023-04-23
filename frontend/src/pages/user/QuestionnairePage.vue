@@ -3,6 +3,8 @@
     <v-card>
       <h1>{{ store.questionnaire.title }}</h1>
       <p>{{ store.questionnaire.descriptionForCustomer }}</p>
+      <v-divider class="my-2" :thickness="3"></v-divider>
+      <p style="color: #1fa481;">* {{ t('questionnaire.navigation.questionOptionalExplanation') }}</p>
     </v-card>
     <template v-for="question in store.questionnaire.questions" :key="question.questionId">
       <FreeTextQuestion
@@ -60,6 +62,21 @@ async function submitForm() {
   await mainForm.value.validate()
   if (validForm.value) {
     store.submitQuestionnaire()
+  }
+  else {
+    const errorMessage = document.querySelector(".v-messages__message:first-of-type")
+      ?.parentElement
+      ?.parentElement
+      ?.parentElement
+      ?.parentElement
+
+    if (errorMessage) {
+      errorMessage.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    }
   }
 }
 </script>

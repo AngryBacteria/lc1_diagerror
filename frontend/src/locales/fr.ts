@@ -16,6 +16,7 @@ export default {
       clearAnswers: 'Effacer les questions',
       abortQuestionnaire: 'Abandonner le questionnaire',
       codeAlreadyUsed: "Demande interdite, ce code d'invitation a déjà été utilisé",
+      questionOptionalExplanation: 'Indique que cette question est facultative'
     },
     validation: {
       fieldRequired: 'Ce formulaire est obligatoire',
