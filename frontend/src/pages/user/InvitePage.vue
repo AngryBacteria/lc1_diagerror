@@ -41,6 +41,10 @@
       >
     </v-form>
   </v-card>
+
+  <v-btn @click="useRandomQuestionnaire(5)">
+    Generate Random Questionnaire
+  </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -55,6 +59,7 @@ import { useI18n } from 'vue-i18n'
 import { watch } from 'vue'
 import { computed } from 'vue'
 import { onMounted } from 'vue'
+import { useRandomQuestionnaire } from '@/composables/useRandomQuestionnaire'
 
 const { t } = useTypedI18n()
 const i18n = useI18n()
