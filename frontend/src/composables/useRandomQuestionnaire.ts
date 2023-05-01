@@ -131,8 +131,7 @@ export function useRandomQuestionnaire(amount: number) {
     language,
     title: `Testfragebogen [${identifier}] für die Entwicklung`,
     description: `Testfragebogen [${identifier}] gefüllt mit zufälligen Fragen`,
-    descriptionForCustomer:
-      `Dieser Fragebogen [${identifier}] dient zum Testen, er wurde gefüllt mit zufälligen Fragen`,
+    descriptionForCustomer: `Dieser Fragebogen [${identifier}] dient zum Testen, er wurde gefüllt mit zufälligen Fragen`,
     validAfterDays: 15,
     validForDays: 10
   }

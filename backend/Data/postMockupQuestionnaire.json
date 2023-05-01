@@ -47,12 +47,38 @@
       },
       {
         "answers": [],
+        "text": "Das ist eine Multiple-Choice Frage",
+        "subtext": "Die möglichen Antworten werden im Fragebogen definiert",
+        "optional": false,
+        "questiontype": "MultipleChoice",
+        "index": 3,
+        "options": [
+          {
+            "index": 0,
+            "value": "Erste Antwortmöglichkeit"
+          },
+          {
+            "index": 1,
+            "value": "Zweite Antwortmöglichkeit"
+          },
+          {
+            "index": 2,
+            "value": "Dritte Antwortmöglichkeit 2"
+          },
+          {
+            "index": 3,
+            "value": "Vierte Antwortmöglichkeit 3"
+          }
+        ]
+      },
+      {
+        "answers": [],
         "text": "Das ist eine optionale Freitextfrage",
         "subtext": "Man kann hier einen beliebigen String eingeben",
         "optional": true,
         "questiontype": "FreeText",
         "options": [],
-        "index": 3
+        "index": 4
       }
     ],
     "identifier": "TF",
@@ -111,12 +137,38 @@
       },
       {
         "answers": [],
+        "text": "This is a multiple choice question",
+        "subtext": "The possible answers are defined in the questionnaire",
+        "optional": false,
+        "questiontype": "MultipleChoice",
+        "index": 3,
+        "options": [
+          {
+            "index": 0,
+            "value": "First choice"
+          },
+          {
+            "index": 1,
+            "value": "Second choice"
+          },
+          {
+            "index": 2,
+            "value": "Third choice"
+          },
+          {
+            "index": 3,
+            "value": "Fourth Choice"
+          }
+        ]
+      },
+      {
+        "answers": [],
         "text": "This is an optional free text question",
         "subtext": "You can enter any string here",
         "optional": false,
         "questiontype": "FreeText",
         "options": [],
-        "index": 3
+        "index": 4
       }
     ],
     "identifier": "TF",
@@ -175,12 +227,38 @@
       },
       {
         "answers": [],
+        "text": "Il s'agit d'une question à choix multiple",
+        "subtext": "Les réponses possibles sont définies dans le questionnaire",
+        "optional": false,
+        "questiontype": "MultipleChoice",
+        "index": 3,
+        "options": [
+          {
+            "index": 0,
+            "value": "Premier choix"
+          },
+          {
+            "index": 1,
+            "value": "Deuxième choix"
+          },
+          {
+            "index": 2,
+            "value": "Troisième choix"
+          },
+          {
+            "index": 3,
+            "value": "Quatrième choix"
+          }
+        ]
+      },
+      {
+        "answers": [],
         "text": "Il s'agit d'une question optional de texte libre",
         "subtext": "Vous pouvez écrire n'importe quelle chaîne de caractères ici",
         "optional": false,
         "questiontype": "FreeText",
         "options": [],
-        "index": 3
+        "index": 4
       }
     ],
     "identifier": "TF",

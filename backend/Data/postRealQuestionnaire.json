@@ -1,0 +1,332 @@
+[
+  {
+    "identifier": "QC",
+    "language": "EN",
+    "title": "Questionnaire for Quality-Control at the university hospital in Bern",
+    "description": "Validated questionnaire to measure the quality of care, especially in regards to the diagnostic errors",
+    "descriptionForCustomer": "This questionnaire helps us better understand where we can be better to give you a good health care",
+    "validAfterDays": 15,
+    "validForDays": 10,
+    "questions": [
+      {
+        "answers": [],
+        "text": "Question d1",
+        "subtext": "Was your most recent visit to an emergency department or urgent care facility to seek care:",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "As a patient yourself; or"
+          },
+          {
+            "index": 1,
+            "value": "As a care partner to a person seeking care?"
+          }
+        ],
+        "index": 0
+      },
+      {
+        "answers": [],
+        "text": "Question d2",
+        "subtext": "Your most recent visit as a patient was to:",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "An emergency department"
+          },
+          {
+            "index": 1,
+            "value": "An urgent care facility."
+          }
+        ],
+        "index": 1
+      },
+      {
+        "answers": [],
+        "text": "Question d3",
+        "subtext": "How long ago was your most recent visit to an emergency department or urgent care facility?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Within the last week;"
+          },
+          {
+            "index": 1,
+            "value": "Within last 1-2 weeks"
+          },
+          {
+            "index": 2,
+            "value": "Within last 2-4 weeks"
+          },
+          {
+            "index": 3,
+            "value": "Within last 2-3 months"
+          }
+        ],
+        "index": 2
+      },
+      {
+        "answers": [],
+        "text": "Question d4",
+        "subtext": "Thinking about this most recent visit, what was the main reason you went?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "An accident or injury;"
+          },
+          {
+            "index": 1,
+            "value": "A new health problem;"
+          },
+          {
+            "index": 2,
+            "value": "An existing health concern that might have been worsening;"
+          },
+          {
+            "index": 3,
+            "value": "Hard to say."
+          }
+        ],
+        "index": 3
+      },
+      {
+        "answers": [],
+        "text": "Question d5",
+        "subtext": "How urgent was your health condition when you went?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Non-urgent;"
+          },
+          {
+            "index": 1,
+            "value": "Urgent, needed care within a few hours;"
+          },
+          {
+            "index": 2,
+            "value": "Potentially life-threatening, needed care in less than one hour."
+          }
+        ],
+        "index": 4
+      },
+      {
+        "answers": [],
+        "text": "Question d6",
+        "subtext": "How long did you wait to get care during your most recent visit?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Less than 15 minutes;"
+          },
+          {
+            "index": 1,
+            "value": "From 15 minutes to an hour;"
+          },
+          {
+            "index": 2,
+            "value": "1-2 hours;"
+          },
+          {
+            "index": 3,
+            "value": "More than 4 hours."
+          }
+        ],
+        "index": 5
+      },
+      {
+        "answers": [],
+        "text": "Question d7",
+        "subtext": "How long did you wait to get an explanation of your health problem?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Less than 1 hour;"
+          },
+          {
+            "index": 1,
+            "value": "1-4 hours;"
+          },
+          {
+            "index": 2,
+            "value": "4-10 hours;"
+          },
+          {
+            "index": 3,
+            "value": "More than 10 hours;"
+          },
+          {
+            "index": 4,
+            "value": "I had to leave before receiving the explanation. "
+          }
+        ],
+        "index": 6
+      },
+      {
+        "answers": [],
+        "text": "Question d8",
+        "subtext": "In the past year, how many emergency department and urgent care facility visits do you estimate you had overall, including this most recent one?",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
+        "index": 7
+      },
+      {
+        "answers": [],
+        "text": "I felt I had 2-way, equal and non-judgmental communication with the clinicians.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 8
+      },
+      {
+        "answers": [],
+        "text": "I felt that the clinicians and I had a shared goal of communicating with each other to determine the explanation of my health problem.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 9
+      },
+      {
+        "answers": [],
+        "text": "I felt that the care team understood my specific needs appropriately.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 10
+      },
+      {
+        "answers": [],
+        "text": "I had the opportunity to share with the care team important aspects of my health problem.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 11
+      },
+      {
+        "answers": [],
+        "text": "I felt like my health concerns were taken seriously by the care team.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 12
+      },
+      {
+        "answers": [],
+        "text": "The care team explained to me their process for establishing the explanation of my health problem.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 13
+      },
+      {
+        "answers": [],
+        "text": "I felt that the explanation of my health problem I was given was true.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 14
+      },
+      {
+        "answers": [],
+        "text": "I was confident in the diagnostic skills of the care team who worked on establishing the explanation of my health problem.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 15
+      },
+      {
+        "answers": [],
+        "text": "I felt the care team seemed certain in the explanation of my health problem they gave to me.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 16
+      },
+      {
+        "answers": [],
+        "text": "I felt the explanation of my health problem was communicated well to me.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 17
+      },
+      {
+        "answers": [],
+        "text": "The explanation described what to expect of my health problem, regardless whether it worsened, stayed the same, or resolved.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 18
+      },
+      {
+        "answers": [],
+        "text": "Based on what was communicated to me about my health problem, I felt I could explain my health problem to a friend.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 19
+      },
+      {
+        "answers": [],
+        "text": "The information that I received was easy for me to understand.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 20
+      },
+      {
+        "answers": [],
+        "text": "The care team checked how I interpreted the explanation of my health problem.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 21
+      },
+      {
+        "answers": [],
+        "text": "I was communicated what I needed to know to take the next steps after the visit.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 22
+      },
+      {
+        "answers": [],
+        "text": "With the communication I received, I felt I had a plan to follow, for example, I knew what doctors I needed to follow up with.",
+        "subtext": "",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 23
+      }
+    ]
+  }
+]

@@ -4,7 +4,9 @@
       <h1>{{ store.questionnaire.title }}</h1>
       <p>{{ store.questionnaire.descriptionForCustomer }}</p>
       <v-divider class="my-2" :thickness="3"></v-divider>
-      <p style="color: #1fa481;">* {{ t('questionnaire.navigation.questionOptionalExplanation') }}</p>
+      <p style="color: #1fa481">
+        * {{ t('questionnaire.navigation.questionOptionalExplanation') }}
+      </p>
     </v-card>
     <template v-for="question in store.questionnaire.questions" :key="question.questionId">
       <FreeTextQuestion
@@ -22,6 +24,11 @@
         :index="question.index"
         :question="question"
       />
+      <MultipleChoiceQuestion
+        v-if="question.questiontype === 'MultipleChoice'"
+        :index="question.index"
+        :question="question"
+      />
     </template>
 
     <v-btn type="submit" @click="submitForm()" class="ma-2">
@@ -36,6 +43,7 @@
 <script setup lang="ts">
 import FreeTextQuestion from '@/components/questionnaire/FreeTextQuestion.vue'
 import LikertQuestionVue from '@/components/questionnaire/LikertQuestion.vue'
+import MultipleChoiceQuestion from '@/components/questionnaire/MultipleChoiceQuestion.vue'
 import SingleChoiceQuestion from '@/components/questionnaire/SingleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
@@ -62,20 +70,16 @@ async function submitForm() {
   await mainForm.value.validate()
   if (validForm.value) {
     store.submitQuestionnaire()
-  }
-  else {
-    const errorMessage = document.querySelector(".v-messages__message:first-of-type")
-      ?.parentElement
-      ?.parentElement
-      ?.parentElement
-      ?.parentElement
+  } else {
+    const errorMessage = document.querySelector('.v-messages__message:first-of-type')?.parentElement
+      ?.parentElement?.parentElement?.parentElement
 
     if (errorMessage) {
       errorMessage.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'center'
-        });
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center'
+      })
     }
   }
 }

@@ -29,8 +29,9 @@ const props = defineProps({
 
 const rules = [
   () => !!store.answers[props.index] || t('questionnaire.validation.fieldRequired'),
-  () => (Number.isInteger(Number(store.answers[props.index])) && store.answers[props.index] > 0)
-  || t('questionnaire.validation.fieldIsNumber')
+  () =>
+    (Number.isInteger(Number(store.answers[props.index])) && store.answers[props.index] > 0) ||
+    t('questionnaire.validation.fieldIsNumber')
 ]
 </script>
 

@@ -1,14 +1,11 @@
 <template>
   <div>
     <v-card v-if="mdAndUp">
-      <h1 style="display: inline;">{{ props.question.text }}</h1>
-      <h1 v-if="!question.optional" style="color: #1fa481; display: inline;"><sup>*</sup></h1>
+      <h1 style="display: inline">{{ props.question.text }}</h1>
+      <h1 v-if="!question.optional" style="color: #1fa481; display: inline"><sup>*</sup></h1>
 
       <h4>{{ props.question.subtext }}</h4>
-      <v-input
-        :model-value="store.answers[props.index]"
-        :rules="rules"
-      >
+      <v-input :model-value="store.answers[props.index]" :rules="rules">
         <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
           <v-btn
             v-for="(item, index) in labels"
@@ -26,11 +23,7 @@
     <v-card v-else>
       <h1>{{ question.text }}</h1>
       <h4>{{ question.subtext }}</h4>
-      <v-radio-group
-        density="compact"
-        v-model="store.answers[props.index]"
-        :rules="rules"
-      >
+      <v-radio-group density="compact" v-model="store.answers[props.index]" :rules="rules">
         <v-radio
           v-for="(option, index) in labels"
           :key="index"
@@ -68,8 +61,7 @@ const rules = [
   () => {
     if (!props.question.optional) {
       return !!store.answers[props.index] || t('questionnaire.validation.fieldRequired')
-    }
-    else {
+    } else {
       return true
     }
   }

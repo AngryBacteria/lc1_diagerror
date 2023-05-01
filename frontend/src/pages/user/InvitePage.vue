@@ -41,10 +41,6 @@
       >
     </v-form>
   </v-card>
-
-  <v-btn @click="useRandomQuestionnaire(5)">
-    Generate Random Questionnaire
-  </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -59,7 +55,6 @@ import { useI18n } from 'vue-i18n'
 import { watch } from 'vue'
 import { computed } from 'vue'
 import { onMounted } from 'vue'
-import { useRandomQuestionnaire } from '@/composables/useRandomQuestionnaire'
 
 const { t } = useTypedI18n()
 const i18n = useI18n()
@@ -70,8 +65,6 @@ const validForm = ref(false)
 const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
 const errorMessage = ref('')
-
-//TODO react on different error codes (404 and 500)
 
 /**
  * Computed property for the url with the api endpoint, invite code and locale
@@ -131,16 +124,14 @@ async function loadQuestionnaire() {
   }
   if (error.value) {
     if (statusCode.value === 404) {
-      errorMessage.value = 
-      `${t('questionnaire.navigation.invitationCode')} 
+      errorMessage.value = `${t('questionnaire.navigation.invitationCode')} 
       "${store.inviteCode}"
       ${t('questionnaire.common.404')}`
       return
     }
     if (statusCode.value === 403) {
       errorMessage.value = t('questionnaire.navigation.codeAlreadyUsed')
-    }
-    else {
+    } else {
       errorMessage.value = t('questionnaire.common.500')
     }
   }

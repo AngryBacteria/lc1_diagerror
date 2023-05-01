@@ -67,12 +67,27 @@ export const useUserStore = defineStore('user', () => {
       if (!questionnaire.value || !answers.value || !inviteCode)
         return { success: false, error: null }
 
+      //TODO test and sort answers by index
       const formattedAnswers = questionnaire.value.questions.map((question) => {
-        return {
-          questionId: question.questionId,
-          text: answers.value.at(question.index) ? answers.value.at(question.index): "",
-          date: new Date().toISOString().split('T')[0],
-          invitationId: inviteCode.value
+        if (question.questiontype != 'MultipleChoice') {
+          return {
+            questionId: question.questionId,
+            text: answers.value.at(question.index) ? answers.value.at(question.index) : '',
+            date: new Date().toISOString().split('T')[0],
+            invitationId: inviteCode.value
+          }
+        } else {
+          const answerArray = answers.value.at(question.index)
+          let answerOutput = ''
+          if (answerArray.length > 0) {
+            answerOutput = answerArray.join('|')
+          }
+          return {
+            questionId: question.questionId,
+            text: answerOutput,
+            date: new Date().toISOString().split('T')[0],
+            invitationId: inviteCode.value
+          }
         }
       })
       console.log(formattedAnswers)

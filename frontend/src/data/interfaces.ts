@@ -17,7 +17,7 @@ export interface Question {
   text: string
   subtext: string
   optional: boolean
-  questiontype: 'Likert' | 'FreeText' | 'SingleChoice'
+  questiontype: 'Likert' | 'FreeText' | 'SingleChoice' | 'MultipleChoice'
   options: Option[]
   index: number
 }
