@@ -4,17 +4,15 @@
     <h1 v-if="!question.optional" style="color: #1fa481; display: inline"><sup>*</sup></h1>
 
     <h4>{{ question.subtext }}</h4>
-    <v-checkbox
-      v-for="option in question.options"
-      :key="option.index"
-      :label="option.value"
-      :value="`${option.index}`"
+    <v-select
       v-model="store.answers[props.index]"
-      :validate-on="validateOn"
+      :items="question.options"
+      item-title="value"
+      item-value="index"
+      label="Select"
+      multiple
       :rules="rules"
-      color="primary"
-      density="compact"
-    ></v-checkbox>
+    ></v-select>
   </v-card>
 </template>
 
@@ -23,9 +21,6 @@ import { useTypedI18n } from '@/composables/useTypedI18n'
 import type { Question } from '@/data/interfaces'
 import { useUserStore } from '@/stores/user'
 import type { PropType } from 'vue'
-import { ref } from 'vue'
-
-const validateOn = ref<'input' | 'submit' | 'blur'>('submit')
 
 const { t } = useTypedI18n()
 const store = useUserStore()
@@ -53,19 +48,6 @@ const rules = [
     }
   }
 ]
-
-//Init if empty and change validation to input
-if (!store.answers[props.index]) {
-  store.answers[props.index] = []
-}
-//TODO check if there is a better way to make this work
-const delay = (ms: number | undefined) => new Promise((res) => setTimeout(res, ms))
-const validationChange = async () => {
-  await delay(2000)
-  console.log('Changing validation to input')
-  validateOn.value = 'input'
-}
-validationChange()
 </script>
 
 <style scoped>
