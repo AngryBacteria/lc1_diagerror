@@ -16,7 +16,8 @@ export default {
       clearAnswers: 'Clear answers',
       abortQuestionnaire: 'Abort Questionnaire',
       codeAlreadyUsed: 'Request forbidden, this invitation code has already been used',
-      questionOptionalExplanation: 'Means this question is optional'
+      questionOptionalExplanation: 'Means this question is optional',
+      clear: 'clear'
     },
     validation: {
       fieldRequired: 'This field is required',

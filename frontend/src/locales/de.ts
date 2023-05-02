@@ -15,7 +15,8 @@ export default {
       clearAnswers: 'Antworten löschen',
       abortQuestionnaire: 'Umfrage abbrechen',
       codeAlreadyUsed: 'Anfrage verboten, dieser Einladungscode wurde schon verwendet',
-      questionOptionalExplanation: 'Bedeutet diese Frage ist optional'
+      questionOptionalExplanation: 'Bedeutet diese Frage ist optional',
+      clear: 'löschen'
     },
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',

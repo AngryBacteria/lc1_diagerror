@@ -34,6 +34,9 @@
         >
         </v-radio>
       </v-radio-group>
+      <v-btn @click="store.answers[props.index] = null">
+        {{ t('questionnaire.navigation.clear') }}
+      </v-btn>
     </v-card>
   </div>
 </template>

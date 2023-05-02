@@ -66,6 +66,7 @@ const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
 const errorMessage = ref('')
 
+//TODO fix width on mobile
 /**
  * Computed property for the url with the api endpoint, invite code and locale
  */
