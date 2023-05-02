@@ -118,7 +118,8 @@ async function initPage() {
  */
 async function loadQuestionnaire() {
   await execute()
-  if (data.value) {
+  if (data.value && !error) {
+    console.log(data)
     store.questionnaire = data.value[0]
     return
   }

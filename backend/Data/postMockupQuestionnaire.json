@@ -165,7 +165,7 @@
         "answers": [],
         "text": "This is an optional free text question",
         "subtext": "You can enter any string here",
-        "optional": false,
+        "optional": true,
         "questiontype": "FreeText",
         "options": [],
         "index": 4
@@ -255,7 +255,7 @@
         "answers": [],
         "text": "Il s'agit d'une question optional de texte libre",
         "subtext": "Vous pouvez écrire n'importe quelle chaîne de caractères ici",
-        "optional": false,
+        "optional": true,
         "questiontype": "FreeText",
         "options": [],
         "index": 4

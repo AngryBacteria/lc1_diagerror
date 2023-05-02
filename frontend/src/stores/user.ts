@@ -60,20 +60,20 @@ export const useUserStore = defineStore('user', () => {
   //TODO submitting to backend and returning if it was successful
   /**
    * Function that builds valid answer objects for submitting them to the database
-   * @param validForm Boolean to indicate if the form was valid or not
    */
   function submitQuestionnaire(): { success: boolean; error: any } {
     try {
       if (!questionnaire.value || !answers.value || !inviteCode)
         return { success: false, error: null }
 
-      //TODO test and sort answers by index
+      //TODO test and sort multiple choice answers by index
+      const currentDate = new Date().toISOString().split('T')[0]
       const formattedAnswers = questionnaire.value.questions.map((question) => {
         if (question.questiontype != 'MultipleChoice') {
           return {
             questionId: question.questionId,
             text: answers.value.at(question.index) ? answers.value.at(question.index) : '',
-            date: new Date().toISOString().split('T')[0],
+            date: currentDate,
             invitationId: inviteCode.value
           }
         } else {
@@ -85,7 +85,7 @@ export const useUserStore = defineStore('user', () => {
           return {
             questionId: question.questionId,
             text: answerOutput,
-            date: new Date().toISOString().split('T')[0],
+            date: currentDate,
             invitationId: inviteCode.value
           }
         }

@@ -10,6 +10,7 @@
       :label="option.value"
       :value="`${option.index}`"
       v-model="store.answers[props.index]"
+      :validate-on="validateOn"
       :rules="rules"
       color="primary"
       density="compact"
@@ -22,6 +23,9 @@ import { useTypedI18n } from '@/composables/useTypedI18n'
 import type { Question } from '@/data/interfaces'
 import { useUserStore } from '@/stores/user'
 import type { PropType } from 'vue'
+import { ref } from 'vue'
+
+const validateOn = ref<'input' | 'submit' | 'blur'>('submit')
 
 const { t } = useTypedI18n()
 const store = useUserStore()
@@ -50,10 +54,18 @@ const rules = [
   }
 ]
 
-//Init if empty
+//Init if empty and change validation to input
 if (!store.answers[props.index]) {
   store.answers[props.index] = []
 }
+//TODO check if there is a better way to make this work
+const delay = (ms: number | undefined) => new Promise((res) => setTimeout(res, ms))
+const validationChange = async () => {
+  await delay(2000)
+  console.log('Changing validation to input')
+  validateOn.value = 'input'
+}
+validationChange()
 </script>
 
 <style scoped>
