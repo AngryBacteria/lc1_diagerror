@@ -47,6 +47,7 @@ import MultipleChoiceQuestion from '@/components/questionnaire/MultipleChoiceQue
 import SingleChoiceQuestion from '@/components/questionnaire/SingleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
+import { onMounted } from 'vue'
 import { ref } from 'vue'
 
 const store = useUserStore()
@@ -55,7 +56,12 @@ const { t } = useTypedI18n()
 const validForm = ref(true)
 const mainForm = ref<any>(null)
 
-await initialValidation()
+/**
+ * Form validation on page reload if answers are already existing
+ */
+onMounted(() => {
+  initialValidation()
+})
 
 /**
  * Submits questionnaire if the form is valid
