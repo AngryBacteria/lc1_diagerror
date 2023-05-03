@@ -46,6 +46,7 @@ import LikertQuestionVue from '@/components/questionnaire/LikertQuestion.vue'
 import MultipleChoiceQuestion from '@/components/questionnaire/MultipleChoiceQuestion.vue'
 import SingleChoiceQuestion from '@/components/questionnaire/SingleChoiceQuestion.vue'
 import { useTypedI18n } from '@/composables/useTypedI18n'
+import router from '@/router'
 import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 import { ref } from 'vue'
@@ -118,6 +119,10 @@ function displayInvalidFormError() {
 }
 
 //TODO
+/**
+ * Displays the error happening while trying to submit
+ * @param error Thrown error
+ */
 function displaySubmitError(error: any) {
   console.log(error)
   store.resetSnackbarConfig
@@ -127,7 +132,11 @@ function displaySubmitError(error: any) {
 }
 
 //TODO
+/**
+ * Prepares the browser for a new questionnaire after one has been submitted
+ */
 function tidyAfterSubmit() {
+  router.push('/questionnaire/thanks')
   store.abortQuestionnaire()
 }
 </script>

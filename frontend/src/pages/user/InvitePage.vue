@@ -65,8 +65,6 @@ const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
 const errorMessage = ref('')
 
-//TODO fix if there is a questionnaire already and you change language, do not reset even if error occurs
-
 /**
  * Computed property for the url with the api endpoint, invite code and locale
  */
@@ -135,6 +133,7 @@ async function loadQuestionnaire() {
     } else {
       errorMessage.value = t('questionnaire.common.500')
     }
+    store.abortQuestionnaire()
   }
 }
 

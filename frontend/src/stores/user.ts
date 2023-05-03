@@ -57,7 +57,6 @@ export const useUserStore = defineStore('user', () => {
     inviteCode.value = ''
   }
 
-  //TODO submitting to backend and returning if it was successful
   /**
    * Function that builds valid answer objects for submitting them to the database
    */
@@ -66,31 +65,8 @@ export const useUserStore = defineStore('user', () => {
       if (!questionnaire.value || !answers.value || !inviteCode)
         return { success: false, error: 'Form Not Valid' }
 
-      const currentDate = new Date().toISOString().split('T')[0]
-      const formattedAnswers = questionnaire.value.questions.map((question) => {
-        if (question.questiontype != 'MultipleChoice') {
-          return {
-            questionId: question.questionId,
-            text: answers.value.at(question.index) ? answers.value.at(question.index) : '',
-            date: currentDate,
-            invitationId: inviteCode.value
-          }
-        } else {
-          const answerArray = answers.value.at(question.index)
-          answerArray.sort((a: number, b: number) => a - b)
-          let answerOutput = ''
-          if (answerArray.length > 0) {
-            answerOutput = answerArray.join('|')
-          }
-          return {
-            questionId: question.questionId,
-            text: answerOutput,
-            date: currentDate,
-            invitationId: inviteCode.value
-          }
-        }
-      })
-
+      const formattedAnswers = prepareAnswerObjects()
+      //TODO remove
       console.log(formattedAnswers)
       const url = `${apiEndpoint}/answer`
       const { error, statusCode } = await useFetch(url, {
@@ -121,6 +97,37 @@ export const useUserStore = defineStore('user', () => {
       timeout: '3000',
       location: 'top'
     }
+  }
+
+  /**
+   * Prepares the answer Objects for submitting
+   */
+  function prepareAnswerObjects(): any[] {
+    const currentDate = new Date().toISOString().split('T')[0]
+    const formattedAnswers = questionnaire.value.questions.map((question) => {
+      if (question.questiontype != 'MultipleChoice') {
+        return {
+          questionId: question.questionId,
+          text: answers.value.at(question.index) ? answers.value.at(question.index) : '',
+          date: currentDate,
+          invitationId: inviteCode.value
+        }
+      } else {
+        const answerArray = answers.value.at(question.index)
+        answerArray.sort((a: number, b: number) => a - b)
+        let answerOutput = ''
+        if (answerArray.length > 0) {
+          answerOutput = answerArray.join('|')
+        }
+        return {
+          questionId: question.questionId,
+          text: answerOutput,
+          date: currentDate,
+          invitationId: inviteCode.value
+        }
+      }
+    })
+    return formattedAnswers
   }
 
   /**
