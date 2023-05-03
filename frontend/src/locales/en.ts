@@ -6,6 +6,13 @@ export default {
       403: 'Request forbidden',
       500: 'Communication with the server failed. Do you have internet?'
     },
+    thanks: {
+      title: 'We thank you very much for participating in the survey',
+      subtitle:
+        'With your contribution we can constantly improve the quality of treatment. If you have any questions you are welcome to contact us',
+      contactInsel: 'Contact us',
+      newQuestionnaire: 'Fill out a new survey'
+    },
     navigation: {
       language: 'Language',
       startQuestionnaire: 'Start questionnaire',
@@ -17,7 +24,8 @@ export default {
       abortQuestionnaire: 'Abort Questionnaire',
       codeAlreadyUsed: 'Request forbidden, this invitation code has already been used',
       questionOptionalExplanation: 'Means this question is optional',
-      clear: 'clear'
+      clear: 'clear',
+      submitError: 'An error has occurred. Please try again'
     },
     validation: {
       fieldRequired: 'This field is required',

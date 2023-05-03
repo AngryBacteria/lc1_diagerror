@@ -5,6 +5,13 @@ export default {
       404: 'konnte nicht gefunden werden',
       500: 'Kommunikation mit dem Server ist fehlgeschlagen. Haben sie kein Internet?'
     },
+    thanks: {
+      title: 'Wir danken ihnen vielmals für die Teilnahme an der Umfrage',
+      subtitle:
+        'Mit ihrem Beitrag können wir die Qualität der Behandlung stetig verbessern. Falls sie noch Fragen haben können sie uns diese gerne kontaktieren',
+      contactInsel: 'Kontakt',
+      newQuestionnaire: 'Neue Umfrage ausfüllen'
+    },
     navigation: {
       language: 'Sprache',
       startQuestionnaire: 'Umfrage starten',
@@ -16,7 +23,8 @@ export default {
       abortQuestionnaire: 'Umfrage abbrechen',
       codeAlreadyUsed: 'Anfrage verboten, dieser Einladungscode wurde schon verwendet',
       questionOptionalExplanation: 'Bedeutet diese Frage ist optional',
-      clear: 'löschen'
+      clear: 'löschen',
+      submitError: 'Ein Fehler ist aufgetreten. Bitte versuche es erneut'
     },
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',

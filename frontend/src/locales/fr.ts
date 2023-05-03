@@ -6,6 +6,13 @@ export default {
       403: 'Demande interdite',
       500: "La communication avec le serveur ne fonctionne pas. Avez-vous accès à l'internet ?"
     },
+    thanks: {
+      title: "Nous vous remercions vivement d'avoir participé à notre questionnaire.",
+      subtitle:
+        "Votre contribution nous permet d'améliorer la qualité du traitement. Si vous avez des questions, n'hésitez pas à nous contacter.",
+      contactInsel: 'Contactez-nous',
+      newQuestionnaire: 'Remplir un nouveau questionnaire'
+    },
     navigation: {
       language: 'Langue',
       startQuestionnaire: 'Commencer le questionnaire',
@@ -17,7 +24,8 @@ export default {
       abortQuestionnaire: 'Abandonner le questionnaire',
       codeAlreadyUsed: "Demande interdite, ce code d'invitation a déjà été utilisé",
       questionOptionalExplanation: 'Indique que cette question est facultative',
-      clear: 'éteindre'
+      clear: 'éteindre',
+      submitError: "Une erreur s'est produite. Veuillez réessayer"
     },
     validation: {
       fieldRequired: 'Ce formulaire est obligatoire',

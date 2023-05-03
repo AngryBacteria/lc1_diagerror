@@ -1,6 +1,6 @@
 import { watch, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { StorageSerializers, useLocalStorage, useSessionStorage } from '@vueuse/core'
+import { StorageSerializers, useFetch, useLocalStorage, useSessionStorage } from '@vueuse/core'
 import type { MessageLanguages } from '@/plugins/i18n'
 import { useI18n } from 'vue-i18n'
 import { useCurrentUser } from 'vuefire'
@@ -61,12 +61,11 @@ export const useUserStore = defineStore('user', () => {
   /**
    * Function that builds valid answer objects for submitting them to the database
    */
-  function submitQuestionnaire(): { success: boolean; error: any } {
+  async function submitQuestionnaire(): Promise<{ success: boolean; error: any }> {
     try {
       if (!questionnaire.value || !answers.value || !inviteCode)
-        return { success: false, error: null }
+        return { success: false, error: 'Form Not Valid' }
 
-      //TODO test and sort multiple choice answers by index
       const currentDate = new Date().toISOString().split('T')[0]
       const formattedAnswers = questionnaire.value.questions.map((question) => {
         if (question.questiontype != 'MultipleChoice') {
@@ -78,6 +77,7 @@ export const useUserStore = defineStore('user', () => {
           }
         } else {
           const answerArray = answers.value.at(question.index)
+          answerArray.sort((a: number, b: number) => a - b)
           let answerOutput = ''
           if (answerArray.length > 0) {
             answerOutput = answerArray.join('|')
@@ -90,10 +90,22 @@ export const useUserStore = defineStore('user', () => {
           }
         }
       })
+
       console.log(formattedAnswers)
-      return { success: true, error: null }
+      const url = `${apiEndpoint}/answer`
+      const { error, statusCode } = await useFetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formattedAnswers)
+      })
+
+      if (!error.value && statusCode.value == 200) {
+        return { success: true, error: null }
+      } else {
+        return { success: false, error: error }
+      }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       return { success: false, error: error }
     }
   }

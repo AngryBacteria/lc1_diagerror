@@ -31,7 +31,7 @@
       />
     </template>
 
-    <v-btn type="submit" @click="submitForm()" class="ma-2">
+    <v-btn type="submit" @click="submitForm()" class="ma-2" :loading="submitLoading">
       {{ t('questionnaire.navigation.submitQuestionnaire') }}
     </v-btn>
     <v-btn @click="store.abortQuestionnaire()" class="ma-2" color="error">
@@ -55,6 +55,7 @@ const { t } = useTypedI18n()
 
 const validForm = ref(true)
 const mainForm = ref<any>(null)
+const submitLoading = ref(false)
 
 /**
  * Form validation on page reload if answers are already existing
@@ -67,21 +68,20 @@ onMounted(() => {
  * Submits questionnaire if the form is valid
  */
 async function submitForm() {
+  submitLoading.value = true
   await mainForm.value.validate()
   if (validForm.value) {
-    store.submitQuestionnaire()
-  } else {
-    const errorMessage = document.querySelector('.v-messages__message:first-of-type')?.parentElement
-      ?.parentElement?.parentElement?.parentElement
+    const { success, error } = await store.submitQuestionnaire()
 
-    if (errorMessage) {
-      errorMessage.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center'
-      })
+    if (success) {
+      tidyAfterSubmit()
+    } else {
+      displaySubmitError(error)
     }
+  } else {
+    displayInvalidFormError()
   }
+  submitLoading.value = false
 }
 
 /**
@@ -102,6 +102,33 @@ async function initialValidation() {
   if (!isEmpty) {
     mainForm.value.validate()
   }
+}
+
+function displayInvalidFormError() {
+  const errorMessage = document.querySelector('.v-messages__message:first-of-type')?.parentElement
+    ?.parentElement?.parentElement?.parentElement
+
+  if (errorMessage) {
+    errorMessage.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    })
+  }
+}
+
+//TODO
+function displaySubmitError(error: any) {
+  console.log(error)
+  store.resetSnackbarConfig
+  store.snackbarConfig.message = t('questionnaire.navigation.submitError')
+  store.snackbarConfig.color = 'error'
+  store.snackbarConfig.visible = true
+}
+
+//TODO
+function tidyAfterSubmit() {
+  store.abortQuestionnaire()
 }
 </script>
 

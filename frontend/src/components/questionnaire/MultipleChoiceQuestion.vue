@@ -11,6 +11,7 @@
       item-value="index"
       label="Select"
       multiple
+      color="primary"
       :rules="rules"
     ></v-select>
   </v-card>

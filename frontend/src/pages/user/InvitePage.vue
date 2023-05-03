@@ -28,7 +28,6 @@
         v-model="store.inviteCode"
         autocomplete="off"
         :label="t('questionnaire.navigation.invitationCode')"
-        rounded
         color="primary"
         validate-on="submit"
         :rules="[
@@ -66,7 +65,8 @@ const codeForm = ref<any>(null)
 const pathParam = route.params.invitationCode
 const errorMessage = ref('')
 
-//TODO fix width on mobile
+//TODO fix if there is a questionnaire already and you change language, do not reset even if error occurs
+
 /**
  * Computed property for the url with the api endpoint, invite code and locale
  */
@@ -152,5 +152,11 @@ async function submitCode() {
 <style>
 .mdi-close {
   color: black !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .v-card {
+    min-width: 95%;
+  }
 }
 </style>

@@ -23,6 +23,11 @@ const router = createRouter({
         {
           path: 'invite',
           component: () => import('@/pages/user/InvitePage.vue')
+        },
+        {
+          path: 'thanks',
+          name: 'thanks-page',
+          component: () => import('@/pages/user/ThankYouPage.vue')
         }
       ]
     },
