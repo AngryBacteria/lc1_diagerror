@@ -44,5 +44,10 @@ export default {
         adminRequired: 'Sie müssen Admin sein'
       }
     }
+  },
+  common: {
+    '404':
+      'Sie haben das Internet nicht zerstört, aber wir könne nicht finden was sie gesucht haben',
+    back: 'Retour à la page principale'
   }
 }

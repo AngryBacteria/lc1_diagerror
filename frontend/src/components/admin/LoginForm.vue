@@ -19,6 +19,7 @@
         rounded="false"
         size="large"
         block
+        :loading="loginLoading"
         @click="login()"
       >
         Anmelden
@@ -40,6 +41,7 @@ const route = useRouter()
 const email = ref('')
 const password = ref('')
 const store = useUserStore()
+const loginLoading = ref(false)
 
 // i18n
 const { t } = useTypedI18n()
@@ -65,6 +67,7 @@ onMounted(async () => {
 })
 
 async function login() {
+  loginLoading.value = true
   const auth = useFirebaseAuth()
   if (auth) {
     try {
@@ -84,12 +87,15 @@ async function login() {
     } catch (error: any) {
       const errorCode = error.code
 
+      loginLoading.value = false
+
       store.resetSnackbarConfig
       store.snackbarConfig.message = errorCode.split('/')[1]
       store.snackbarConfig.color = 'error'
       store.snackbarConfig.visible = true
     }
   }
+  loginLoading.value = false
 }
 </script>
 <style scoped></style>

@@ -3,8 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
 import { i18n } from '@/plugins/i18n'
 
+//TODO implement 404 catch
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -48,6 +49,15 @@ const router = createRouter({
           component: () => import('@/components/admin/LoginForm.vue')
         }
       ]
+    },
+    {
+      // Catch route
+      path: '/:catchAll(.*)',
+      name: 'NotFound',
+      component: () => import('@/components/global/404Page.vue'),
+      meta: {
+        requiresAuth: false
+      }
     }
   ]
 })

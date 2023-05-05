@@ -45,5 +45,10 @@ export default {
         adminRequired: 'Vous devez être administrateur'
       }
     }
+  },
+  common: {
+    '404':
+      "Vous n'avez pas cassé l'internet, mais nous ne pouvons pas trouver ce que vous cherchez.",
+    back: ''
   }
 }

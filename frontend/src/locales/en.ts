@@ -45,5 +45,9 @@ export default {
         adminRequired: 'You have to  be an admin'
       }
     }
+  },
+  common: {
+    '404': "You didnt break the internet, but we can't find what you are looking for",
+    back: 'Go back to the homepage'
   }
 }
