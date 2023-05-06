@@ -35,13 +35,20 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'home-admin',
+      redirect: '/admin/overview',
       component: () => import('@/layouts/AdminLayout.vue'),
       children: [
         {
-          path: '',
+          path: 'overview',
+          name: 'admin-overview',
+          meta: { requiresAuth: true },
+          component: () => import('@/pages/admin/QuestionnaireOverview.vue')
+        },
+        {
+          path: 'edit',
           name: 'admin-home',
           meta: { requiresAuth: true },
-          component: () => import('@/pages/admin/AdminHomePage.vue')
+          component: () => import('@/pages/admin/UploadEditQuestionnaire.vue')
         },
         {
           path: 'login',

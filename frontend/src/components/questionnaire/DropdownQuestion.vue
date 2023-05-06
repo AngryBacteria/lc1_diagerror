@@ -4,17 +4,16 @@
     <h1 v-if="!question.optional" style="color: #1fa481; display: inline"><sup>*</sup></h1>
 
     <h4>{{ question.subtext }}</h4>
-    <v-checkbox
-      v-for="option in question.options"
-      :key="option.index"
-      v-model="answers"
+    <v-select
+      v-model="store.answers[props.index]"
+      :items="question.options"
+      item-title="value"
+      item-value="index"
+      label="Select"
+      multiple
       color="primary"
-      :label="option.value"
-      :value="option.index"
       :rules="rules"
-      density="compact"
-      hide-details="auto"
-    ></v-checkbox>
+    ></v-select>
   </v-card>
 </template>
 
@@ -23,14 +22,9 @@ import { useTypedI18n } from '@/composables/useTypedI18n'
 import type { Question } from '@/data/interfaces'
 import { useUserStore } from '@/stores/user'
 import type { PropType } from 'vue'
-import { onMounted } from 'vue'
-import { watch } from 'vue'
-import { ref } from 'vue'
 
-const answers = ref([])
 const { t } = useTypedI18n()
 const store = useUserStore()
-
 const props = defineProps({
   index: {
     type: Number,
@@ -45,7 +39,7 @@ const props = defineProps({
 const rules = [
   () => {
     if (!props.question.optional) {
-      if (!answers.value || answers.value.length == 0) {
+      if (!store.answers[props.index] || store.answers[props.index].length == 0) {
         return t('questionnaire.validation.fieldRequired')
       } else {
         return true
@@ -55,16 +49,6 @@ const rules = [
     }
   }
 ]
-
-onMounted(() => {
-  if (store.answers[props.index]) {
-    answers.value = store.answers[props.index]
-  }
-})
-
-watch(answers, () => {
-  store.answers[props.index] = answers.value
-})
 </script>
 
 <style scoped>

@@ -39,28 +39,16 @@ interface navItem {
 
 const items: navItem[] = [
   {
-    title: 'Startseite',
-    subtitle: 'Admin-Tool Startseite',
-    to: '/admin',
+    title: 'Übersicht Fragebogen',
+    subtitle: 'Fragebogen anzeigen',
+    to: '/admin/overview',
     icon: 'mdi-home'
   },
   {
-    title: 'Questionnaire',
-    subtitle: 'Questionnaire Page',
-    to: '/',
-    icon: 'mdi-account-question'
-  },
-  {
-    title: 'Andere Seite 1',
-    subtitle: 'foo',
-    to: '/admin1',
-    icon: 'mdi-ab-testing'
-  },
-  {
-    title: 'Andere Seite 1',
-    subtitle: 'foo',
-    to: '/admin2',
-    icon: 'mdi-ab-testing'
+    title: 'Edit/Upload Fragebogen',
+    subtitle: 'Editieren und uploaden von Fragebogen',
+    to: '/admin/edit',
+    icon: 'mdi-home'
   }
 ]
 
@@ -82,7 +70,7 @@ const drawer = mdAndUp ? ref(true) : ref(false)
         <template v-slot:activator="{ props }">
           <v-btn
             v-if="smAndUp"
-            variant="tonal"
+            variant="elevated"
             color="primary"
             v-bind="props"
             style="margin-right: 1rem"
@@ -126,7 +114,13 @@ const drawer = mdAndUp ? ref(true) : ref(false)
       </v-menu>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" location="left" permanent elevation="3">
+    <v-navigation-drawer
+      v-model="drawer"
+      location="left"
+      permanent
+      elevation="3"
+      v-if="store.isLoggedIn"
+    >
       <v-list nav>
         <v-list-item
           v-for="(item, i) in items"
