@@ -225,9 +225,11 @@ app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, i
     }
 
     // Apply pagination
+    var pageCount = Math.Ceiling((double)questionnaires.Count() / (double)take);
     questionnaires = questionnaires.Skip(skip).Take(take);
+    var data = await questionnaires.ToListAsync();
 
-    return Results.Ok(await questionnaires.ToListAsync());
+    return Results.Ok(new {pageCount, data});
 
 }).WithOpenApi(operation => new(operation)
 {
@@ -282,9 +284,20 @@ app.MapGet("/questionnaire/light/filter", async (DiagErrorDb db, int? page, int?
     }
 
     // Apply pagination
+
+    var pageCount = Math.Ceiling((double)questionnaires.Count() / (double)take);
+
     questionnaires = questionnaires.Skip(skip).Take(take);
 
-    return Results.Ok(await questionnaires.ToListAsync());
+    var data = await questionnaires.ToListAsync();
+
+    return Results.Ok(new { pageCount, data});
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Get all questionnaires with filtering",
+    Description = "This endpoint retrieves all questionnaires with their associated questions. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
+    "<br><br>" + //two breaks included in the text
+    "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
 }).WithTags("Questionnaire-Light");
 
 //Endpoints for POST Questionnaires without answers
@@ -294,12 +307,6 @@ app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] quest
     await db.SaveChangesAsync();
 
     return Results.Ok();
-}).WithOpenApi(operation => new(operation)
-{
-    Summary = "Get all questionnaires with filtering",
-    Description = "This endpoint retrieves all questionnaires with their associated questions. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
-    "<br><br>" + //two breaks included in the text
-    "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
 }).WithTags("Questionnaire-Light");
 
 //////// Testing ////////
