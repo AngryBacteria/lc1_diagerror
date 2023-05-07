@@ -85,6 +85,11 @@ app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string?
 {
     try
     {
+        if(invitationCode.Length <2 )
+        {
+            throw new ArgumentException("The identifier is too short. It has to consist of 2 digits representing a questionnaire identifier and 6 digits representing unique invitation");
+        };
+
         string identifier = invitationCode[..2];//Extract Identifier out of invitationCode
 
         //Searching for questionnaires with matching identifier
@@ -110,9 +115,15 @@ app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string?
     }
     catch (Exception e)
     {
-        return Results.StatusCode(500);
+        return Results.Problem(
+            statusCode : StatusCodes.Status500InternalServerError,
+            detail : e.Message
+        );
     }
-    
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Retrieve questionnaires by invitation code",
+    Description = "This endpoint validates an invitation code and returns the matching questionnaires. If a language parameter is provided, the endpoint additionally returns only questionnaires that match the specified language."
 }).WithTags("Invitation");
 
 //////// Question-Complete ////////
@@ -139,35 +150,69 @@ app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
 
 //////// Questionnaire-Complete ////////
 //Endpoints for GET all Questionnaires with answers
-app.MapGet("/questionnaire/complete", async (DiagErrorDb db) => 
+app.MapGet("/questionnaire/complete", async (DiagErrorDb db) =>
 {
     return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync();
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Get all questionnaires",
+    Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers."
 }).WithTags("Questionnaire-Complete");
 
 //Endpoints for GET all Questionnaires with answers and filtering possibilities
-app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, string? id, string? identifier, string? language) => 
+app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) => 
 {
+    // Calculate the number of items to skip and take based on the page and pageSize parameters
+    int skip = (page.GetValueOrDefault(1) - 1) * pageSize.GetValueOrDefault(10);
+    int take = pageSize.GetValueOrDefault(10);
+
+    //Retrieving all stored questionnaires with questions and answers
     var questionnaires = db.Questionnaires
             .Include(q => q.Questions)
-                .ThenInclude(q => q.Answers)
+            .ThenInclude(q => q.Answers)
             .AsQueryable();
 
+    //Filtering questionnaires with given id
     if (!string.IsNullOrEmpty(id))
     {
         questionnaires = questionnaires.Where(q => q.QuestionnaireId == int.Parse(id));
     }
 
+    //Filtering questionnaires with given identifier
     if (!string.IsNullOrEmpty(identifier))
     {
         questionnaires = questionnaires.Where(q => q.Identifier == identifier);
     }
 
+    //Filtering questionnaires with given language
     if (!string.IsNullOrEmpty(language))
     {
-        questionnaires = questionnaires.Where(q => q.Language == Enum.Parse<Language>(language)); //Todo: try/catch parsing
+        //checking if given language is supported in the databaseContext
+        try
+        {
+            Enum.Parse<Language>(language);
+        }
+        catch (Exception e)
+        {
+            return Results.Problem(
+                statusCode : StatusCodes.Status400BadRequest,
+                detail : $"Exception Message: '{e.Message}'. Invalid language value: '{language}'. Supported Languages are: {string.Join(", ", Enum.GetNames(typeof(Language)))}.");
+        }
+
+        questionnaires = questionnaires.Where(q => q.Language == Enum.Parse<Language>(language));
     }
 
-    return await questionnaires.ToListAsync();
+    // Apply pagination
+    questionnaires = questionnaires.Skip(skip).Take(take);
+
+    return Results.Ok(await questionnaires.ToListAsync());
+
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Get all questionnaires with filtering",
+    Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
+    "<br><br>" + //two breaks included in the text
+    "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
 }).WithTags("Questionnaire-Complete");
 
 //////// Questionnaire-Light ////////
