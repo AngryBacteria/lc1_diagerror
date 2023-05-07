@@ -53,9 +53,24 @@ app.UseHttpsRedirection();
 
 //////// Answer ////////
 //Endpoints for GET answers
-app.MapGet("/answer", async (DiagErrorDb db) => 
+app.MapGet("/answer/filter", async (DiagErrorDb db, string? questionnaireIdentifier) =>
 {
-    return await db.Answers.ToListAsync();
+    //Retrieving all stored answers
+    var answers = db.Answers
+            .AsQueryable();
+
+    //Filtering answers with given identifier
+    if (!string.IsNullOrEmpty(questionnaireIdentifier))
+    {
+        answers = answers.Where(q => q.InvitationId.StartsWith(questionnaireIdentifier.ToUpper()));
+    }
+
+    return Results.Ok(await db.Answers.ToListAsync());
+
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Get answers with filtering",
+    Description = "This endpoint retrieves all stored answers. You can filter for answers belonging to certain questionnaires with its identifier."
 }).WithTags("Answer");
 
 //Endpoints for POST answers
@@ -71,12 +86,19 @@ app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
         await db.Answers.AddRangeAsync(answers);
         await db.SaveChangesAsync();
 
-        return Results.Ok();
+        return Results.Ok($"{answers.Length} answers stored to the database");
     }
     catch (Exception e)
     {
-        return Results.StatusCode(500);
+        return Results.Problem(
+           statusCode: StatusCodes.Status500InternalServerError,
+           detail: e.Message
+        );
     }
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Store new answers",
+    Description = "This endpoint stores new answers in the database."
 }).WithTags("Answer");
 
 //////// Invitation ////////
@@ -217,9 +239,52 @@ app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, i
 
 //////// Questionnaire-Light ////////
 //Endpoints for GET Questionnaires without answers
-app.MapGet("/questionnaire/light", async (DiagErrorDb db) => 
+app.MapGet("/questionnaire/light/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) => 
 {
-    return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Options).ToListAsync();
+    // Calculate the number of items to skip and take based on the page and pageSize parameters
+    int skip = (page.GetValueOrDefault(1) - 1) * pageSize.GetValueOrDefault(10);
+    int take = pageSize.GetValueOrDefault(10);
+
+    //Retrieving all stored questionnaires with questions and answers
+    var questionnaires = db.Questionnaires
+            .Include(q => q.Questions)
+            .ThenInclude(q => q.Options)
+            .AsQueryable();
+
+    //Filtering questionnaires with given id
+    if (!string.IsNullOrEmpty(id))
+    {
+        questionnaires = questionnaires.Where(q => q.QuestionnaireId == int.Parse(id));
+    }
+
+    //Filtering questionnaires with given identifier
+    if (!string.IsNullOrEmpty(identifier))
+    {
+        questionnaires = questionnaires.Where(q => q.Identifier == identifier);
+    }
+
+    //Filtering questionnaires with given language
+    if (!string.IsNullOrEmpty(language))
+    {
+        //checking if given language is supported in the databaseContext
+        try
+        {
+            Enum.Parse<Language>(language);
+        }
+        catch (Exception e)
+        {
+            return Results.Problem(
+                statusCode: StatusCodes.Status400BadRequest,
+                detail: $"Exception Message: '{e.Message}'. Invalid language value: '{language}'. Supported Languages are: {string.Join(", ", Enum.GetNames(typeof(Language)))}.");
+        }
+
+        questionnaires = questionnaires.Where(q => q.Language == Enum.Parse<Language>(language));
+    }
+
+    // Apply pagination
+    questionnaires = questionnaires.Skip(skip).Take(take);
+
+    return Results.Ok(await questionnaires.ToListAsync());
 }).WithTags("Questionnaire-Light");
 
 //Endpoints for POST Questionnaires without answers
@@ -229,6 +294,12 @@ app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] quest
     await db.SaveChangesAsync();
 
     return Results.Ok();
+}).WithOpenApi(operation => new(operation)
+{
+    Summary = "Get all questionnaires with filtering",
+    Description = "This endpoint retrieves all questionnaires with their associated questions. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
+    "<br><br>" + //two breaks included in the text
+    "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
 }).WithTags("Questionnaire-Light");
 
 //////// Testing ////////
