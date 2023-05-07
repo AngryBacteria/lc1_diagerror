@@ -24,7 +24,8 @@ export default {
       codeAlreadyUsed: 'Anfrage verboten, dieser Einladungscode wurde schon verwendet',
       questionOptionalExplanation: 'Bedeutet diese Frage ist optional',
       clear: 'löschen',
-      submitError: 'Ein Fehler ist aufgetreten. Bitte versuche es erneut'
+      submitError: 'Ein Fehler ist aufgetreten. Bitte versuche es erneut',
+      languageNotAvailable: 'Der Fragebogen ist in dieser Sprache leider nicht verfügbar'
     },
     validation: {
       fieldRequired: 'Dieses Feld ist erforderlich',

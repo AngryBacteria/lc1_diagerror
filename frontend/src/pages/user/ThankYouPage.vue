@@ -42,7 +42,7 @@ function openInNewTab(url: string) {
 }
 </script>
 
-<style>
+<style scoped>
 .v-card {
   padding: 1rem;
   margin: 1rem;

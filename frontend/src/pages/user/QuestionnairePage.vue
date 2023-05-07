@@ -58,6 +58,8 @@ const validForm = ref(true)
 const mainForm = ref<any>(null)
 const submitLoading = ref(false)
 
+//TODO text smaller on small devices
+
 /**
  * Form validation on page reload if answers are already existing
  */
@@ -118,7 +120,6 @@ function displayInvalidFormError() {
   }
 }
 
-//TODO
 /**
  * Displays the error happening while trying to submit
  * @param error Thrown error
@@ -131,7 +132,6 @@ function displaySubmitError(error: any) {
   store.snackbarConfig.visible = true
 }
 
-//TODO
 /**
  * Prepares the browser for a new questionnaire after one has been submitted
  */
@@ -141,7 +141,7 @@ function tidyAfterSubmit() {
 }
 </script>
 
-<style>
+<style scoped>
 .v-form {
   max-width: 1000px;
   margin-right: auto;

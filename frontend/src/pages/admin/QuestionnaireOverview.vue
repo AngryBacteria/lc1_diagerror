@@ -2,13 +2,11 @@
 import { ref } from 'vue'
 import { computed } from 'vue'
 import download from 'downloadjs'
-import { watch } from 'vue'
 
 const searchValue = ref('')
 const maxPage = ref(60)
 const page = ref()
 
-const file = ref()
 
 const filteredList = computed(() => {
   return items.filter((item) => {
@@ -16,10 +14,6 @@ const filteredList = computed(() => {
       return item
     }
   })
-})
-
-watch(file, () => {
-  console.log(file.value)
 })
 
 function test() {

@@ -25,7 +25,8 @@ export default {
       codeAlreadyUsed: "Demande interdite, ce code d'invitation a déjà été utilisé",
       questionOptionalExplanation: 'Indique que cette question est facultative',
       clear: 'éteindre',
-      submitError: "Une erreur s'est produite. Veuillez réessayer"
+      submitError: "Une erreur s'est produite. Veuillez réessayer",
+      languageNotAvailable : "Malheureusement, le questionnaire n'est pas disponible dans cette langue"
     },
     validation: {
       fieldRequired: 'Ce formulaire est obligatoire',

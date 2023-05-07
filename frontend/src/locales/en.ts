@@ -25,7 +25,8 @@ export default {
       codeAlreadyUsed: 'Request forbidden, this invitation code has already been used',
       questionOptionalExplanation: 'Means this question is optional',
       clear: 'clear',
-      submitError: 'An error has occurred. Please try again'
+      submitError: 'An error has occurred. Please try again',
+      languageNotAvailable: 'The questionnaire is sadly not available in this language'
     },
     validation: {
       fieldRequired: 'This field is required',
