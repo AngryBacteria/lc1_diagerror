@@ -26,7 +26,8 @@ export default {
       questionOptionalExplanation: 'Indique que cette question est facultative',
       clear: 'éteindre',
       submitError: "Une erreur s'est produite. Veuillez réessayer",
-      languageNotAvailable : "Malheureusement, le questionnaire n'est pas disponible dans cette langue"
+      languageNotAvailable:
+        "Malheureusement, le questionnaire n'est pas disponible dans cette langue"
     },
     validation: {
       fieldRequired: 'Ce formulaire est obligatoire',

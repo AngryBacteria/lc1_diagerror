@@ -66,7 +66,6 @@ export const useUserStore = defineStore('user', () => {
         return { success: false, error: 'Form Not Valid' }
 
       const formattedAnswers = prepareAnswerObjects()
-      //TODO remove
       console.log(formattedAnswers)
       const url = `${apiEndpoint}/answer`
       const { error, statusCode } = await useFetch(url, {

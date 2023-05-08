@@ -1,3 +1,8 @@
+export interface PaginatedQuestionnaire {
+  pageCount: number
+  data: Questionnaire[]
+}
+
 export interface Questionnaire {
   questionnaireId?: number
   questions: Question[]

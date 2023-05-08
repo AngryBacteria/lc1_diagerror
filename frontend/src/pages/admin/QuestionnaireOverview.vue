@@ -1,53 +1,46 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { computed } from 'vue'
 import download from 'downloadjs'
+import { useDebouncedRef } from '@/composables/useDebouncedRef'
+import { watch } from 'vue'
+import { useFetch } from '@vueuse/core'
+import type { PaginatedQuestionnaire } from '@/data/interfaces'
 
-const searchValue = ref('')
+const searchValue = useDebouncedRef('')
 const maxPage = ref(60)
-const page = ref()
+const page = ref(1)
 
-
-const filteredList = computed(() => {
-  return items.filter((item) => {
-    if (item.identifier.toLocaleLowerCase().startsWith(searchValue.value)) {
-      return item
-    }
-  })
-})
+//TODO make this computed
+const lightUrl = `https://localhost:7184/questionnaire/light/filter?page=${page.value}&identifier=${searchValue.value}`
+const { execute, error, statusCode, isFetching, data } = useFetch(lightUrl, { immediate: false })
+  .get()
+  .json<PaginatedQuestionnaire>()
 
 function test() {
-  download(JSON.stringify(items, null, 2), 'test.json', 'application/json')
+  download(JSON.stringify('', null, 2), 'test.json', 'application/json')
 }
 
-const items = [
-  {
-    title: 'Questionnaire for Quality-Control at the university hospital in Bern',
-    identifier: 'QC',
-    language: 'EN'
-  },
-  {
-    title: 'Testfragebogen für die Entwicklung',
-    identifier: 'TF',
-    language: 'DE'
-  },
-  {
-    title: 'Test questionnaire for development',
-    identifier: 'TF',
-    language: 'EN'
-  },
-  {
-    title: 'Questionnaire de test pour le développement',
-    identifier: 'TF',
-    language: 'FR'
+watch(searchValue, () => {
+  fetchQuestionnaire()
+})
+
+//TODO error handling
+async function fetchQuestionnaire() {
+  await execute()
+  console.log(statusCode.value)
+  if (data.value && !error.value) {
+    maxPage.value = data.value?.pageCount
   }
-]
+}
+
+fetchQuestionnaire()
 </script>
 
 <template>
   <main style="margin: 1rem">
     <h1>Admin</h1>
     <v-text-field
+      :loading="isFetching"
       v-model="searchValue"
       label="Fragebogen mit Kürzel suchen"
       color="primary"
@@ -57,7 +50,7 @@ const items = [
 
     <h3>Verfügbare Fragebogen</h3>
     <v-card
-      v-for="item in filteredList"
+      v-for="item in data?.data"
       :key="`${item.identifier} - ${item.language}`"
       style="padding: 1rem; margin-bottom: 1rem"
     >

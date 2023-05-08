@@ -118,11 +118,10 @@ async function initPage() {
 async function loadQuestionnaire() {
   await execute()
   if (data.value && !error.value) {
-
-    if(statusCode.value == 202) {
+    if (statusCode.value == 202) {
       store.resetSnackbarConfig()
       store.snackbarConfig.color = 'error'
-      store.snackbarConfig.message = t('questionnaire.navigation.languageNotAvailable');
+      store.snackbarConfig.message = t('questionnaire.navigation.languageNotAvailable')
       store.snackbarConfig.timeout = '5000'
       store.snackbarConfig.visible = true
     }

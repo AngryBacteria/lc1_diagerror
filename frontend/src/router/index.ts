@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
 import { i18n } from '@/plugins/i18n'
 
-//TODO implement 404 catch
 const router = createRouter({
   history: createWebHistory(),
   routes: [
