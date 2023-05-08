@@ -25,7 +25,7 @@ const { smAndUp } = useDisplay()
             <v-btn v-if="smAndUp" variant="elevated" color="primary" v-bind="props">
               {{ t('questionnaire.navigation.language') }} ({{ store.language }})
             </v-btn>
-            <v-btn v-else variant="tonal" color="primary" v-bind="props">{{
+            <v-btn v-else variant="elevated" color="primary" v-bind="props">{{
               store.language
             }}</v-btn>
           </template>

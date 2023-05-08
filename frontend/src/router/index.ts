@@ -44,12 +44,6 @@ const router = createRouter({
           component: () => import('@/pages/admin/QuestionnaireOverview.vue')
         },
         {
-          path: 'edit',
-          name: 'admin-home',
-          meta: { requiresAuth: true },
-          component: () => import('@/pages/admin/UploadEditQuestionnaire.vue')
-        },
-        {
           path: 'login',
           name: 'admin-login',
           component: () => import('@/components/admin/LoginForm.vue')

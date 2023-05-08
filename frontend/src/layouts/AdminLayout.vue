@@ -43,12 +43,6 @@ const items: navItem[] = [
     subtitle: 'Fragebogen anzeigen',
     to: '/admin/overview',
     icon: 'mdi-home'
-  },
-  {
-    title: 'Edit/Upload Fragebogen',
-    subtitle: 'Editieren und uploaden von Fragebogen',
-    to: '/admin/edit',
-    icon: 'mdi-home'
   }
 ]
 
@@ -77,7 +71,9 @@ const drawer = mdAndUp ? ref(true) : ref(false)
           >
             {{ t('questionnaire.navigation.language') }} ({{ store.language }})
           </v-btn>
-          <v-btn v-else variant="tonal" color="primary" v-bind="props">{{ store.language }}</v-btn>
+          <v-btn v-else variant="elevated" color="primary" v-bind="props">{{
+            store.language
+          }}</v-btn>
         </template>
         <v-list>
           <v-list-item

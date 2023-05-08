@@ -18,7 +18,8 @@ const globalIsFetching = ref(false)
  * Computed reactive url for light questionnaires
  */
 const lightUrl = computed(() => {
-  return `${store.apiEndpoint}/questionnaire/light/filter?page=${page.value}&identifier=${searchValue.value}`
+  const value = (searchValue.value as string).toUpperCase()
+  return `${store.apiEndpoint}/questionnaire/light/filter?page=${page.value}&identifier=${value}`
 })
 
 /**
@@ -39,7 +40,6 @@ const {
   data: lightData
 } = useFetch(lightUrl, { immediate: false, refetch: false }).get().json<PaginatedQuestionnaire>()
 
-//TODO error handling
 /**
  * Fetches new questionnaires and displays occured errors
  */
@@ -50,20 +50,23 @@ async function fetchLightQuestionnaires() {
   }
 
   if (lightError.value) {
-    console.log(lightStatusCode.value, lightError.value)
+    store.resetSnackbarConfig
+    store.snackbarConfig.message = `Etwas ist schiefgelaufen beim anzeigen [CODE: ${lightStatusCode.value}]`
+    store.snackbarConfig.color = 'error'
+    store.snackbarConfig.visible = true
   }
 }
 
-//TODO add language
 //TODO problem with utf chars on downloaded files (öüä)
 /**
  * Downloads questionnaire
  * @param identifier Identifier of questionnaire
+ * @param language Language of questionnaire
  */
-async function downloadQuestionnaires(identifier: string) {
+async function downloadQuestionnaires(identifier: string, language: string) {
   try {
     globalIsFetching.value = true
-    const url = `https://localhost:7184/questionnaire/light/filter?identifier=${identifier}`
+    const url = `https://localhost:7184/questionnaire/light/filter?identifier=${identifier}&language=${language}`
     const { error, statusCode, data } = await useFetch(url, {
       immediate: true,
       refetch: false
@@ -72,7 +75,11 @@ async function downloadQuestionnaires(identifier: string) {
       .json<PaginatedQuestionnaire>()
 
     if (data.value && !error.value) {
-      download(JSON.stringify(data.value, null, 2), 'test.json', 'application/json')
+      download(
+        JSON.stringify(data.value.data, null, 2),
+        `${data.value.data[0].identifier}[${data.value.data[0].language}].json`,
+        'text/plain'
+      )
     } else {
       store.resetSnackbarConfig
       store.snackbarConfig.message = `Etwas ist schiefgelaufen beim download [CODE: ${statusCode.value}]`
@@ -124,17 +131,11 @@ fetchLightQuestionnaires()
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="auto" style="margin-top: auto; margin-bottom: auto">
-          <v-btn color="secondary" prepend-icon="mdi-note-edit" style="margin-right: 1rem"
-            >Editieren</v-btn
-          >
           <v-btn
             prepend-icon="mdi-download"
             style="margin-right: 1rem"
-            @click="downloadQuestionnaires(item.identifier)"
+            @click="downloadQuestionnaires(item.identifier, item.language)"
             >Download</v-btn
-          >
-          <v-btn color="secondary" prepend-icon="mdi-folder-plus" style="margin-right: 1rem"
-            >Datei erstellen</v-btn
           >
         </v-col>
       </v-row>
