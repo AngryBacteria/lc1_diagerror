@@ -57,7 +57,6 @@ async function fetchLightQuestionnaires() {
   }
 }
 
-//TODO problem with utf chars on downloaded files (öüä)
 /**
  * Downloads questionnaire
  * @param identifier Identifier of questionnaire

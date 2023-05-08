@@ -49,6 +49,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//Map endpoints
 app.MapQuestionnaireEndpoints();
 app.MapAnswerEndpoints();
 app.MapInvitationEndpoints();

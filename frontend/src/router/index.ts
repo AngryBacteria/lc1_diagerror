@@ -47,6 +47,11 @@ const router = createRouter({
           path: 'login',
           name: 'admin-login',
           component: () => import('@/components/admin/LoginForm.vue')
+        },
+        {
+          path: 'questionnaire/upload',
+          name: 'admin-upload',
+          component: () => import('@/components/admin/UploadQuestionnaire.vue')
         }
       ]
     },

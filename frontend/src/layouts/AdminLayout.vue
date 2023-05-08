@@ -43,6 +43,12 @@ const items: navItem[] = [
     subtitle: 'Fragebogen anzeigen',
     to: '/admin/overview',
     icon: 'mdi-home'
+  },
+  {
+    title: 'Fragebogen hochladen',
+    subtitle: 'Einen neuen Fragebogen hochladen',
+    to: '/admin/questionnaire/upload',
+    icon: 'mdi-upload'
   }
 ]
 

@@ -140,10 +140,16 @@ namespace backend.Endpoints
             //Endpoints for POST Questionnaires without answers
             app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
             {
-                await db.Questionnaires.AddRangeAsync(questionnaires);
-                await db.SaveChangesAsync();
-
-                return Results.Ok();
+                try {
+                    await db.Questionnaires.AddRangeAsync(questionnaires);
+                    await db.SaveChangesAsync();
+                    return Results.Ok();
+                }
+                catch (Exception e) {
+                        return Results.Problem(
+                            statusCode: StatusCodes.Status400BadRequest,
+                            detail: $"Exception Message: '{e.Message}'");
+                }
             }).WithTags("Questionnaire-Light");
         }
     }
