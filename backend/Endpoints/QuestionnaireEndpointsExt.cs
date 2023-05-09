@@ -205,8 +205,13 @@ namespace backend.Endpoints
                     JsonSerializerOptions jso = new JsonSerializerOptions();
                     jso.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
                     string jsonString = JsonSerializer.Serialize(data, jso);
-                    //TODO use right path. This saves into bin/debug/net7.0
-                    string fileName = $"{AppDomain.CurrentDomain.BaseDirectory}{identifier}[{language}]-[Antworten].json";
+
+                    //path variables
+                    char seperator = System.IO.Path.DirectorySeparatorChar;
+                    string filename = $"{identifier}[{language}]-[Antworten].json";
+                    string currentDir = System.IO.Directory.GetCurrentDirectory();
+                    string fileName = $"{currentDir}{seperator}fileOut{seperator}{filename}";
+                    
                     await File.WriteAllTextAsync(fileName, jsonString);
                     return Results.Ok(new {fileName});
                 }
@@ -215,7 +220,11 @@ namespace backend.Endpoints
                             statusCode: StatusCodes.Status400BadRequest,
                             detail: $"Exception Message: '{e.Message}'");
                 }
-            });
+            }).WithOpenApi(operation => new(operation)
+            {
+                Summary = "Create a Questionnaire JSON",
+                Description = "Creates a Questionnaire JSON on the filesystem of the server running the api. Returns the created file's path"
+            }).WithTags("Questionnaire-Complete");
         }
     }
 }
