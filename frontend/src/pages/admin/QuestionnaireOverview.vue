@@ -41,7 +41,7 @@ const {
   data: lightData
 } = useFetch(lightUrl, { immediate: false, refetch: false }).get().json<PaginatedQuestionnaire>()
 
-//TODO test various new methods implemented!
+//TODO test various new implemented methods
 
 /**
  * Fetches new questionnaires and displays occured errors
