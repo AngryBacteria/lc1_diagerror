@@ -39,6 +39,10 @@ namespace backend.Migrations
 
                     b.HasKey("AnswerId");
 
+                    b.HasIndex("Date");
+
+                    b.HasIndex("InvitationId");
+
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Answers", t =>

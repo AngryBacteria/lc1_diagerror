@@ -1,5 +1,8 @@
 ﻿using backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace backend.Endpoints
 {
@@ -7,8 +10,6 @@ namespace backend.Endpoints
     {
         public static void MapQuestionnaireEndpoints(this WebApplication app)
         {
-            //////// Questionnaire-Complete ////////
-            //Endpoints for GET all Questionnaires with answers
             app.MapGet("/questionnaire/complete", async (DiagErrorDb db) =>
             {
                 return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync();
@@ -16,20 +17,40 @@ namespace backend.Endpoints
             {
                 Summary = "Get all questionnaires",
                 Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers."
-            }).WithTags("Questionnaire-Complete");
+            }).WithTags("Obsolete");
 
-            //Endpoints for GET all Questionnaires with answers and filtering possibilities
-            app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) =>
+            app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language, int? lastDays) =>
             {
                 // Calculate the number of items to skip and take based on the page and pageSize parameters
                 int skip = (page.GetValueOrDefault(1) - 1) * pageSize.GetValueOrDefault(10);
                 int take = pageSize.GetValueOrDefault(10);
 
                 //Retrieving all stored questionnaires with questions and answers
-                var questionnaires = db.Questionnaires
+                IQueryable<Questionnaire> questionnaires;
+
+                //lastDays was provided, filter out older answers
+                if(lastDays != null)
+                {
+                    //Date "lastDays" ago
+                    var filterDate = DateOnly.FromDateTime(DateTime.Now.AddDays((double)lastDays * -1 ));
+
+                    questionnaires = db.Questionnaires
                         .Include(q => q.Questions)
-                        .ThenInclude(q => q.Answers)
+                            .ThenInclude(q => q.Answers.Where(a => a.Date >= filterDate))
+                        .Include(q => q.Questions)
+                            .ThenInclude(q => q.Options)
                         .AsQueryable();
+                }
+                //lastDays was not provided, filter nothing out
+                else
+                {
+                    questionnaires = db.Questionnaires
+                            .Include(q => q.Questions)
+                                .ThenInclude(q => q.Answers)
+                            .Include(q => q.Questions)
+                                .ThenInclude(q => q.Options)
+                            .AsQueryable();
+                }
 
                 //Filtering questionnaires with given id
                 if (!string.IsNullOrEmpty(id))
@@ -76,8 +97,7 @@ namespace backend.Endpoints
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
             }).WithTags("Questionnaire-Complete");
 
-            //////// Questionnaire-Light ////////
-            //Endpoints for GET Questionnaires without answers
+
             app.MapGet("/questionnaire/light/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) =>
             {
                 // Calculate the number of items to skip and take based on the page and pageSize parameters
@@ -121,7 +141,6 @@ namespace backend.Endpoints
                 }
 
                 // Apply pagination
-
                 var pageCount = Math.Ceiling((double)questionnaires.Count() / (double)take);
 
                 questionnaires = questionnaires.Skip(skip).Take(take);
@@ -137,7 +156,6 @@ namespace backend.Endpoints
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
             }).WithTags("Questionnaire-Light");
 
-            //Endpoints for POST Questionnaires without answers
             app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
             {
                 try {
@@ -151,6 +169,53 @@ namespace backend.Endpoints
                             detail: $"Exception Message: '{e.Message}'");
                 }
             }).WithTags("Questionnaire-Light");
+
+            app.MapGet("/questionnaire/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
+            {
+                try {
+                    if(string.IsNullOrEmpty(identifier) || string.IsNullOrEmpty(language))
+                    {
+                        return Results.BadRequest();
+                    }
+
+                    try
+                    {
+                        Enum.Parse<Language>(language);
+                    }
+                    catch (Exception e)
+                    {
+                        return Results.Problem(
+                            statusCode: StatusCodes.Status400BadRequest,
+                            detail: $"Exception Message: '{e.Message}'. Invalid language value: '{language}'. Supported Languages are: {string.Join(", ", Enum.GetNames(typeof(Language)))}.");
+                    }
+
+                    var questionnaires = db.Questionnaires
+                            .Include(q => q.Questions)
+                                .ThenInclude(q => q.Answers)
+                            .Include(q => q.Questions)
+                                .ThenInclude(q => q.Options)
+                            .AsQueryable();
+
+                    var data = await questionnaires
+                        .Where(q => q.Identifier == identifier)
+                        .Where(q => q.Language == Enum.Parse<Language>(language))
+                        .ToListAsync();
+
+                    //do not excape unicode characters such as öäü
+                    JsonSerializerOptions jso = new JsonSerializerOptions();
+                    jso.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+                    string jsonString = JsonSerializer.Serialize(data, jso);
+                    //TODO use right path. This saves into bin/debug/net7.0
+                    string fileName = $"{AppDomain.CurrentDomain.BaseDirectory}{identifier}[{language}]-[Antworten].json";
+                    await File.WriteAllTextAsync(fileName, jsonString);
+                    return Results.Ok(new {fileName});
+                }
+                catch (Exception e) {
+                        return Results.Problem(
+                            statusCode: StatusCodes.Status400BadRequest,
+                            detail: $"Exception Message: '{e.Message}'");
+                }
+            });
         }
     }
 }

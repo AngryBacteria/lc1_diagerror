@@ -11,7 +11,7 @@ using backend.Models;
 namespace backend.Migrations
 {
     [DbContext(typeof(DiagErrorDb))]
-    [Migration("20230502074335_InitialCreate")]
+    [Migration("20230509093618_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,6 +41,10 @@ namespace backend.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("AnswerId");
+
+                    b.HasIndex("Date");
+
+                    b.HasIndex("InvitationId");
 
                     b.HasIndex("QuestionId");
 

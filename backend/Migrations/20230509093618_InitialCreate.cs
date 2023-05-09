@@ -99,6 +99,16 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Answers_Date",
+                table: "Answers",
+                column: "Date");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answers_InvitationId",
+                table: "Answers",
+                column: "InvitationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Answers_QuestionId",
                 table: "Answers",
                 column: "QuestionId");

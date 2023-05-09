@@ -7,8 +7,6 @@ namespace backend.Endpoints
     {
         public static void MapAnswerEndpoints(this WebApplication app)
         {
-            //////// Answer ////////
-            //Endpoints for GET answers
             app.MapGet("/answer/filter", async (DiagErrorDb db, string? questionnaireIdentifier) =>
             {
                 //Retrieving all stored answers
@@ -27,9 +25,8 @@ namespace backend.Endpoints
             {
                 Summary = "Get answers with filtering",
                 Description = "This endpoint retrieves all stored answers. You can filter for answers belonging to certain questionnaires with its identifier."
-            }).WithTags("Answer");
+            }).WithTags("Obsolete");
 
-            //Endpoints for POST answers
             app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
             {
                 try

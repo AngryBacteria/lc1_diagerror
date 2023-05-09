@@ -7,8 +7,6 @@ namespace backend.Endpoints
     {
         public static void MapInvitationEndpoints(this WebApplication app)
         {
-            //////// Invitation ////////
-            //Endpoints for POST Invitation code
             app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string? language) =>
             {
                 try
@@ -18,7 +16,12 @@ namespace backend.Endpoints
                         throw new ArgumentException("The identifier is too short. It has to consist of 2 digits representing a questionnaire identifier and 6 digits representing unique invitation");
                     };
 
-                    //TODO check if answer exists with that invitationCode
+                    var exists = await db.Answers.Where(a => a.InvitationId == invitationCode).Take(1).ToListAsync();
+                    if(exists.Any())
+                    {
+                        return Results.BadRequest();
+                    }
+
 
                     string identifier = invitationCode[..2];//Extract Identifier out of invitationCode
 

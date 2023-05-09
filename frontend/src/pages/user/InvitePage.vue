@@ -135,7 +135,7 @@ async function loadQuestionnaire() {
       ${t('questionnaire.common.404')}`
       return
     }
-    if (statusCode.value === 403) {
+    if (statusCode.value === 400) {
       errorMessage.value = t('questionnaire.navigation.codeAlreadyUsed')
     } else {
       errorMessage.value = t('questionnaire.common.500')
