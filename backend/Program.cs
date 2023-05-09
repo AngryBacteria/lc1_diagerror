@@ -59,7 +59,10 @@ app.MapQuestionEndpoints();
 //////// Testing ////////
 app.MapGet("/hello", () =>
 {
-    return Results.Ok(new { message = "hello world", path = System.IO.Directory.GetCurrentDirectory()});
+    return Results.Ok(new { 
+        message = "hello world",
+        path = System.IO.Directory.GetCurrentDirectory(), 
+        time= DateTime.Now.ToString("yyyy-MM-dd")});
 }).WithTags("Testing");
 
 app.MapGet("/secured", () =>
