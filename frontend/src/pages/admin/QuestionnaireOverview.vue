@@ -78,7 +78,9 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
     if (data.value && !error.value) {
       download(
         JSON.stringify(data.value.data, null, 2),
-        `${data.value.data[0].identifier}[${data.value.data[0].language}]-[${fileAppend}].json`,
+        `${data.value.data[0].identifier}[${
+          data.value.data[0].language
+        }][${fileAppend}][${new Date().toISOString().substring(0, 10)}].json`,
         'text/plain'
       )
     } else {
@@ -211,7 +213,7 @@ fetchLightQuestionnaires()
             @click="
               downloadQuestionnaires(
                 `${store.apiEndpoint}/questionnaire/light/filter?identifier=${item.identifier}&language=${item.language}`,
-                'Fragebogen'
+                'questionnaire'
               )
             "
           >
@@ -224,7 +226,7 @@ fetchLightQuestionnaires()
             @click="
               downloadQuestionnaires(
                 `${store.apiEndpoint}/questionnaire/complete/filter?identifier=${item.identifier}&language=${item.language}&lastDays=30`,
-                'Antworten(30-Tage)'
+                'answers-30days'
               )
             "
           >

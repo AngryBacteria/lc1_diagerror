@@ -208,7 +208,7 @@ namespace backend.Endpoints
 
                     //path variables
                     char seperator = System.IO.Path.DirectorySeparatorChar;
-                    string filename = $"{identifier}[{language}]-[Antworten].json";
+                    string filename = $"{identifier}[{language}][answers-all][{DateTime.Now.ToString("yyyy-MM-dd")}].json";
                     string currentDir = System.IO.Directory.GetCurrentDirectory();
                     string fileName = $"{currentDir}{seperator}fileOut{seperator}{filename}";
                     
