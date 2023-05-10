@@ -2,9 +2,9 @@
   {
     "identifier": "QC",
     "language": "EN",
-    "title": "Questionnaire for Quality-Control at the university hospital in Bern",
-    "description": "Validated questionnaire to measure the quality of care, especially in regards to the diagnostic errors",
-    "descriptionForCustomer": "This questionnaire helps us better understand where we can be better to give you a good health care",
+    "title": "Questionnaire for Quality-Control at the UKN Bern",
+    "description": "Validated questionnaire to measure the quality of care, especially in regards to diagnostic errors",
+    "descriptionForCustomer": "This questionnaire helps us better understand where we can improve to provide you with better health care",
     "validAfterDays": 15,
     "validForDays": 10,
     "questions": [
@@ -334,7 +334,7 @@
     "language": "DE",
     "title": "Fragebogen für die Qualitätskontrolle am Inselspital Bern",
     "description": "Validierter Fragebogen um die Qualität der Behandlung zu messen mit Schwerpunkt auf Diagnosefehlern",
-    "descriptionForCustomer": "Dieser Fragebogen hilft uns besser zu verstehen wo es Verbesserungspotential gibt in unseren Prozessen und ihnen eine bessere Versorgung zu bieten",
+    "descriptionForCustomer": "Dieser Fragebogen hilft uns besser zu verstehen wo es Verbesserungspotential in unseren Prozessen gibt. Damit können wir ihnen eine bessere medizinische Versorgung bieten",
     "validAfterDays": 15,
     "validForDays": 10,
     "questions": [
@@ -351,7 +351,7 @@
           },
           {
             "index": 1,
-            "value": "Als Partner einer pflegebedürftigen Person?"
+            "value": "Als Partner*in einer pflegebedürftigen Person?"
           }
         ],
         "index": 0
@@ -359,7 +359,7 @@
       {
         "answers": [],
         "text": "Frage d2",
-        "subtext": "Ihr letzter Besuch als Patient war bei:",
+        "subtext": "Ihr letzter Besuch als Patient*in war auf:",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
@@ -369,7 +369,7 @@
           },
           {
             "index": 1,
-            "value": "Eine Einrichtung für dringende Fälle"
+            "value": "Einer Einrichtung für dringende Fälle"
           }
         ],
         "index": 1
@@ -429,7 +429,7 @@
       {
         "answers": [],
         "text": "Frage d5",
-        "subtext": "Wie dringend war Ihr Gesundheitszustand, als Sie sich auf den Weg machten?",
+        "subtext": "Wie dringend war Ihr Gesundheitszustand, als Sie die Notfallstation aufsuchten?",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
@@ -461,7 +461,7 @@
           },
           {
             "index": 1,
-            "value": "Zwischen 15 Minuten und einer Stunde;"
+            "value": "Zwischen 15 Minuten und 1 Stunde;"
           },
           {
             "index": 2,
@@ -507,7 +507,7 @@
       {
         "answers": [],
         "text": "Frage d8",
-        "subtext": "Im vergangenen Jahr, was schätzen sie wie viele male mussten sie eine Notfallstation aufsuchen einschliesslich des letzten Besuchs?",
+        "subtext": "Im vergangenen Jahr, was schätzen sie, wie viele male mussten sie eine Notfallstation aufsuchen einschliesslich des letzten Besuchs?",
         "optional": false,
         "questiontype": "FreeText",
         "options": [],
@@ -516,7 +516,7 @@
       {
         "answers": [],
         "text": "Frage d9",
-        "subtext": "Ich hatte das Gefühl, dass die Kommunikation mit den Ärzten in beide Richtungen, gleichberechtigt und ohne Vorurteile verlief:",
+        "subtext": "Ich hatte das Gefühl, dass die Kommunikation mit den Ärzt*innen in beide Richtungen, gleichberechtigt und ohne Vorurteile verlief:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -525,7 +525,7 @@
       {
         "answers": [],
         "text": "Frage d10",
-        "subtext": "Ich hatte das Gefühl, dass die Ärzte und ich das gemeinsame Ziel hatten, miteinander zu kommunizieren, um die Ursache meines Gesundheitsproblems zu klären:",
+        "subtext": "Ich hatte das Gefühl, dass die Ärzt*innen und ich das gemeinsame Ziel hatten, miteinander zu kommunizieren, um die Ursache meines Gesundheitsproblems zu klären:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -534,7 +534,7 @@
       {
         "answers": [],
         "text": "Frage d11",
-        "subtext": "Ich hatte das Gefühl, dass das Pflegeteam meine spezifischen Bedürfnisse richtig verstanden hat:",
+        "subtext": "Ich hatte das Gefühl, dass das Behandlungsteam meine spezifischen Bedürfnisse richtig verstanden hat:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -552,7 +552,7 @@
       {
         "answers": [],
         "text": "Frage d13",
-        "subtext": "Ich hatte das Gefühl, dass meine gesundheitlichen Bedenken vom Pflegeteam ernst genommen wurden:",
+        "subtext": "Ich hatte das Gefühl, dass meine gesundheitlichen Bedenken vom Behandlungsteam ernst genommen wurden:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -561,7 +561,7 @@
       {
         "answers": [],
         "text": "Frage d14",
-        "subtext": "Das Behandlungsteam erklärte mir, wie sie mein Gesundheitsproblem aufklären möchten:",
+        "subtext": "Das Behandlungsteam erklärte mir, wie sie vorgehen möchten um mein Gesundheitsproblem aufzuklären:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -579,7 +579,7 @@
       {
         "answers": [],
         "text": "Frage d16",
-        "subtext": "Ich hatte Vertrauen in die diagnostischen Fähigkeiten des Pflegeteams, das an der Aufklärung meines Gesundheitsproblems arbeitete:",
+        "subtext": "Ich hatte Vertrauen in die diagnostischen Fähigkeiten des Behandlungsteam, das an der Aufklärung meines Gesundheitsproblems arbeitete:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -588,7 +588,7 @@
       {
         "answers": [],
         "text": "Frage d17",
-        "subtext": "Ich hatte den Eindruck, dass das Pflegeteam sicher war, was mein gesundheitliches Problem ist:",
+        "subtext": "Ich hatte den Eindruck, dass das Behandlungsteam sicher war, was mein gesundheitliches Problem ist:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -633,7 +633,7 @@
       {
         "answers": [],
         "text": "Frage d22",
-        "subtext": "Das Pflegeteam überprüfte, wie ich die Erklärung meines Gesundheitsproblems verstanden habe:",
+        "subtext": "Das Behandlungsteam überprüfte, wie ich die Erklärung meines Gesundheitsproblems verstanden habe:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -651,7 +651,7 @@
       {
         "answers": [],
         "text": "Frage d24",
-        "subtext": "Durch die Kommunikation, die ich erhielt, hatte ich das Gefühl einen Plan zu haben, den ich befolgen konnte. Zum Beispiel wusste ich, welche Ärzte ich aufsuchen musste:",
+        "subtext": "Durch die Kommunikation, die ich erhielt, hatte ich das Gefühl einen Plan zu haben, den ich befolgen konnte. Zum Beispiel wusste ich, welche Ärzt*innen ich aufsuchen musste:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
