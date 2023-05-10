@@ -210,7 +210,8 @@ namespace backend.Endpoints
                     char seperator = System.IO.Path.DirectorySeparatorChar;
                     string filename = $"{identifier}[{language}][answers-all][{DateTime.Now.ToString("yyyy-MM-dd")}].json";
                     string currentDir = System.IO.Directory.GetCurrentDirectory();
-                    string fileName = $"{currentDir}{seperator}fileOut{seperator}{filename}";
+
+                    string fileName = Path.Combine(currentDir, "fileOut", filename);
                     
                     await File.WriteAllTextAsync(fileName, jsonString);
                     return Results.Ok(new {fileName});

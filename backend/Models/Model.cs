@@ -15,16 +15,7 @@ namespace backend.Models
 
         public DiagErrorDb(DbContextOptions options): base (options)
         {
-            var projectPath = AppDomain.CurrentDomain.BaseDirectory;
-
-            //if "bin" is present, remove all the path starting from "bin" word. Path is now the project root folder
-            if (projectPath.Contains("bin"))
-            {
-                int index = projectPath.IndexOf("bin");
-                projectPath = projectPath.Substring(0, index);
-            }
-
-            var dbPath = Path.Combine(projectPath, "Database", "diagError.db");
+            var dbPath = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Database", "diagError.db");
             DbPath = dbPath;
         }
 
