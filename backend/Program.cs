@@ -40,14 +40,17 @@ app.UseCors(builder => builder
 .SetIsOriginAllowed((host) => true)
 .AllowCredentials());
 
+Console.WriteLine($"App is in development: {app.Environment.IsDevelopment()}");
+Console.WriteLine($"Connection string: {connectionString}");
+Console.WriteLine($"Current DIR: {System.IO.Directory.GetCurrentDirectory()}");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 }
-
-app.UseHttpsRedirection();
 
 //Map endpoints
 app.MapQuestionnaireEndpoints();
