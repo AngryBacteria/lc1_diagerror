@@ -93,9 +93,23 @@ export const useUserStore = defineStore('user', () => {
       visible: false,
       message: 'TestMessage',
       color: 'primary',
-      timeout: '3000',
+      timeout: '4000',
       location: 'top'
     }
+  }
+
+  /**
+   * Helper function to display the snackbar. All values are optional except the message
+   * @param message Message to display
+   * @param color Color to display
+   * @param timeout Time in milliseconds for the snackbar to stay visible
+   */
+  function displaySnackbar(message: string, color: string = 'primary', timeout: string = '3000') {
+    resetSnackbarConfig()
+    snackbarConfig.value.message = message
+    snackbarConfig.value.color = color
+    snackbarConfig.value.timeout = timeout
+    snackbarConfig.value.visible = true
   }
 
   /**
@@ -153,6 +167,7 @@ export const useUserStore = defineStore('user', () => {
     submitQuestionnaire,
     questionnaire,
     apiEndpoint,
-    inviteCode
+    inviteCode,
+    displaySnackbar
   }
 })

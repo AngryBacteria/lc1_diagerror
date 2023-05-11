@@ -1,3 +1,6 @@
+#custom
+fileOut/*
+
 *.swp
 *.*~
 project.lock.json

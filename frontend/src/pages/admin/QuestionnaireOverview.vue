@@ -41,8 +41,6 @@ const {
   data: lightData
 } = useFetch(lightUrl, { immediate: false, refetch: false }).get().json<PaginatedQuestionnaire>()
 
-//TODO test various new implemented methods
-
 /**
  * Fetches new questionnaires and displays occured errors
  */
@@ -53,10 +51,10 @@ async function fetchLightQuestionnaires() {
   }
 
   if (lightError.value) {
-    store.resetSnackbarConfig
-    store.snackbarConfig.message = `Etwas ist schiefgelaufen beim anzeigen [CODE: ${lightStatusCode.value}]`
-    store.snackbarConfig.color = 'error'
-    store.snackbarConfig.visible = true
+    store.displaySnackbar(
+      `Etwas ist schiefgelaufen beim anzeigen [CODE: ${lightStatusCode.value}]`,
+      'error'
+    )
   }
 }
 
@@ -84,16 +82,13 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
         'text/plain'
       )
     } else {
-      store.resetSnackbarConfig
-      store.snackbarConfig.message = `Etwas ist schiefgelaufen beim download [CODE: ${statusCode.value}]`
-      store.snackbarConfig.color = 'error'
-      store.snackbarConfig.visible = true
+      store.displaySnackbar(
+        `Etwas ist schiefgelaufen beim download [CODE: ${statusCode.value}]`,
+        'error'
+      )
     }
   } catch (error: any) {
-    store.resetSnackbarConfig
-    store.snackbarConfig.message = `Etwas ist schiefgelaufen beim download`
-    store.snackbarConfig.color = 'error'
-    store.snackbarConfig.visible = true
+    store.displaySnackbar(`Etwas ist schiefgelaufen beim download`, 'error')
   } finally {
     globalIsFetching.value = false
   }
@@ -111,22 +106,15 @@ async function createFileOnServer(identifier: string, language: string) {
       .json<any>()
 
     if (data.value && !error.value) {
-      store.resetSnackbarConfig
-      store.snackbarConfig.message = `Datei wurde erstellt: ${data.value.fileName}`
-      store.snackbarConfig.timeout = '10000'
-      store.snackbarConfig.color = 'primary'
-      store.snackbarConfig.visible = true
+      store.displaySnackbar(`Datei wurde erstellt: ${data.value.fileName}`, 'primary', '10000')
     } else {
-      store.resetSnackbarConfig
-      store.snackbarConfig.message = `Etwas ist schiefgelaufen beim Erstellen der Datei [CODE: ${statusCode.value}]`
-      store.snackbarConfig.color = 'error'
-      store.snackbarConfig.visible = true
+      store.displaySnackbar(
+        `Etwas ist schiefgelaufen beim Erstellen der Datei [CODE: ${statusCode.value}]`,
+        'error'
+      )
     }
   } catch (e: any) {
-    store.resetSnackbarConfig
-    store.snackbarConfig.message = `Etwas ist schiefgelaufen beim Erstellen der Datei`
-    store.snackbarConfig.color = 'error'
-    store.snackbarConfig.visible = true
+    store.displaySnackbar(`Etwas ist schiefgelaufen beim Erstellen der Datei`, 'error')
   } finally {
     globalIsFetching.value = false
   }
