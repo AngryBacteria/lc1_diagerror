@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 app.MapQuestionnaireEndpoints();
 app.MapAnswerEndpoints();
 app.MapInvitationEndpoints();
-app.MapQuestionEndpoints();
+app.MapUnusedEndpoints();
 
 
 //////// Testing ////////

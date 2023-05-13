@@ -43,10 +43,11 @@ const password = ref('')
 const store = useUserStore()
 const loginLoading = ref(false)
 
-// i18n
 const { t } = useTypedI18n()
 
-//Automatic restore from storage if present
+/**
+ * Hook to automatically restore the User from storage if its present
+ */
 onMounted(async () => {
   const currentUser = await getCurrentUser()
   if (currentUser) {
@@ -66,6 +67,9 @@ onMounted(async () => {
   }
 })
 
+/**
+ * Initiates the firebase login with the provided credentials
+ */
 async function login() {
   loginLoading.value = true
   const auth = useFirebaseAuth()

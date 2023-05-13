@@ -7,26 +7,6 @@ namespace backend.Endpoints
     {
         public static void MapAnswerEndpoints(this WebApplication app)
         {
-            app.MapGet("/answer/filter", async (DiagErrorDb db, string? questionnaireIdentifier) =>
-            {
-                //Retrieving all stored answers
-                var answers = db.Answers
-                        .AsQueryable();
-
-                //Filtering answers with given identifier
-                if (!string.IsNullOrEmpty(questionnaireIdentifier))
-                {
-                    answers = answers.Where(q => q.InvitationId.StartsWith(questionnaireIdentifier.ToUpper()));
-                }
-
-                return Results.Ok(await db.Answers.ToListAsync());
-
-            }).WithOpenApi(operation => new(operation)
-            {
-                Summary = "Get answers with filtering",
-                Description = "This endpoint retrieves all stored answers. You can filter for answers belonging to certain questionnaires with its identifier."
-            }).WithTags("Obsolete");
-
             app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
             {
                 try

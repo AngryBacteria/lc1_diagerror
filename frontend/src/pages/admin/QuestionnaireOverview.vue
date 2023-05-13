@@ -7,6 +7,7 @@ import { useFetch } from '@vueuse/core'
 import type { PaginatedQuestionnaire } from '@/data/interfaces'
 import { computed } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { getCurrentUser } from 'vuefire'
 
 const searchValue = useDebouncedRef('')
 const maxPage = ref(60)
@@ -31,6 +32,12 @@ watch(lightUrl, () => {
 })
 
 /**
+ * Get current Firebase User
+ */
+const currentUser = await getCurrentUser()
+const token = await currentUser?.getIdTokenResult()
+
+/**
  * Function to fetch light questionnaires
  */
 const {
@@ -39,7 +46,13 @@ const {
   statusCode: lightStatusCode,
   isFetching: lightIsFetching,
   data: lightData
-} = useFetch(lightUrl, { immediate: false, refetch: false }).get().json<PaginatedQuestionnaire>()
+} = useFetch(
+  lightUrl,
+  { headers: { Authorization: `Bearer ${token?.token}` } },
+  { immediate: false, refetch: false }
+)
+  .get()
+  .json<PaginatedQuestionnaire>()
 
 /**
  * Fetches new questionnaires and displays occured errors
@@ -51,6 +64,7 @@ async function fetchLightQuestionnaires() {
   }
 
   if (lightError.value) {
+    console.log(lightError.value)
     store.displaySnackbar(
       `Etwas ist schiefgelaufen beim anzeigen [CODE: ${lightStatusCode.value}]`,
       'error'
@@ -66,10 +80,14 @@ async function fetchLightQuestionnaires() {
 async function downloadQuestionnaires(url: string, fileAppend: string) {
   try {
     globalIsFetching.value = true
-    const { error, statusCode, data } = await useFetch(url, {
-      immediate: true,
-      refetch: false
-    })
+    const { error, statusCode, data } = await useFetch(
+      url,
+      { headers: { Authorization: `Bearer ${token?.token}` } },
+      {
+        immediate: true,
+        refetch: false
+      }
+    )
       .get()
       .json<PaginatedQuestionnaire>()
 
@@ -94,14 +112,23 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
   }
 }
 
+/**
+ * Creates a file on the server with the API-Endpoint
+ * @param identifier Identifier of questionnaire
+ * @param language Language of questionnaire
+ */
 async function createFileOnServer(identifier: string, language: string) {
   try {
     globalIsFetching.value = true
     const url = `${store.apiEndpoint}/questionnaire/file/create?identifier=${identifier}&language=${language}`
-    const { error, statusCode, data } = await useFetch(url, {
-      immediate: true,
-      refetch: false
-    })
+    const { error, statusCode, data } = await useFetch(
+      url,
+      { headers: { Authorization: `Bearer ${token?.token}` } },
+      {
+        immediate: true,
+        refetch: false
+      }
+    )
       .get()
       .json<any>()
 

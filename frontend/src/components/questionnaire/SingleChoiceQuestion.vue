@@ -40,6 +40,9 @@ const props = defineProps({
   }
 })
 
+/**
+ * Validation rules
+ */
 const rules = [
   () => {
     if (!props.question.optional) {

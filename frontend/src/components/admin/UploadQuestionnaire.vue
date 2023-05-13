@@ -16,11 +16,21 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
+import { getCurrentUser } from 'vuefire'
 
 const questionnaire = ref('')
 const store = useUserStore()
 const fetching = ref(false)
 
+/**
+ * Get current Firebase User and Token
+ */
+const currentUser = await getCurrentUser()
+const token = await currentUser?.getIdTokenResult()
+
+/**
+ * Uploads the Questionnaire with the API-Endpoint
+ */
 async function uploadQuestionnaire() {
   try {
     fetching.value = true
@@ -36,7 +46,8 @@ async function uploadQuestionnaire() {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token?.token}`
       },
       body: JSON.stringify(JSON.parse(questionnaire.value))
     })

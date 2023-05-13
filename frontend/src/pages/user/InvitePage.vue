@@ -95,8 +95,6 @@ onMounted(() => {
   if (store.inviteCode && store.inviteCode.length != 0 && codeForm.value) codeForm.value.validate()
 })
 
-initPage()
-
 /**
  * Reads the invite code from the path parameter if present and loads the questionnaire
  */
@@ -153,6 +151,8 @@ async function submitCode() {
     await loadQuestionnaire()
   }
 }
+
+initPage()
 </script>
 
 <style scoped>

@@ -13,6 +13,9 @@ const router = useRouter()
 const { t } = useTypedI18n()
 const { smAndUp } = useDisplay()
 
+/**
+ * Function to logout the firebase user. Redirects the user to '/admin/login' after logout
+ */
 async function logout() {
   try {
     const auth = useFirebaseAuth()
@@ -25,11 +28,13 @@ async function logout() {
     store.snackbarConfig.message = t('admin.loginComponent.alerts.logoutFail')
     store.snackbarConfig.color = 'error'
     store.snackbarConfig.visible = true
-
     console.log(`Error while attempting to Log-Out: ${error}`)
   }
 }
 
+/**
+ * Interface for the left-drawer navigation items
+ */
 interface navItem {
   title: string
   subtitle: string
@@ -37,6 +42,9 @@ interface navItem {
   icon: string
 }
 
+/**
+ * Left-drawer navigation items
+ */
 const items: navItem[] = [
   {
     title: 'Übersicht Fragebogen',
@@ -52,7 +60,6 @@ const items: navItem[] = [
   }
 ]
 
-//Show nav menu only on bigger devices
 const { mdAndUp } = useDisplay()
 const drawer = mdAndUp ? ref(true) : ref(false)
 </script>

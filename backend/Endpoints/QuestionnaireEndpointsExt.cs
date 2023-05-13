@@ -1,8 +1,7 @@
 ﻿using backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
+using backend.EndpointFilters;
 
 namespace backend.Endpoints
 {
@@ -10,15 +9,6 @@ namespace backend.Endpoints
     {
         public static void MapQuestionnaireEndpoints(this WebApplication app)
         {
-            app.MapGet("/questionnaire/complete", async (DiagErrorDb db) =>
-            {
-                return await db.Questionnaires.Include(q => q.Questions).ThenInclude(q => q.Answers).ToListAsync();
-            }).WithOpenApi(operation => new(operation)
-            {
-                Summary = "Get all questionnaires",
-                Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers."
-            }).WithTags("Obsolete");
-
             app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language, int? lastDays) =>
             {
                 // Calculate the number of items to skip and take based on the page and pageSize parameters
@@ -95,8 +85,7 @@ namespace backend.Endpoints
                 Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
                 "<br><br>" + //two breaks included in the text
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
-            }).WithTags("Questionnaire-Complete");
-
+            }).WithTags("Questionnaire-Complete").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapGet("/questionnaire/light/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) =>
             {
@@ -107,7 +96,7 @@ namespace backend.Endpoints
                 //Retrieving all stored questionnaires with questions and answers
                 var questionnaires = db.Questionnaires
                         .Include(q => q.Questions)
-                        .ThenInclude(q => q.Options)
+                            .ThenInclude(q => q.Options)
                         .AsQueryable();
 
                 //Filtering questionnaires with given id
@@ -154,7 +143,7 @@ namespace backend.Endpoints
                 Description = "This endpoint retrieves all questionnaires with their associated questions. You can filter the list with id, identifier and language of the wished questionnaire. The list is paginated with page and pageSize." +
                 "<br><br>" + //two breaks included in the text
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
-            }).WithTags("Questionnaire-Light");
+            }).WithTags("Questionnaire-Light").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
             {
@@ -168,7 +157,11 @@ namespace backend.Endpoints
                             statusCode: StatusCodes.Status400BadRequest,
                             detail: $"Exception Message: '{e.Message}'");
                 }
-            }).WithTags("Questionnaire-Light");
+            }).WithOpenApi(operation => new(operation)
+            {
+                Summary = "Post a Questionnaire without answers",
+                Description = "With this Endpoint it is possible to POST a new Questionnaire to the Database without any answers. Identifier + Language needs to be unique"
+            }).WithTags("Questionnaire-Light").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapGet("/questionnaire/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
             {
@@ -225,7 +218,7 @@ namespace backend.Endpoints
             {
                 Summary = "Create a Questionnaire JSON",
                 Description = "Creates a Questionnaire JSON on the filesystem of the server running the api. Returns the created file's path"
-            }).WithTags("Questionnaire-Complete");
+            }).WithTags("Questionnaire-Complete").AddEndpointFilter<FirebaseAuthFilter>();
         }
     }
 }

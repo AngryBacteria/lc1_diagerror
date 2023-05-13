@@ -107,6 +107,9 @@ async function initialValidation() {
   }
 }
 
+/**
+ * Scroll to the first validation errors if any exist
+ */
 function displayInvalidFormError() {
   const errorMessage = document.querySelector('.v-messages__message:first-of-type')?.parentElement
     ?.parentElement?.parentElement?.parentElement

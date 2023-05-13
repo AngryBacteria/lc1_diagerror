@@ -37,6 +37,10 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const { t } = useTypedI18n()
 
+/**
+ * Opens an url in a new tab
+ * @param url valid url
+ */
 function openInNewTab(url: string) {
   window.open(url)
 }

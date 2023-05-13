@@ -18,8 +18,6 @@ namespace backend.EndpointFilters
         {
             //Firebase token verification throws errors. They need to be catched
             try {
-                Console.WriteLine("Code runs before route");
-
                 //No Token
                 if(!context.HttpContext.Request.Headers.TryGetValue("Authorization", out var authorizationHeader)){
                     return Results.Unauthorized();
@@ -41,7 +39,6 @@ namespace backend.EndpointFilters
                         if ((bool)isAdmin)
                         {
                             var result = await next(context);
-                            Console.WriteLine("Code runs after route");
                             return result;
                         }
                         return Results.Unauthorized();

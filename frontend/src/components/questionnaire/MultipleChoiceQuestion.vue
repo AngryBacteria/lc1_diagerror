@@ -42,6 +42,9 @@ const props = defineProps({
   }
 })
 
+/**
+ * Validation rules
+ */
 const rules = [
   () => {
     if (!props.question.optional) {
@@ -56,12 +59,18 @@ const rules = [
   }
 ]
 
+/**
+ * If answers are already present in pinia, restore them in the component
+ */
 onMounted(() => {
   if (store.answers[props.index]) {
     answers.value = store.answers[props.index]
   }
 })
 
+/**
+ * If answers change, save them into the pinia store
+ */
 watch(answers, () => {
   store.answers[props.index] = answers.value
 })

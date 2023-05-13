@@ -60,6 +60,9 @@ const props = defineProps({
   }
 })
 
+/**
+ * Validation rules
+ */
 const rules = [
   () => {
     if (!props.question.optional) {
@@ -70,6 +73,9 @@ const rules = [
   }
 ]
 
+/**
+ * Current 5-point likert labels based on i18n language
+ */
 const labels = computed(() => {
   if (i18n.locale.value === 'de') {
     return labelsGerman
@@ -81,6 +87,9 @@ const labels = computed(() => {
   }
 })
 
+/**
+ * 5-point likert labels in all 3 app-languages
+ */
 const labelsEnglish = ['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']
 const labelsGerman = [
   'Trifft nicht zu',
