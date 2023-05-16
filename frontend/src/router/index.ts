@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
 import { i18n } from '@/plugins/i18n'
 
+/**
+ * Creates the router instance with all its routes and router guards
+ */
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -56,7 +59,7 @@ const router = createRouter({
       ]
     },
     {
-      // Catch route
+      // Routes for error catching
       path: '/:catchAll(.*)',
       name: 'NotFound',
       component: () => import('@/components/global/404Page.vue'),
@@ -67,6 +70,9 @@ const router = createRouter({
   ]
 })
 
+/**
+ * Router guards
+ */
 router.beforeEach(async (to) => {
   /**
    * Router gard for protected routes. Checks if user is logged in and has the admin claim.
@@ -108,5 +114,4 @@ router.beforeEach(async (to) => {
     }
   }
 })
-
 export default router

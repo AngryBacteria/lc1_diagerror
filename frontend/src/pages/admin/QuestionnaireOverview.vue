@@ -17,7 +17,8 @@ const globalIsFetching = ref(false)
 const dialog = ref(false)
 
 /**
- * Computed reactive url for light questionnaires
+ * Computed reactive url for light questionnaire endpoint.
+ * Uses the current page and identifier values
  */
 const lightUrl = computed(() => {
   const value = (searchValue.value as string).toUpperCase()
@@ -25,20 +26,20 @@ const lightUrl = computed(() => {
 })
 
 /**
- * Fetch new light questionnaires on url change
+ * Fetches new light questionnaires on url change
  */
 watch(lightUrl, () => {
   fetchLightQuestionnaires()
 })
 
 /**
- * Get current Firebase User
+ * Gets the current Firebase User
  */
 const currentUser = await getCurrentUser()
 const token = await currentUser?.getIdTokenResult()
 
 /**
- * Function to fetch light questionnaires
+ * Creates function to fetch the light questionnaires
  */
 const {
   execute: executeLight,
@@ -73,9 +74,9 @@ async function fetchLightQuestionnaires() {
 }
 
 /**
- * Downloads questionnaire
- * @param identifier Identifier of questionnaire
- * @param language Language of questionnaire
+ * Downloads a questionnaire
+ * @param identifier Identifier of the questionnaire
+ * @param language Language of the questionnaire
  */
 async function downloadQuestionnaires(url: string, fileAppend: string) {
   try {
@@ -114,8 +115,8 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
 
 /**
  * Creates a file on the server with the API-Endpoint
- * @param identifier Identifier of questionnaire
- * @param language Language of questionnaire
+ * @param identifier Identifier of the questionnaire
+ * @param language Language of the questionnaire
  */
 async function createFileOnServer(identifier: string, language: string) {
   try {

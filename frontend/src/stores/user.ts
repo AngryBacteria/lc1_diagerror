@@ -8,13 +8,13 @@ import type { SnackbarConfig } from '@/components/global/GlobalSnackbar.vue'
 import type { Questionnaire } from '@/data/interfaces'
 
 export const useUserStore = defineStore('user', () => {
-  //other fields
+  //non-store fields
   const i18n = useI18n()
   const refUser = useCurrentUser()
   const isLoggedIn = ref(false)
   const apiEndpoint = 'https://localhost:7184'
 
-  //store fields
+  //store fields. All get synced automatically with the session storage of the browser
   const language = useLocalStorage<MessageLanguages>('language', 'de')
   const answers = useSessionStorage<any[]>('answers', [])
   const questionnaire = useSessionStorage<Questionnaire>('key', null, {
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', () => {
     location: 'top'
   })
 
-  //init language
+  //init the i18n object with the language from the browser storage
   i18n.locale.value = language.value
 
   /**
@@ -58,7 +58,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   /**
-   * Function that builds valid answer objects for submitting them to the database
+   * Builds valid answer objects for submitting them to the database
    */
   async function submitQuestionnaire(): Promise<{ success: boolean; error: any }> {
     try {
@@ -99,10 +99,10 @@ export const useUserStore = defineStore('user', () => {
   }
 
   /**
-   * Helper function to display the snackbar. All values are optional except the message
+   * Displays the snackbar. All values are optional except the message
    * @param message Message to display
    * @param color Color to display
-   * @param timeout Time in milliseconds for the snackbar to stay visible
+   * @param timeout Time in milliseconds for the snackbar to stay visible, should not be bigger than 10_000
    */
   function displaySnackbar(message: string, color: string = 'primary', timeout: string = '3000') {
     resetSnackbarConfig()
@@ -113,7 +113,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   /**
-   * Prepares the answer Objects for submitting
+   * Prepares the answer objects for submitting
    */
   function prepareAnswerObjects(): any[] {
     const currentDate = new Date().toISOString().split('T')[0]

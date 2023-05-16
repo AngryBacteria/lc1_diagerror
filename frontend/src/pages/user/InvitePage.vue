@@ -73,14 +73,14 @@ const url = computed(() => {
 })
 
 /**
- * Function to fetch the api endpoint for questionnaires
+ * Fetches the api endpoint for questionnaires
  */
 const { execute, error, statusCode, isFetching, data } = useFetch(url, { immediate: false })
   .post()
   .json<Questionnaire[]>()
 
 /**
- * Fetches a new questionnaire if one is present and the locale changed
+ * Fetches a new questionnaire if one is present in the store and the locale changed
  */
 watch(i18n.locale, () => {
   if (store.questionnaire) {
@@ -89,14 +89,14 @@ watch(i18n.locale, () => {
 })
 
 /**
- * Form validation on page reload if an invite code is present
+ * Validates the form on page reload if an invite code is present
  */
 onMounted(() => {
   if (store.inviteCode && store.inviteCode.length != 0 && codeForm.value) codeForm.value.validate()
 })
 
 /**
- * Reads the invite code from the path parameter if present and loads the questionnaire
+ * If present the function reads the invite code from the path parameter and loads the questionnaire
  */
 async function initPage() {
   if (pathParam != null) {
@@ -111,7 +111,7 @@ async function initPage() {
 }
 
 /**
- * Loads the questionnaire. If multiple are present, it picks the first
+ * Loads the questionnaire. If multiple are present, it picks the first in the list
  */
 async function loadQuestionnaire() {
   await execute()
@@ -143,7 +143,7 @@ async function loadQuestionnaire() {
 }
 
 /**
- * Submits the code for loading a new questionnaire. Validates the form first
+ * Submits the code for loading a new questionnaire. Validates the form first and doesnt submit if invalid
  */
 async function submitCode() {
   await codeForm.value.validate()

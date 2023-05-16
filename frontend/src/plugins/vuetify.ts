@@ -6,6 +6,9 @@ import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
+/**
+ * Creates the theme of this app
+ */
 const inselTheme: ThemeDefinition = {
   dark: false,
   colors: {
@@ -20,6 +23,9 @@ const inselTheme: ThemeDefinition = {
   }
 }
 
+/**
+ * Creates the vuetify instance and exports it
+ */
 export const vuetify = createVuetify({
   components,
   directives,

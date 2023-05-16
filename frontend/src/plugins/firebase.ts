@@ -1,5 +1,8 @@
 import { initializeApp } from 'firebase/app'
 
+/**
+ * Firebase configuration JSON. This can be exposed and is not a secret
+ */
 const firebaseConfig = {
   apiKey: 'AIzaSyAqbEVHkqsqEbWlkT95m2OjgNuH77R3c4w',
   authDomain: 'lc1-diagerror.firebaseapp.com',

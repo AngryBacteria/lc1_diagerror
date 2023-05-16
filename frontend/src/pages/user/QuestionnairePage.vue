@@ -58,8 +58,6 @@ const validForm = ref(true)
 const mainForm = ref<any>(null)
 const submitLoading = ref(false)
 
-//TODO text smaller on small devices
-
 /**
  * Form validation on page reload if answers are already existing
  */
@@ -68,7 +66,7 @@ onMounted(() => {
 })
 
 /**
- * Submits questionnaire if the form is valid
+ * Submits the questionnaire if the form is valid
  */
 async function submitForm() {
   submitLoading.value = true
@@ -88,7 +86,7 @@ async function submitForm() {
 }
 
 /**
- * On mount checks if any answers are present. If there are it validates the form
+ * Checks if any answers are present. If there are, it validates the form
  */
 async function initialValidation() {
   const isEmpty = store.answers.every((item) => {
@@ -108,7 +106,7 @@ async function initialValidation() {
 }
 
 /**
- * Scroll to the first validation errors if any exist
+ * Scrolls smoothly to the first validation error if any exist
  */
 function displayInvalidFormError() {
   const errorMessage = document.querySelector('.v-messages__message:first-of-type')?.parentElement
@@ -124,8 +122,8 @@ function displayInvalidFormError() {
 }
 
 /**
- * Displays the error happening while trying to submit
- * @param error Thrown error
+ * Displays the errors that can emerge while trying to submit
+ * @param error Thrown error while submitting
  */
 function displaySubmitError(error: any) {
   console.log(error)

@@ -1,8 +1,14 @@
+/**
+ * Paginated response of the backend for Questionnaires
+ */
 export interface PaginatedQuestionnaire {
   pageCount: number
   data: Questionnaire[]
 }
 
+/**
+ * Questionnaire as defined in the backend database
+ */
 export interface Questionnaire {
   questionnaireId?: number
   questions: Question[]
@@ -15,6 +21,9 @@ export interface Questionnaire {
   validForDays: number
 }
 
+/**
+ * Question as defined in the backend database
+ */
 export interface Question {
   questionId?: number
   questionnaireId: number
@@ -27,6 +36,9 @@ export interface Question {
   index: number
 }
 
+/**
+ * Answer as defined in the backend database
+ */
 export interface Answer {
   answerId?: number
   questionId: number
@@ -35,6 +47,9 @@ export interface Answer {
   invitationId: string
 }
 
+/**
+ * Answer-Option as defined in the backend database
+ */
 export interface Option {
   optionId?: number
   index: number
