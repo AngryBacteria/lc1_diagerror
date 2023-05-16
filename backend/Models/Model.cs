@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace backend.Models
 {
+    /// <summary>
+    /// DBContext for the main database
+    /// </summary>
     class DiagErrorDb : DbContext
     {
         public DbSet<Questionnaire> Questionnaires { get; set; } = null!;
@@ -34,6 +37,9 @@ namespace backend.Models
         }
     }
 
+    /// <summary>
+    /// ENUM for the supported languages in the frontend-apps
+    /// </summary>
     [JsonConverter(typeof(EnumConverter<Language>))]
     public enum Language
     {
@@ -42,6 +48,9 @@ namespace backend.Models
         FR
     }
 
+    /// <summary>
+    /// ENUM for the supported question-types of the frontend and backend
+    /// </summary>
     [JsonConverter(typeof(EnumConverter<QuestionType>))]
     public enum QuestionType
     {
@@ -51,6 +60,9 @@ namespace backend.Models
         MultipleChoice
     }
 
+    /// <summary>
+    /// Questionnaire class. Used to define questionnaires for the frontend
+    /// </summary>
     [Index(nameof(Identifier), nameof(Language), IsUnique = true)]
     [Index(nameof(Identifier))]
     [Index(nameof(Language))]
@@ -68,6 +80,9 @@ namespace backend.Models
         public int ValidForDays { get; set; }
     }
 
+    /// <summary>
+    /// Question class used to define questions of a questionnaire. Part of the questionnaire class
+    /// </summary>
     public class Question
     {
         public int QuestionId { get; set; }
@@ -83,6 +98,9 @@ namespace backend.Models
         public int Index { get; set; }
     }
 
+    /// <summary>
+    /// Anser class used to define answers to a question. Part of the answer class
+    /// </summary>
     [Index(nameof(Date))]
     [Index(nameof(InvitationId))]
     public class Answer
@@ -96,6 +114,9 @@ namespace backend.Models
         public string InvitationId { get; set; }
     }
 
+    /// <summary>
+    /// Option class used to define options of an answer. Part of the answer class but optional
+    /// </summary>
     public class Option
     {
         public int OptionId { get; set; }

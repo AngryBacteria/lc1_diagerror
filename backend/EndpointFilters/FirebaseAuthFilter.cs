@@ -1,18 +1,31 @@
 ﻿using FirebaseAdmin.Auth;
 namespace backend.EndpointFilters
 {
+    /// <summary>
+    /// Filter to secure endpoints with authentication and authorization 
+    /// </summary>
     public class FirebaseAuthFilter : IEndpointFilter
     {
 
         private readonly FirebaseAuth _firebaseAuth;
 
-        //Constructor
+        /// <summary>
+        /// Constructor for the Endpointfilter
+        /// </summary>
+        /// <param name="firebaseAuth">Firebase auth instance</param>
         public FirebaseAuthFilter(FirebaseAuth firebaseAuth)
         {
             _firebaseAuth = firebaseAuth;
         }
 
         //Filter
+        /// <summary>
+        /// Endpoint filter function. Checks if the firebase token is present in the "Authorization" header.
+        /// Additionally it checks if the token has the admin claim set to true
+        /// </summary>
+        /// <param name="context">context passed from the http request</param>
+        /// <param name="next">function to call after the filter</param>
+        /// <returns></returns>
         public virtual async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context,
             EndpointFilterDelegate next)
         {
