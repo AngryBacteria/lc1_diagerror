@@ -7,7 +7,7 @@ namespace backend.Endpoints
     {
         public static void MapInvitationEndpoints(this WebApplication app)
         {
-            app.MapPost("/invitation", async (DiagErrorDb db, string invitationCode, string? language) =>
+            app.MapPost("/api/invitation", async (DiagErrorDb db, string invitationCode, string? language) =>
             {
                 try
                 {

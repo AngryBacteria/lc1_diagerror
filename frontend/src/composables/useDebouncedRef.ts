@@ -5,7 +5,7 @@ import { customRef } from 'vue'
  * Default is 800 milliseconds
  * @param value Value to set the reactive variable to
  * @param delay Delay in milliseconds until the ref updates
- * @returns 
+ * @returns
  */
 export function useDebouncedRef(value: any, delay = 800) {
   let timeout: string | number | NodeJS.Timeout | undefined

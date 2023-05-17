@@ -22,7 +22,7 @@ const dialog = ref(false)
  */
 const lightUrl = computed(() => {
   const value = (searchValue.value as string).toUpperCase()
-  return `${store.apiEndpoint}/questionnaire/light/filter?page=${page.value}&identifier=${value}`
+  return `${store.apiEndpoint}/api/questionnaire/light/search?page=${page.value}&identifier=${value}`
 })
 
 /**
@@ -121,7 +121,7 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
 async function createFileOnServer(identifier: string, language: string) {
   try {
     globalIsFetching.value = true
-    const url = `${store.apiEndpoint}/questionnaire/file/create?identifier=${identifier}&language=${language}`
+    const url = `${store.apiEndpoint}/api/questionnaire/file/create?identifier=${identifier}&language=${language}`
     const { error, statusCode, data } = await useFetch(
       url,
       { headers: { Authorization: `Bearer ${token?.token}` } },
@@ -228,7 +228,7 @@ fetchLightQuestionnaires()
             color="primary"
             @click="
               downloadQuestionnaires(
-                `${store.apiEndpoint}/questionnaire/light/filter?identifier=${item.identifier}&language=${item.language}`,
+                `${store.apiEndpoint}/api/questionnaire/light/search?identifier=${item.identifier}&language=${item.language}`,
                 'questionnaire'
               )
             "
@@ -241,7 +241,7 @@ fetchLightQuestionnaires()
             color="secondary"
             @click="
               downloadQuestionnaires(
-                `${store.apiEndpoint}/questionnaire/complete/filter?identifier=${item.identifier}&language=${item.language}&lastDays=30`,
+                `${store.apiEndpoint}/api/questionnaire/complete/search?identifier=${item.identifier}&language=${item.language}&lastDays=30`,
                 'answers-30days'
               )
             "

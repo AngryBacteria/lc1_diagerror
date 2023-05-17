@@ -42,7 +42,7 @@ async function uploadQuestionnaire() {
       return
     }
 
-    const url = `${store.apiEndpoint}/questionnaire/light`
+    const url = `${store.apiEndpoint}/api/questionnaire/light`
     const response = await fetch(url, {
       method: 'POST',
       headers: {

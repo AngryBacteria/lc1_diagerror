@@ -66,8 +66,7 @@ export const useUserStore = defineStore('user', () => {
         return { success: false, error: 'Form Not Valid' }
 
       const formattedAnswers = prepareAnswerObjects()
-      console.log(formattedAnswers)
-      const url = `${apiEndpoint}/answer`
+      const url = `${apiEndpoint}/api/answer`
       const { error, statusCode } = await useFetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

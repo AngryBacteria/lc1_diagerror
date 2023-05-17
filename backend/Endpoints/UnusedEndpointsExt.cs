@@ -9,7 +9,7 @@ namespace backend.Endpoints
         public static void MapUnusedEndpoints(this WebApplication app)
         {
             // ANSWER ENDPOINTS
-            app.MapGet("/answer/filter", async (DiagErrorDb db, string? questionnaireIdentifier) =>
+            app.MapGet("/api/answer/filter", async (DiagErrorDb db, string? questionnaireIdentifier) =>
             {
                 //Retrieving all stored answers
                 var answers = db.Answers
@@ -31,17 +31,17 @@ namespace backend.Endpoints
 
 
             // QUESTION ENDPOINTS
-            app.MapGet("/question/complete", async (DiagErrorDb db) =>
+            app.MapGet("/api/question/complete", async (DiagErrorDb db) =>
             {
                 return await db.Questions.Include(a => a.Answers).ToListAsync();
             }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapGet("/question/light", async (DiagErrorDb db) =>
+            app.MapGet("/api/question/light", async (DiagErrorDb db) =>
             {
                 return await db.Questions.ToListAsync();
             }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapPost("/question/light", async (DiagErrorDb db, Question question) =>
+            app.MapPost("/api/question/light", async (DiagErrorDb db, Question question) =>
             {
                 await db.Questions.AddAsync(question);
                 await db.SaveChangesAsync();
@@ -49,7 +49,7 @@ namespace backend.Endpoints
             }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
 
             // QUESTIONNAIRE ENDPOINTS
-            app.MapGet("/questionnaire/complete", async (DiagErrorDb db) =>
+            app.MapGet("/api/questionnaire/complete", async (DiagErrorDb db) =>
             {
                 return await db.Questionnaires
                     .Include(questionnaire => questionnaire.Questions)
@@ -63,7 +63,7 @@ namespace backend.Endpoints
                 Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers."
             }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapGet("/questionnaire/light", async (DiagErrorDb db) =>
+            app.MapGet("/api/questionnaire/light", async (DiagErrorDb db) =>
             {
                 return await db.Questionnaires
                     .Include(questionnaire => questionnaire.Questions)

@@ -69,7 +69,7 @@ const errorMessage = ref('')
  * Computed property for the url with the api endpoint, invite code and locale
  */
 const url = computed(() => {
-  return `${store.apiEndpoint}/invitation?invitationCode=${store.inviteCode}&language=${i18n.locale.value}`
+  return `${store.apiEndpoint}/api/invitation?invitationCode=${store.inviteCode}&language=${i18n.locale.value}`
 })
 
 /**

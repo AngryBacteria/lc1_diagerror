@@ -9,7 +9,7 @@ namespace backend.Endpoints
     {
         public static void MapQuestionnaireEndpoints(this WebApplication app)
         {
-            app.MapGet("/questionnaire/complete/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language, int? lastDays) =>
+            app.MapGet("/api/questionnaire/complete/search", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language, int? lastDays) =>
             {
                 // Calculate the number of items to skip and take based on the page and pageSize parameters
                 int skip = (page.GetValueOrDefault(1) - 1) * pageSize.GetValueOrDefault(10);
@@ -87,7 +87,7 @@ namespace backend.Endpoints
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
             }).WithTags("Questionnaire-Complete").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapGet("/questionnaire/light/filter", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) =>
+            app.MapGet("/api/questionnaire/light/search", async (DiagErrorDb db, int? page, int? pageSize, string? id, string? identifier, string? language) =>
             {
                 // Calculate the number of items to skip and take based on the page and pageSize parameters
                 int skip = (page.GetValueOrDefault(1) - 1) * pageSize.GetValueOrDefault(10);
@@ -145,7 +145,7 @@ namespace backend.Endpoints
                 "e.g. There are 10 questionnaires, but my page can only handle 3 at once. If the endpoint es called from page number 2, there will be the second three questionnaires returned."
             }).WithTags("Questionnaire-Light").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapPost("/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
+            app.MapPost("/api/questionnaire/light", async (DiagErrorDb db, Questionnaire[] questionnaires) =>
             {
                 try {
                     await db.Questionnaires.AddRangeAsync(questionnaires);
@@ -163,7 +163,7 @@ namespace backend.Endpoints
                 Description = "With this Endpoint it is possible to POST a new Questionnaire to the Database without any answers. Identifier + Language needs to be unique"
             }).WithTags("Questionnaire-Light").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapGet("/questionnaire/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
+            app.MapGet("/api/questionnaire/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
             {
                 try {
                     if(string.IsNullOrEmpty(identifier) || string.IsNullOrEmpty(language))

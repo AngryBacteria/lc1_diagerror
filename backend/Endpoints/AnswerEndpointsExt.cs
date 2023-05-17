@@ -7,7 +7,7 @@ namespace backend.Endpoints
     {
         public static void MapAnswerEndpoints(this WebApplication app)
         {
-            app.MapPost("/answer", async (DiagErrorDb db, Answer[] answers) =>
+            app.MapPost("/api/answer", async (DiagErrorDb db, Answer[] answers) =>
             {
                 try
                 {
