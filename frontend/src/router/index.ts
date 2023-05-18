@@ -54,6 +54,7 @@ const router = createRouter({
         {
           path: 'questionnaire/upload',
           name: 'admin-upload',
+          meta: { requiresAuth: true },
           component: () => import('@/components/admin/UploadQuestionnaire.vue')
         }
       ]

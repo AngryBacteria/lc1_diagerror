@@ -2,7 +2,7 @@ export default {
   questionnaire: {
     common: {
       test: 'Hallo Welt!',
-      404: 'konnte nicht gefunden werden',
+      404: 'Konnte nicht gefunden werden',
       500: 'Kommunikation mit dem Server ist fehlgeschlagen. Haben sie kein Internet?'
     },
     thanks: {
@@ -48,7 +48,7 @@ export default {
   },
   common: {
     '404':
-      'Sie haben das Internet nicht zerstört, aber wir könne nicht finden was sie gesucht haben',
-    back: 'Retour à la page principale'
+      'Sie haben das Internet nicht zerstört, aber wir können leider nicht finden was sie gesucht haben',
+    back: 'Zurück zur Startseite'
   }
 }
