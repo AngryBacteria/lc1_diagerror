@@ -163,7 +163,7 @@ namespace backend.Endpoints
                 Description = "With this Endpoint it is possible to POST a new Questionnaire to the Database without any answers. Identifier + Language needs to be unique"
             }).WithTags("Questionnaire-Light").AddEndpointFilter<FirebaseAuthFilter>();
 
-            app.MapGet("/api/questionnaire/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
+            app.MapGet("/api/questionnaire/complete/file/create", async (DiagErrorDb db, string? identifier, string? language) => 
             {
                 try {
                     if(string.IsNullOrEmpty(identifier) || string.IsNullOrEmpty(language))

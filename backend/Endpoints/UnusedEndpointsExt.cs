@@ -27,26 +27,26 @@ namespace backend.Endpoints
             {
                 Summary = "Get answers with filtering",
                 Description = "This endpoint retrieves all stored answers. You can filter for answers belonging to certain questionnaires with its identifier."
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
 
 
             // QUESTION ENDPOINTS
             app.MapGet("/api/question/complete", async (DiagErrorDb db) =>
             {
                 return await db.Questions.Include(a => a.Answers).ToListAsync();
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapGet("/api/question/light", async (DiagErrorDb db) =>
             {
                 return await db.Questions.ToListAsync();
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapPost("/api/question/light", async (DiagErrorDb db, Question question) =>
             {
                 await db.Questions.AddAsync(question);
                 await db.SaveChangesAsync();
                 return Results.Created($"/question/light/{question.QuestionId}", question);
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
 
             // QUESTIONNAIRE ENDPOINTS
             app.MapGet("/api/questionnaire/complete", async (DiagErrorDb db) =>
@@ -61,7 +61,7 @@ namespace backend.Endpoints
             {
                 Summary = "Get all questionnaires",
                 Description = "This endpoint retrieves all questionnaires with their associated questions and stored answers."
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
 
             app.MapGet("/api/questionnaire/light", async (DiagErrorDb db) =>
             {
@@ -73,7 +73,7 @@ namespace backend.Endpoints
             {
                 Summary = "Get all questionnaires without answers",
                 Description = "This endpoint retrieves all questionnaires with their associated questions but without the stored answers."
-            }).WithTags("Obsolete").AddEndpointFilter<FirebaseAuthFilter>();
+            }).WithTags("Unused").AddEndpointFilter<FirebaseAuthFilter>();
         }
     }
 }

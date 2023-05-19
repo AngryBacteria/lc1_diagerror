@@ -8,8 +8,6 @@ using backend.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 ////Swagger documentation initialization
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

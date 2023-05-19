@@ -121,7 +121,7 @@ async function downloadQuestionnaires(url: string, fileAppend: string) {
 async function createFileOnServer(identifier: string, language: string) {
   try {
     globalIsFetching.value = true
-    const url = `${store.apiEndpoint}/api/questionnaire/file/create?identifier=${identifier}&language=${language}`
+    const url = `${store.apiEndpoint}/api/questionnaire/complete/file/create?identifier=${identifier}&language=${language}`
     const { error, statusCode, data } = await useFetch(
       url,
       { headers: { Authorization: `Bearer ${token?.token}` } },
