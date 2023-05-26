@@ -11,7 +11,7 @@
       {
         "answers": [],
         "text": "Question d1",
-        "subtext": "Was your most recent visit to an emergency department or urgent care facility to seek care:",
+        "subtext": "Was your most recent visit to an emergency department to seek care:",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
@@ -29,25 +29,7 @@
       {
         "answers": [],
         "text": "Question d2",
-        "subtext": "Your most recent visit as a patient was to:",
-        "optional": false,
-        "questiontype": "SingleChoice",
-        "options": [
-          {
-            "index": 0,
-            "value": "An emergency department"
-          },
-          {
-            "index": 1,
-            "value": "An urgent care facility"
-          }
-        ],
-        "index": 1
-      },
-      {
-        "answers": [],
-        "text": "Question d3",
-        "subtext": "How long ago was your most recent visit to an emergency department or urgent care facility?",
+        "subtext": "How long ago was your most recent visit to an emergency department?",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
@@ -68,11 +50,11 @@
             "value": "Within last 2-3 months"
           }
         ],
-        "index": 2
+        "index": 1
       },
       {
         "answers": [],
-        "text": "Question d4",
+        "text": "Question d3",
         "subtext": "Thinking about this most recent visit, what was the main reason you went?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -94,11 +76,11 @@
             "value": "Hard to say"
           }
         ],
-        "index": 3
+        "index": 2
       },
       {
         "answers": [],
-        "text": "Question d5",
+        "text": "Question d4",
         "subtext": "How urgent was your health condition when you went?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -116,11 +98,11 @@
             "value": "Potentially life-threatening, needed care in less than one hour"
           }
         ],
-        "index": 4
+        "index": 3
       },
       {
         "answers": [],
-        "text": "Question d6",
+        "text": "Question d5",
         "subtext": "How long did you wait to get care during your most recent visit?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -142,11 +124,11 @@
             "value": "More than 4 hours"
           }
         ],
-        "index": 5
+        "index": 4
       },
       {
         "answers": [],
-        "text": "Question d7",
+        "text": "Question d6",
         "subtext": "How long did you wait to get an explanation of your health problem?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -172,21 +154,30 @@
             "value": "I had to leave before receiving the explanation"
           }
         ],
+        "index": 5
+      },
+      {
+        "answers": [],
+        "text": "Question d7",
+        "subtext": "In the past year, how many emergency department visits do you estimate you had overall, including this most recent one?",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
         "index": 6
       },
       {
         "answers": [],
         "text": "Question d8",
-        "subtext": "In the past year, how many emergency department and urgent care facility visits do you estimate you had overall, including this most recent one?",
+        "subtext": "I felt I had 2-way, equal and non-judgmental communication with the clinicians:",
         "optional": false,
-        "questiontype": "FreeText",
+        "questiontype": "Likert",
         "options": [],
         "index": 7
       },
       {
         "answers": [],
         "text": "Question d9",
-        "subtext": "I felt I had 2-way, equal and non-judgmental communication with the clinicians:",
+        "subtext": "I felt that the clinicians and I had a shared goal of communicating with each other to determine the explanation of my health problem:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -195,7 +186,7 @@
       {
         "answers": [],
         "text": "Question d10",
-        "subtext": "I felt that the clinicians and I had a shared goal of communicating with each other to determine the explanation of my health problem:",
+        "subtext": "I felt that the care team understood my specific needs appropriately:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -204,7 +195,7 @@
       {
         "answers": [],
         "text": "Question d11",
-        "subtext": "I felt that the care team understood my specific needs appropriately:",
+        "subtext": "I had the opportunity to share with the care team important aspects of my health problem:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -213,7 +204,7 @@
       {
         "answers": [],
         "text": "Question d12",
-        "subtext": "I had the opportunity to share with the care team important aspects of my health problem:",
+        "subtext": "I felt like my health concerns were taken seriously by the care team:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -222,7 +213,7 @@
       {
         "answers": [],
         "text": "Question d13",
-        "subtext": "I felt like my health concerns were taken seriously by the care team:",
+        "subtext": "The care team explained to me their process for establishing the explanation of my health problem:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -231,7 +222,7 @@
       {
         "answers": [],
         "text": "Question d14",
-        "subtext": "The care team explained to me their process for establishing the explanation of my health problem:",
+        "subtext": "I felt that the explanation of my health problem I was given was true:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -240,7 +231,7 @@
       {
         "answers": [],
         "text": "Question d15",
-        "subtext": "I felt that the explanation of my health problem I was given was true:",
+        "subtext": "I was confident in the diagnostic skills of the care team who worked on establishing the explanation of my health problem:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -249,7 +240,7 @@
       {
         "answers": [],
         "text": "Question d16",
-        "subtext": "I was confident in the diagnostic skills of the care team who worked on establishing the explanation of my health problem:",
+        "subtext": "I felt the care team seemed certain in the explanation of my health problem they gave to me:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -258,7 +249,7 @@
       {
         "answers": [],
         "text": "Question d17",
-        "subtext": "I felt the care team seemed certain in the explanation of my health problem they gave to me:",
+        "subtext": "I felt the explanation of my health problem was communicated well to me:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -267,7 +258,7 @@
       {
         "answers": [],
         "text": "Question d18",
-        "subtext": "I felt the explanation of my health problem was communicated well to me:",
+        "subtext": "The explanation described what to expect of my health problem, regardless whether it worsened, stayed the same, or resolved:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -276,7 +267,7 @@
       {
         "answers": [],
         "text": "Question d19",
-        "subtext": "The explanation described what to expect of my health problem, regardless whether it worsened, stayed the same, or resolved:",
+        "subtext": "Based on what was communicated to me about my health problem, I felt I could explain my health problem to a friend:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -285,7 +276,7 @@
       {
         "answers": [],
         "text": "Question d20",
-        "subtext": "Based on what was communicated to me about my health problem, I felt I could explain my health problem to a friend:",
+        "subtext": "The information that I received was easy for me to understand:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -294,7 +285,7 @@
       {
         "answers": [],
         "text": "Question d21",
-        "subtext": "The information that I received was easy for me to understand:",
+        "subtext": "The care team checked how I interpreted the explanation of my health problem:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -303,7 +294,7 @@
       {
         "answers": [],
         "text": "Question d22",
-        "subtext": "The care team checked how I interpreted the explanation of my health problem:",
+        "subtext": "I was communicated what I needed to know to take the next steps after the visit:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -312,20 +303,11 @@
       {
         "answers": [],
         "text": "Question d23",
-        "subtext": "I was communicated what I needed to know to take the next steps after the visit:",
-        "optional": false,
-        "questiontype": "Likert",
-        "options": [],
-        "index": 22
-      },
-      {
-        "answers": [],
-        "text": "Question d24",
         "subtext": "With the communication I received, I felt I had a plan to follow, for example, I knew what doctors I needed to follow up with:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
-        "index": 23
+        "index": 22
       }
     ]
   },
@@ -341,7 +323,7 @@
       {
         "answers": [],
         "text": "Frage d1",
-        "subtext": "War Ihr letzter Besuch einer Notfallstation oder einer Einrichtung für dringende Fälle:",
+        "subtext": "War Ihr letzter Besuch einer Notfallstation:",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
@@ -359,17 +341,25 @@
       {
         "answers": [],
         "text": "Frage d2",
-        "subtext": "Ihr letzter Besuch als Patient*in war auf:",
+        "subtext": "Wie lange ist ihr letzter Besuch einer Notfallstation her?",
         "optional": false,
         "questiontype": "SingleChoice",
         "options": [
           {
             "index": 0,
-            "value": "Einer Notfallstation"
+            "value": "Weniger lange als eine Woche"
           },
           {
             "index": 1,
-            "value": "Einer Einrichtung für dringende Fälle"
+            "value": "1-2 Wochen"
+          },
+          {
+            "index": 2,
+            "value": "2-4 Wochen"
+          },
+          {
+            "index": 3,
+            "value": "2-3 Monate"
           }
         ],
         "index": 1
@@ -377,32 +367,6 @@
       {
         "answers": [],
         "text": "Frage d3",
-        "subtext": "Wie lange ist ihr letzter Besuch einer Notfallstation her?",
-        "optional": false,
-        "questiontype": "SingleChoice",
-        "options": [
-          {
-            "index": 0,
-            "value": "Vor weniger als einer Woche"
-          },
-          {
-            "index": 1,
-            "value": "In den letzten 1-2 Wochen"
-          },
-          {
-            "index": 2,
-            "value": "In den letzten 2-4 Wochen"
-          },
-          {
-            "index": 3,
-            "value": "In den letzten 2-3 Monaten"
-          }
-        ],
-        "index": 2
-      },
-      {
-        "answers": [],
-        "text": "Frage d4",
         "subtext": "Wenn Sie an Ihren letzten Besuch zurückdenken, was war der Hauptgrund für Ihren Besuch?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -424,11 +388,11 @@
             "value": "Schwer zu sagen"
           }
         ],
-        "index": 3
+        "index": 2
       },
       {
         "answers": [],
-        "text": "Frage d5",
+        "text": "Frage d4",
         "subtext": "Wie dringend war Ihr Gesundheitszustand, als Sie die Notfallstation aufsuchten?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -446,11 +410,11 @@
             "value": "Potenziell lebensbedrohlich, ich benötigte Hilfe innerhalb einer Stunde"
           }
         ],
-        "index": 4
+        "index": 3
       },
       {
         "answers": [],
-        "text": "Frage d6",
+        "text": "Frage d5",
         "subtext": "Wie lange haben Sie bei Ihrem letzten Besuch auf eine Behandlung gewartet?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -472,11 +436,11 @@
             "value": "Mehr als 4 Stunden"
           }
         ],
-        "index": 5
+        "index": 4
       },
       {
         "answers": [],
-        "text": "Frage d7",
+        "text": "Frage d6",
         "subtext": "Wie lange haben Sie darauf gewartet, eine Erklärung für Ihr Gesundheitsproblem zu erhalten?",
         "optional": false,
         "questiontype": "SingleChoice",
@@ -502,21 +466,30 @@
             "value": "Ich musste gehen, bevor ich die Erklärung erhielt"
           }
         ],
+        "index": 5
+      },
+      {
+        "answers": [],
+        "text": "Frage d7",
+        "subtext": "Im vergangenen Jahr, was schätzen sie, wie viele male mussten sie eine Notfallstation aufsuchen einschliesslich des letzten Besuchs?",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
         "index": 6
       },
       {
         "answers": [],
         "text": "Frage d8",
-        "subtext": "Im vergangenen Jahr, was schätzen sie, wie viele male mussten sie eine Notfallstation aufsuchen einschliesslich des letzten Besuchs?",
+        "subtext": "Ich hatte das Gefühl, dass die Kommunikation mit den Ärzt*innen in beide Richtungen, gleichberechtigt und ohne Vorurteile verlief:",
         "optional": false,
-        "questiontype": "FreeText",
+        "questiontype": "Likert",
         "options": [],
         "index": 7
       },
       {
         "answers": [],
         "text": "Frage d9",
-        "subtext": "Ich hatte das Gefühl, dass die Kommunikation mit den Ärzt*innen in beide Richtungen, gleichberechtigt und ohne Vorurteile verlief:",
+        "subtext": "Ich hatte das Gefühl, dass die Ärzt*innen und ich das gemeinsame Ziel hatten, miteinander zu kommunizieren, um die Ursache meines Gesundheitsproblems zu klären:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -525,7 +498,7 @@
       {
         "answers": [],
         "text": "Frage d10",
-        "subtext": "Ich hatte das Gefühl, dass die Ärzt*innen und ich das gemeinsame Ziel hatten, miteinander zu kommunizieren, um die Ursache meines Gesundheitsproblems zu klären:",
+        "subtext": "Ich hatte das Gefühl, dass das Behandlungsteam meine spezifischen Bedürfnisse richtig verstanden hat:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -534,7 +507,7 @@
       {
         "answers": [],
         "text": "Frage d11",
-        "subtext": "Ich hatte das Gefühl, dass das Behandlungsteam meine spezifischen Bedürfnisse richtig verstanden hat:",
+        "subtext": "Ich hatte die Möglichkeit, dem Behandlungsteam wichtige Aspekte meines Gesundheitsproblems zu schildern:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -543,7 +516,7 @@
       {
         "answers": [],
         "text": "Frage d12",
-        "subtext": "Ich hatte die Möglichkeit, dem Behandlungsteam wichtige Aspekte meines Gesundheitsproblems zu schildern:",
+        "subtext": "Ich hatte das Gefühl, dass meine gesundheitlichen Bedenken vom Behandlungsteam ernst genommen wurden:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -552,7 +525,7 @@
       {
         "answers": [],
         "text": "Frage d13",
-        "subtext": "Ich hatte das Gefühl, dass meine gesundheitlichen Bedenken vom Behandlungsteam ernst genommen wurden:",
+        "subtext": "Das Behandlungsteam erklärte mir, wie sie vorgehen möchten um mein Gesundheitsproblem aufzuklären:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -561,7 +534,7 @@
       {
         "answers": [],
         "text": "Frage d14",
-        "subtext": "Das Behandlungsteam erklärte mir, wie sie vorgehen möchten um mein Gesundheitsproblem aufzuklären:",
+        "subtext": "Ich hatte das Gefühl, dass die mir gegebene Erklärung meines Gesundheitsproblems richtig war:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -570,7 +543,7 @@
       {
         "answers": [],
         "text": "Frage d15",
-        "subtext": "Ich hatte das Gefühl, dass die mir gegebne Erklärung meines Gesundheitsproblems richtig war:",
+        "subtext": "Ich hatte Vertrauen in die diagnostischen Fähigkeiten des Behandlungsteam, das an der Aufklärung meines Gesundheitsproblems arbeitete:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -579,7 +552,7 @@
       {
         "answers": [],
         "text": "Frage d16",
-        "subtext": "Ich hatte Vertrauen in die diagnostischen Fähigkeiten des Behandlungsteam, das an der Aufklärung meines Gesundheitsproblems arbeitete:",
+        "subtext": "Ich hatte den Eindruck, dass das Behandlungsteam sicher war, was mein gesundheitliches Problem ist:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -588,7 +561,7 @@
       {
         "answers": [],
         "text": "Frage d17",
-        "subtext": "Ich hatte den Eindruck, dass das Behandlungsteam sicher war, was mein gesundheitliches Problem ist:",
+        "subtext": "Ich hatte das Gefühl, dass mir die Erklärung meines Gesundheitsproblems gut erklärt wurde:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -597,7 +570,7 @@
       {
         "answers": [],
         "text": "Frage d18",
-        "subtext": "Ich hatte das Gefühl, dass mir die Erklärung meines Gesundheitsproblems gut erklärt wurde:",
+        "subtext": "Die Erklärung erläuterte, was ich von meinem Gesundheitsproblem zu erwarten hatte, unabhängig davon, ob es sich verschlimmerte, gleich blieb oder sich besserte:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -606,7 +579,7 @@
       {
         "answers": [],
         "text": "Frage d19",
-        "subtext": "Die Erklärung erläuterte, was ich von meinem Gesundheitsproblem zu erwarten hatte, unabhängig davon, ob es sich verschlimmerte, gleich blieb oder sich besserte:",
+        "subtext": "Aufgrund dessen, was mir über mein Gesundheitsproblem mitgeteilt wurde, hatte ich das Gefühl, dass ich es einer Freund*in erklären könnte:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -615,7 +588,7 @@
       {
         "answers": [],
         "text": "Frage d20",
-        "subtext": "Aufgrund dessen, was mir über mein Gesundheitsproblem mitgeteilt wurde, hatte ich das Gefühl, dass ich es einer Freund*in erklären könnte:",
+        "subtext": "Die Informationen, die ich erhielt, waren für mich leicht zu verstehen:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -624,7 +597,7 @@
       {
         "answers": [],
         "text": "Frage d21",
-        "subtext": "Die Informationen, die ich erhielt, waren für mich leicht zu verstehen:",
+        "subtext": "Das Behandlungsteam überprüfte, wie ich die Erklärung meines Gesundheitsproblems verstanden habe:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -633,7 +606,7 @@
       {
         "answers": [],
         "text": "Frage d22",
-        "subtext": "Das Behandlungsteam überprüfte, wie ich die Erklärung meines Gesundheitsproblems verstanden habe:",
+        "subtext": "Mir wurde alles mitgeteilt, was ich wissen musste, um nach dem Besuch die nächsten Schritte einzuleiten:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
@@ -642,20 +615,323 @@
       {
         "answers": [],
         "text": "Frage d23",
-        "subtext": "Mir wurde alles mitgeteilt, was ich wissen musste, um nach dem Besuch die nächsten Schritte einzuleiten:",
-        "optional": false,
-        "questiontype": "Likert",
-        "options": [],
-        "index": 22
-      },
-      {
-        "answers": [],
-        "text": "Frage d24",
         "subtext": "Durch die Kommunikation, die ich erhielt, hatte ich das Gefühl einen Plan zu haben, den ich befolgen konnte. Zum Beispiel wusste ich, welche Ärzt*innen ich aufsuchen musste:",
         "optional": false,
         "questiontype": "Likert",
         "options": [],
-        "index": 23
+        "index": 22
+      }
+    ]
+  },
+  {
+    "identifier": "QC",
+    "language": "FR",
+    "title": "Questionnaire pour le contrôle de qualité à l'Hôpital universitaire de Berne",
+    "description": "Questionnaire validé pour mesurer la qualité du traitement en se concentrant sur les erreurs diagnostiques",
+    "descriptionForCustomer": "Ce questionnaire nous aide à mieux comprendre où il y a des possibilités d'amélioration dans nos procédures. Nous pourrons ainsi vous offrir de meilleurs soins médicaux",
+    "validAfterDays": 15,
+    "validForDays": 10,
+    "questions": [
+      {
+        "answers": [],
+        "text": "Question d1",
+        "subtext": "Etait votre dernière visite dans un service d'urgence:",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Comme patiente ;ou"
+          },
+          {
+            "index": 1,
+            "value": "Comme partenaire d'une personne qui a besoin de soins?"
+          }
+        ],
+        "index": 0
+      },
+      {
+        "answers": [],
+        "text": "Question d2",
+        "subtext": "Depuis combien de temps n'avez-vous pas visité un service d'urgence?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Il y a moins d'une semaine"
+          },
+          {
+            "index": 1,
+            "value": "Il y a 1 à 2 semaines"
+          },
+          {
+            "index": 2,
+            "value": "Il y a 2 à 4 semaines"
+          },
+          {
+            "index": 3,
+            "value": "Il y a 2 à 3 derniers mois"
+          }
+        ],
+        "index": 1
+      },
+      {
+        "answers": [],
+        "text": "Question d3",
+        "subtext": "Si vous repensez à votre dernière visite, quelle était la raison principale de votre visite?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Un accident ou une blessure;"
+          },
+          {
+            "index": 1,
+            "value": "Un nouveau problème médical;"
+          },
+          {
+            "index": 2,
+            "value": "Un problème médical préexistant qui pourrait s'être aggravé;"
+          },
+          {
+            "index": 3,
+            "value": "Difficile à dire"
+          }
+        ],
+        "index": 2
+      },
+      {
+        "answers": [],
+        "text": "Question d4",
+        "subtext": "Quel était l'urgence de votre état de santé lorsque vous vous êtes rendu aux services d'urgence?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Pas urgent;"
+          },
+          {
+            "index": 1,
+            "value": "Urgent, j'avais besoin d'aide en quelques heures;"
+          },
+          {
+            "index": 2,
+            "value": "Potentiellement mortel, j'avais besoin d'aide en moins d'une heure"
+          }
+        ],
+        "index": 3
+      },
+      {
+        "answers": [],
+        "text": "Question d5",
+        "subtext": "Combien de temps avez-vous attendu pour un traitement la dernière fois que vous êtes allée aux services d'urgence?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Moins de 15 minutes;"
+          },
+          {
+            "index": 1,
+            "value": "Entre 15 minutes et 1 heure;"
+          },
+          {
+            "index": 2,
+            "value": "1 à 2 heures;"
+          },
+          {
+            "index": 3,
+            "value": "Plus de 4 heures"
+          }
+        ],
+        "index": 4
+      },
+      {
+        "answers": [],
+        "text": "Question d6",
+        "subtext": "Combien de temps avez-vous attendu pour obtenir une explication sur votre problème médical?",
+        "optional": false,
+        "questiontype": "SingleChoice",
+        "options": [
+          {
+            "index": 0,
+            "value": "Moins d'une heure;"
+          },
+          {
+            "index": 1,
+            "value": "1 à 4 heures;"
+          },
+          {
+            "index": 2,
+            "value": "4 à 10 heures;"
+          },
+          {
+            "index": 3,
+            "value": "Plus de 10 heures;"
+          },
+          {
+            "index": 4,
+            "value": "J'ai dû partir avant de recevoir une explication"
+          }
+        ],
+        "index": 5
+      },
+      {
+        "answers": [],
+        "text": "Question d7",
+        "subtext": "Au cours de l'année passée, combien de fois avez-vous visité un service d'urgence, inclus la dernière visite?",
+        "optional": false,
+        "questiontype": "FreeText",
+        "options": [],
+        "index": 6
+      },
+      {
+        "answers": [],
+        "text": "Question d8",
+        "subtext": "J'ai eu le sentiment que la communication avec les médecins se faisait dans les deux sens, sur un pied d'égalité et sans préjugés:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 7
+      },
+      {
+        "answers": [],
+        "text": "Question d9",
+        "subtext": "J'ai eu le sentiment que les médecins et moi avions pour objectif mutuel de communiquer pour clarifier la cause de mon problème médical:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 8
+      },
+      {
+        "answers": [],
+        "text": "Question d10",
+        "subtext": "J'ai eu le sentiment que l'équipe soignante avait bien compris mes besoins spécifiques:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 9
+      },
+      {
+        "answers": [],
+        "text": "Question d11",
+        "subtext": "J'ai eu l'occasion de décrire à l'équipe soignante des aspects importants de mon problème médical:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 10
+      },
+      {
+        "answers": [],
+        "text": "Question d12",
+        "subtext": "J'ai eu le sentiment que mes préoccupations en matière de santé étaient prises au sérieux par l'équipe soignante:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 11
+      },
+      {
+        "answers": [],
+        "text": "Question d13",
+        "subtext": "L'équipe soignante m'a expliqué comment elle voulait procéder pour clarifier mon problème médical:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 12
+      },
+      {
+        "answers": [],
+        "text": "Question d14",
+        "subtext": "J'ai eu le sentiment que l'explication qu'on m'avait donnée de mon problème médical était correcte:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 13
+      },
+      {
+        "answers": [],
+        "text": "Question d15",
+        "subtext": "J'avais confiance dans les compétences diagnostiques de l'équipe soignante qui travaillait à mon problème médical:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 14
+      },
+      {
+        "answers": [],
+        "text": "Question d16",
+        "subtext": "J'ai eu l'impression que l'équipe soignante était sûre de la nature de mon problème de santé:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 15
+      },
+      {
+        "answers": [],
+        "text": "Question d17",
+        "subtext": "J'ai eu l'impression que les explications sur mon problème médical m'étaient bien expliquées:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 16
+      },
+      {
+        "answers": [],
+        "text": "Question d18",
+        "subtext": "La déclaration expliquait ce que je dois anticiper de mon problème médical, qu'il s'aggrave, reste identique ou s'améliore:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 17
+      },
+      {
+        "answers": [],
+        "text": "Question d19",
+        "subtext": "Sur la base de ce que l'on m'a dit de mon problème de santé, j'ai eu l'impression que je pouvais l'expliquer à une amie:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 18
+      },
+      {
+        "answers": [],
+        "text": "Question d20",
+        "subtext": "Les informations que j'ai reçues étaient faciles à comprendre pour moi:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 19
+      },
+      {
+        "answers": [],
+        "text": "Question d21",
+        "subtext": "L'équipe soignante a vérifié comment j'avais compris l'explication de mon problème médical:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 20
+      },
+      {
+        "answers": [],
+        "text": "Question d22",
+        "subtext": "On m'a dit tout ce que je devais savoir pour prendre les mesures suivantes après la visite:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 21
+      },
+      {
+        "answers": [],
+        "text": "Question d23",
+        "subtext": "Grâce à la communication que j'ai reçue, j'ai eu l'impression d'avoir un plan à suivre. Par exemple, je savais quels médecins je devais consulter:",
+        "optional": false,
+        "questiontype": "Likert",
+        "options": [],
+        "index": 22
       }
     ]
   }
