@@ -26,7 +26,7 @@ var claims = new Dictionary<string, object>()
 };
 
 //List of firebase uid's to add the admin claim to
-List<string> accounts = new List<string>() {"ZqEThJkICmMuxgUku53fqnuuSoV2"};
+List<string> accounts = new List<string>() {"ZqEThJkICmMuxgUku53fqnuuSoV2", "JSGMVJLv12PMMubU9uDfdREmpI22"};
 
 //Adds the admin claim to the admin-user accounts
 foreach (string account in accounts)
