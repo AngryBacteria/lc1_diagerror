@@ -5,7 +5,7 @@
       <h1 v-if="!question.optional" style="color: #1fa481; display: inline"><sup>*</sup></h1>
 
       <h4>{{ props.question.subtext }}</h4>
-      <v-input :model-value="store.answers[props.index]" :rules="rules">
+      <v-input :model-value="store.answers[props.index]" :rules="rules" style="margin-top: 5px">
         <v-btn-toggle elevation="1" divided density="compact" v-model="store.answers[props.index]">
           <v-btn
             v-for="(item, index) in labels"

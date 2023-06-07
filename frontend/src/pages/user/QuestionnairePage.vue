@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent v-model="validForm" ref="mainForm">
-    <v-card>
+    <v-card style="margin-top: 1rem">
       <h1>{{ store.questionnaire.title }}</h1>
       <p>{{ store.questionnaire.descriptionForCustomer }}</p>
       <v-divider class="my-2" :thickness="3"></v-divider>

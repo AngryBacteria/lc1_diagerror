@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main style="margin-top: 1rem;">
     <h1>Ein valides Questionnaire JSON Array kann hier hochgeladen werden</h1>
     <v-btn @click="uploadQuestionnaire()" :loading="fetching">Hochladen</v-btn>
     <v-textarea

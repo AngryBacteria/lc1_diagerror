@@ -16,7 +16,7 @@
 
   <v-card
     v-if="!store.questionnaire || error"
-    style="margin: 2rem auto 0 auto; padding: 1rem"
+    style="margin: 1rem auto 0 auto; padding: 1rem"
     max-width="50%"
     elevation="1"
   >

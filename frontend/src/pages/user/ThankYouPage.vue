@@ -3,7 +3,7 @@
     class="d-flex flex-column align-center"
     max-width="60%"
     elevation="3"
-    style="margin-right: auto; margin-left: auto"
+    style="margin-right: auto; margin-left: auto; margin-top: 1rem;"
   >
     <v-icon icon="mdi-charity" size="100px" color="primary"> </v-icon>
 

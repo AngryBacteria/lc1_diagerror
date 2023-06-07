@@ -5,13 +5,9 @@ import { useFirebaseAuth } from 'vuefire'
 import { signOut } from 'firebase/auth'
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs'
-import { useTypedI18n } from '@/composables/useTypedI18n'
-import { APP_LANGUAGES } from '@/plugins/i18n'
 
 const store = useUserStore()
 const router = useRouter()
-const { t } = useTypedI18n()
-const { smAndUp } = useDisplay()
 
 /**
  * Function to logout the firebase user. Redirects the user to '/admin/login' after logout
@@ -25,7 +21,7 @@ async function logout() {
     await router.push('/admin/login')
   } catch (error) {
     store.resetSnackbarConfig
-    store.snackbarConfig.message = t('admin.loginComponent.alerts.logoutFail')
+    store.snackbarConfig.message = "Etwas ist schiefgelaufen, bitte versuchen sie es erneut"
     store.snackbarConfig.color = 'error'
     store.snackbarConfig.visible = true
     console.log(`Error while attempting to Log-Out: ${error}`)
@@ -72,33 +68,6 @@ const drawer = mdAndUp ? ref(true) : ref(false)
       <v-toolbar-title>Admin-Tool</v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <v-menu>
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-if="smAndUp"
-            variant="elevated"
-            color="primary"
-            v-bind="props"
-            style="margin-right: 1rem"
-          >
-            {{ t('questionnaire.navigation.language') }} ({{ store.language }})
-          </v-btn>
-          <v-btn v-else variant="elevated" color="primary" v-bind="props">{{
-            store.language
-          }}</v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            @click="store.changeLanguage(item)"
-            v-for="(item, index) in APP_LANGUAGES"
-            :key="index"
-            :value="index"
-          >
-            <v-list-item-title>{{ item.toUpperCase() }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
 
       <v-menu>
         <template v-slot:activator="{ props }">

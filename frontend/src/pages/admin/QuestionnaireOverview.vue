@@ -153,7 +153,7 @@ fetchLightQuestionnaires()
 
 <template>
   <main style="margin: 1rem">
-    <h1>Admin</h1>
+    <h1>Fragebogen Suchen</h1>
     <v-text-field
       :loading="lightIsFetching || globalIsFetching"
       v-model="searchValue"
@@ -172,22 +172,17 @@ fetchLightQuestionnaires()
 
         <v-card>
           <v-card-text>
-            Ein fragebogen kann auf mehrere weisen heruntergeladen werden. Folgend werden diese
+            Ein Fragebogen kann auf mehrere weisen heruntergeladen werden. Folgend werden diese
             erklärt;
             <ul style="padding: 1rem">
               <li>
-                <b>Fragebogen:</b> Es wird ein JSON heruntergeladen mit nur dem Fragebogen ohne
-                Antworten
+                <b>Fragebogen:</b> Nur die Struktur des Fragebogens wird heruntergeladen (ohne Antworten)
               </li>
               <li>
-                <b>Antworten (letzte 30 Tage):</b> Es wird ein JSON heruntergeladen dem Fragebogen
-                und den Antworten der letzten 30 Tage. Es wird hier limitiert, da über den Browser
-                grössere Anfragen nicht möglich sind
+                <b>Antworten (letzte 30 Tage):</b> Die Antworten des Fragebogens der letzten 30 Tage werden heruntergeladen
               </li>
               <li>
-                <b>Datei mit allen Antworten erstellen:</b> Auf dem Server wird eine JSON Datei
-                erstellt mit allen Antworten zu diesem Fragebogen. Der Path zur Datei wird
-                dargestellt nachdem sie erstellt wurde
+                <b>Datei mit allen Antworten erstellen:</b> Alle Antworten des Fragebogens werden in einer Datei auf dem Server gespeichert
               </li>
             </ul>
           </v-card-text>
@@ -238,7 +233,7 @@ fetchLightQuestionnaires()
           <v-btn
             prepend-icon="mdi-download"
             style="margin-right: 1rem"
-            color="secondary"
+            color="primary"
             @click="
               downloadQuestionnaires(
                 `${store.apiEndpoint}/api/questionnaire/complete/search?identifier=${item.identifier}&language=${item.language}&lastDays=30`,

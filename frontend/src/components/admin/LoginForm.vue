@@ -1,6 +1,6 @@
 <template>
   <v-card
-    style="margin-left: auto; margin-right: auto"
+    style="margin-left: auto; margin-right: auto; margin-top: 2rem;"
     width="700"
     title="Authentifikation"
     subtitle="Melden sie sich mit dem Admin-Konto an"
@@ -33,7 +33,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { getCurrentUser, useFirebaseAuth } from 'vuefire'
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
-import { useTypedI18n } from '@/composables/useTypedI18n'
 import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
@@ -42,8 +41,6 @@ const email = ref('')
 const password = ref('')
 const store = useUserStore()
 const loginLoading = ref(false)
-
-const { t } = useTypedI18n()
 
 /**
  * Hook to automatically restore the User from storage if its present
@@ -59,7 +56,7 @@ onMounted(async () => {
         : '/admin'
 
     store.resetSnackbarConfig
-    store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
+    store.snackbarConfig.message = "Erfolgreich authentifiziert"
     store.snackbarConfig.color = 'primary'
     store.snackbarConfig.visible = true
 
@@ -78,7 +75,7 @@ async function login() {
       await signInWithEmailAndPassword(auth, email.value, password.value)
 
       store.resetSnackbarConfig
-      store.snackbarConfig.message = t('admin.loginComponent.alerts.authenticated')
+      store.snackbarConfig.message = "Erfolgreich authentifiziert"
       store.snackbarConfig.color = 'primary'
       store.snackbarConfig.visible = true
 

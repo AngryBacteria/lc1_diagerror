@@ -1,7 +1,6 @@
 import { useUserStore } from '@/stores/user'
 import { createRouter, createWebHistory } from 'vue-router'
 import { getCurrentUser } from 'vuefire'
-import { i18n } from '@/plugins/i18n'
 
 /**
  * Creates the router instance with all its routes and router guards
@@ -86,7 +85,7 @@ router.beforeEach(async (to) => {
     //Redirection
     if (!currentUser) {
       store.resetSnackbarConfig
-      store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')
+      store.snackbarConfig.message = "Sie müssen authentifiziert sein"
       store.snackbarConfig.color = 'error'
       store.snackbarConfig.visible = true
 
@@ -102,7 +101,7 @@ router.beforeEach(async (to) => {
     //No admin right --> redirection
     if (!token || token.claims.admin != true) {
       store.resetSnackbarConfig
-      store.snackbarConfig.message = i18n.global.t('admin.loginComponent.alerts.userRequired')
+      store.snackbarConfig.message = "Sie müssen authentifiziert sein"
       store.snackbarConfig.color = 'error'
       store.snackbarConfig.visible = true
 
