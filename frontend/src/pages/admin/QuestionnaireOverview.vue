@@ -233,7 +233,7 @@ fetchLightQuestionnaires()
           <v-btn
             prepend-icon="mdi-download"
             style="margin-right: 1rem"
-            color="primary"
+            color="secondary"
             @click="
               downloadQuestionnaires(
                 `${store.apiEndpoint}/api/questionnaire/complete/search?identifier=${item.identifier}&language=${item.language}&lastDays=30`,

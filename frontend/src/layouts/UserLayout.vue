@@ -22,10 +22,10 @@ const { smAndUp } = useDisplay()
       <template v-slot:append>
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn prepend-icon="mdi-translate" v-if="smAndUp" variant="elevated" color="primary" v-bind="props">
+            <v-btn v-if="smAndUp" variant="elevated" color="primary" v-bind="props">
               {{ t('questionnaire.navigation.language') }} ({{ store.language }})
             </v-btn>
-            <v-btn prepend-icon="mdi-translate" v-else variant="elevated" color="primary" v-bind="props">{{
+            <v-btn v-else variant="elevated" color="primary" v-bind="props">{{
               store.language
             }}</v-btn>
           </template>
