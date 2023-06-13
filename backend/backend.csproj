@@ -25,6 +25,9 @@
     <Folder Include="Database\" />
     <Folder Include="Migrations\" />
     <Folder Include="fileOut\" />
+	  <None Include="wwwroot\**">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

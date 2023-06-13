@@ -12,7 +12,7 @@ export const useUserStore = defineStore('user', () => {
   const i18n = useI18n()
   const refUser = useCurrentUser()
   const isLoggedIn = ref(false)
-  const apiEndpoint = 'https://localhost:7184'
+  const apiEndpoint = ''
 
   //store fields. All get synced automatically with the session storage of the browser
   const language = useLocalStorage<MessageLanguages>('language', 'de')

@@ -69,16 +69,16 @@ if (app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-//static files
-app.UseDefaultFiles();
-app.UseStaticFiles();
-app.MapFallbackToFile("index.html");
-app.UseRouting();
-
 ////Map endpoints
 app.MapQuestionnaireEndpoints();
 app.MapAnswerEndpoints();
 app.MapInvitationEndpoints();
 app.MapUnusedEndpoints();
+
+//static files
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.UseRouting();
+app.MapFallbackToFile("{*path:regex(^(?!api).*$)}", "index.html");
 
 app.Run();
