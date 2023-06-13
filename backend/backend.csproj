@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
+    <None Include="Database\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Folder Include="Migrations\" />
     <Folder Include="fileOut\" />
 	  <None Include="wwwroot\**">

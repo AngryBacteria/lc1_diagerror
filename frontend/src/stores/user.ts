@@ -12,6 +12,11 @@ export const useUserStore = defineStore('user', () => {
   const i18n = useI18n()
   const refUser = useCurrentUser()
   const isLoggedIn = ref(false)
+  
+  //if in development:
+  //const apiEndpoint = 'https://localhost:7184'
+
+  //else use that if in production and hosting with dotnet api:
   const apiEndpoint = ''
 
   //store fields. All get synced automatically with the session storage of the browser
