@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 ////Firebase initialization. Creates the firebase object and adds the admin claim to the provided users
 FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions()
 {
-    Credential = GoogleCredential.FromFile("Data\\firebaseServiceAccount.json"),
+    Credential = GoogleCredential.FromFile(Path.Combine("Data", "firebaseServiceAccount.json")),
 });
 FirebaseAuth firebaseAuth = FirebaseAuth.GetAuth(firebaseApp);
 
@@ -68,6 +68,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseHttpsRedirection();
 }
+
+//static files
+app.UseDefaultFiles();
+app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
+app.UseRouting();
 
 ////Map endpoints
 app.MapQuestionnaireEndpoints();
